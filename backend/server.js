@@ -1,12 +1,12 @@
 /*jslint node:true */
 (function () {
     "use strict";
-    var express, app, server, hauMongo, bodyParser;
+    let express, app, server, hauMongo, bodyParser;
 
     function logger(req, res, next) {
         console.log(new Date(), req.ip, req.method, req.url);
         next();
-    }
+    }  
 
     express = require('express');
     hauMongo = require('./hau-mongo');
@@ -18,7 +18,7 @@
     app.enable('trust proxy');
     app.use(logger);
 
-    app.get("\/:collection(places|users|dogs)(\/)?$", function(req, res) {
+    app.get("\/:collection(places|users|dogs)(\/)?$", (req, res) => {
         hauMongo.getWholeCollection(req.params.collection, (docs) => sendResponse(res, docs));
     });
 
@@ -86,7 +86,7 @@
         hauMongo.deleteVisitById(req.params.id, (place) => sendResponse(res, place));
     });
 
-    var server = app.listen(8080, function() {
+    server = app.listen(8080, function() {
         hauMongo.init();
         console.log('Server listening\n');
     });

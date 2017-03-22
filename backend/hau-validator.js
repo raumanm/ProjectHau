@@ -31,8 +31,8 @@
             && typeof toCheck["addressStreet"] === "string"
             && typeof toCheck["addressCity"] === "string"
             && typeof toCheck["visitationInterval"] === "string"
-            && (toCheck.visitationInterval === "Regular" ||
-                toCheck.visitationInterval === "One time");
+            && (toCheck["visitationInterval"] === "Regular" ||
+                toCheck["visitationInterval"] === "One time");
     }
 
     function validateDog(toCheck) {
