@@ -2,7 +2,7 @@
 (function() {
     "use strict";
 
-    var MongoDB, MongoClient, db, ObjectId, safeObjectId, hauResponse, hauValidator;
+    let MongoDB, MongoClient, db, ObjectId, safeObjectId, hauResponse, hauValidator;
 
     MongoDB = require('mongodb');
     hauResponse = require('./hau-response');
@@ -27,20 +27,17 @@
         }, {
             password: 0
         }).toArray(function(err, docs) {
-            var user;
+            let user;
+
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
-
                 user = docs.pop();
+
                 if (user !== undefined) {
-                    db.collection('pairs').find({
-                        'user._id': safeObjectId(user._id)
-                    }, {
-                        '_id': 0,
-                        'dog._id': 1
-                    }).toArray(function(err, pairs) {
-                        var dogids = [];
+                    db.collection('pairs').find({ 'user._id': safeObjectId(user._id)}, { '_id': 0, 'dog._id': 1 }).toArray(function(err, pairs) {
+                        let dogids = [];
+
                         while (pairs.length > 0) {
                             dogids.push(safeObjectId(pairs.pop().dog._id));
                         }
@@ -75,40 +72,28 @@
     }
 
     function getDogById(id, callback) {
-        db.collection('dogs').find({
-            _id: safeObjectId(id)
-        }).toArray(function(err, docs) {
-            var dog;
+        db.collection('dogs').find({ _id: safeObjectId(id)}).toArray(function(err, docs) {
+            let dog;
+
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
                 dog = docs.pop();
+
                 if (dog !== undefined) {
-                    db.collection('pairs').find({
-                        'dog._id': safeObjectId(dog._id)
-                    }, {
-                        '_id': 0,
-                        'user._id': 1
-                    }).toArray(function(err, pairs) {
-                        var userids = [];
+                    db.collection('pairs').find({ 'dog._id': safeObjectId(dog._id)}, { '_id': 0, 'user._id': 1}).toArray(function(err, pairs) {
+                        let userids = [];
 
                         if (err) {
                             callback(hauResponse.createErrorResponse(err))
                         } else {
+
                             while (pairs.length > 0) {
                                 userids.push(safeObjectId(pairs.pop().user._id));
                             }
 
                             if (userids.length > 0) {
-                                db.collection('users').find({
-                                    _id: {
-                                        $in: userids
-                                    }
-                                }, {
-                                    _id: 1,
-                                    firstName: 1,
-                                    lastName: 1
-                                }).toArray(function(err, users) {
+                                db.collection('users').find({ _id: { $in: userids}}, { _id: 1, firstName: 1, lastName: 1}).toArray(function(err, users) {
                                     dog.pairedUsers = users;
                                     callback(hauResponse.createOkResponse(dog));
                                 });
@@ -125,7 +110,7 @@
     }
 
     function getPlaceById(id, callback) {
-        var place;
+        let place;
 
         db.collection('places').find({
             _id: safeObjectId(id)
@@ -167,9 +152,7 @@
 
     function postNewUser(user, callback) {
         if (hauValidator.validateUser(user)) {
-            db.collection('users').find({
-                'username': user.username
-            }).count(function(err, counter) {
+            db.collection('users').find({ 'username': user.username}).count(function(err, counter) {
                 if (err) {
                     callback(hauResponse.createErrorResponse(err));
                 } else {
@@ -196,7 +179,7 @@
             callback(hauResponse.createBadRequestResponse());
         } else {
             dog.dateBirth = new Date(dog.dateBirth);
-            db.collection('dogs').insert(dog, (err, result) => {
+            db.collection('dogs').insert(dog, function (err, result) {
                 if (err) {
                     callback(hauResponse.createErrorResponse(err));
                 } else {
@@ -238,7 +221,7 @@
 
 
     function postNewPair(ids, callback) {
-        var pair = {};
+        let pair = {};
 
         if (!hauValidator.validatePair(ids)) {
             callback(hauResponse.createBadRequestResponse());
