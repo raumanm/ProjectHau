@@ -3,7 +3,7 @@
     "use strict";
 
     function createOkResponse(data) {
-        var response = {};
+        let response = {};
         response.data = data;
         response.status = 200;
         response.content = 'application/json';
@@ -12,7 +12,7 @@
     }
 
     function createNotFoundResponse(what) {
-        var errorMessage = {},
+        let errorMessage = {},
             response = {};
 
         errorMessage.code = 404;
@@ -28,7 +28,7 @@
     }
 
     function createFoundResponse(what) {
-        var errorMessage = {},
+        let errorMessage = {},
             response = {};
 
         errorMessage.code = 409;
@@ -44,7 +44,7 @@
     }
 
     function createErrorResponse(what) {
-        var response = {};
+        let response = {};
 
         response.status = 500;
         response.content = 'application/json';
@@ -54,7 +54,7 @@
     }
 
     function createBadRequestResponse() {
-        var response = {};
+        let response = {};
 
         response.status = 400;
         response.content = 'application/json';
