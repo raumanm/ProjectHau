@@ -13,7 +13,7 @@ import * as hauResponse from "../hau-response";
     db = hauDB['db'];
     safeObjectId = hauDB.safeObjectId;
 
-    function postNewUser(user, callback) {
+    function postNew(user, callback) {
         user = userValidator.pruneExcessive(user);
 
         if (userValidator.validateRequired(user) && userValidator.validateOptionals(user)) {
@@ -39,7 +39,7 @@ import * as hauResponse from "../hau-response";
         }
     }
 
-    function getAllUsers(callback) {
+    function getAll(callback) {
         db.collection('users').find({}, { password: 0}).toArray(function(err, docs) {
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
@@ -49,7 +49,7 @@ import * as hauResponse from "../hau-response";
         });
     }
 
-    function getUserById(id, callback) {
+    function getById(id, callback) {
 
         db.collection('users').find({ _id: safeObjectId(id)}, { password: 0}).toArray(function(err, docs) {
             let user;
@@ -88,17 +88,15 @@ import * as hauResponse from "../hau-response";
         });
     }
 
-    function deleteUserById(userid, callback) {
-        db.collection('users').deleteOne({
-            _id: safeObjectId(userid)
-        }, (err, response) => {
+    //TODO: PUT update method
+
+    function deleteById(userid, callback) {
+        db.collection('users').deleteOne({ _id: safeObjectId(userid)}, (err, response) => {
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
                 if (response.deletedCount === 1) {
-                    db.collection('pairs').deleteMany({
-                        'user._id': safeObjectId(userid)
-                    }, (errs, r) => {
+                    db.collection('pairs').deleteMany({ 'user._id': safeObjectId(userid)}, (errs, r) => {
                         if (errs) {
                             callback(hauResponse.createErrorResponse(err));
                         } else {
