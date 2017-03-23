@@ -47,7 +47,7 @@
         pruned.phone = (toPrune.hasOwnProperty('phone')) ? toPrune.phone : undefined;
         pruned.email = (toPrune.hasOwnProperty('email')) ? toPrune.email : undefined;
         pruned.memberNumber = (toPrune.hasOwnProperty('memberNumber')) ? toPrune.memberNumber : undefined;
-        pruned.qualificationDate = (toPrune.hasOwnProperty('qualificationDate')) ? toPrune.qualificationDate : undefined;
+        pruned.qualificationDate = (toPrune.hasOwnProperty('qualificationDate')) ? new Date(toPrune.qualificationDate) : undefined;
         pruned.details = (toPrune.hasOwnProperty('details')) ? toPrune.details : undefined;
 
         return pruned;
