@@ -18,7 +18,6 @@ import * as hauResponse from "../hau-response";
         if (!validator.validateRequired(dog) || !validator.validateOptionals(dog)) {
             callback(hauResponse.createBadRequestResponse());
         } else {
-            dog.dateBirth = new Date(dog.dateBirth);
             db.collection('dogs').insertOne(dog, function (err, result) {
                 if (err) {
                     callback(hauResponse.createErrorResponse(err));
