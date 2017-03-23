@@ -1,16 +1,41 @@
 /*jslint node:true */
-import * as hauResponse from "../hau-response";
-
 (function () {
     "use strict";
+    let hauDB, safeObjectId, express, validator, app, hauResponse;
 
-    let db, hauDB, safeObjectId, express, validator;
+    express = require('express');
+    app = module.exports = express();
 
     hauDB = require('../hau-db');
     validator = require('./validate-visit');
-    express = require('express');
-    db = hauDB['db'];
+    hauResponse = require('../hau-response');
+
     safeObjectId = hauDB.safeObjectId;
+
+    app.route("\/dogs(\/)?$")
+        .all((req, res, next) => {
+            next();
+        })
+        .post((req, res, next) => {
+            if (req.get('Content-Type') === 'application/json') {
+                postNew(req.body, (result) => hauResponse.sendResponse(res, result));
+            }
+        })
+        .get((req, res, next) => {
+            getAll((docs) => hauResponse.sendResponse(res, docs));
+        });
+
+
+    app.route("\/dogs\/:id([0-9a-fA-F]{24})(\/)?$")
+        .all((req, res, next) => {
+            next();
+        })
+        .get((req, res, next) => {
+            getById(req.params.id, (visit) => hauResponse.sendResponse(res, visit));
+        })
+        .delete((req, res, next) => {
+            deleteById(req.params.id, (visit) => hauResponse.sendResponse(res, visit));
+        });
 
     function postNew(visit, callback) {
         visit = validator.pruneExcessive(visit);
@@ -18,7 +43,7 @@ import * as hauResponse from "../hau-response";
         if (!validator.validateRequired(visit) || !validator.validateOptionals()) {
             callback(hauResponse.createBadRequestResponse());
         } else {
-            db.collection('visits').insertOne(visit, (err, result) => {
+            hauDB.db.collection('visits').insertOne(visit, (err, result) => {
                 if (err) {
                     callback(hauResponse.createErrorResponse(err));
                 } else {
@@ -29,7 +54,7 @@ import * as hauResponse from "../hau-response";
     }
 
     function getAll(callback) {
-        db.collection('visits').find({}).toArray(function(err, docs) {
+        hauDB.db.collection('visits').find({}).toArray(function(err, docs) {
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
@@ -39,7 +64,7 @@ import * as hauResponse from "../hau-response";
     }
 
     function getById(visitId, callback) {
-        db.collection('visits').find({ _id: safeObjectId(visitId)}).toArray(function (err, docs) {
+        hauDB.db.collection('visits').find({ _id: safeObjectId(visitId)}).toArray(function (err, docs) {
             if (!err) {
                 let pair = docs.pop();
 
@@ -54,10 +79,8 @@ import * as hauResponse from "../hau-response";
         });
     }
 
-    //TODO: PUT update method
-
     function deleteById(visitId, callback) {
-        db.collection('visits').deleteOne({ _id: safeObjectId(visitId)}, (err, response) => {
+        hauDB.db.collection('visits').deleteOne({ _id: safeObjectId(visitId)}, (err, response) => {
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
