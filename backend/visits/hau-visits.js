@@ -12,7 +12,7 @@
 
     safeObjectId = hauDB.safeObjectId;
 
-    app.route("\/dogs(\/)?$")
+    app.route("\/visits(\/)?$")
         .all((req, res, next) => {
             next();
         })
@@ -26,7 +26,7 @@
         });
 
 
-    app.route("\/dogs\/:id([0-9a-fA-F]{24})(\/)?$")
+    app.route("\/visits\/:id([0-9a-fA-F]{24})(\/)?$")
         .all((req, res, next) => {
             next();
         })
