@@ -64,9 +64,23 @@
         return response;
     }
 
+    function sendResponse(res, data) {
+
+        if (data.hasOwnProperty('status')) {
+            res.status(data.status);
+        }
+        if (data.hasOwnProperty('content')) {
+            res.setHeader('Content-Type', data.content);
+        }
+
+        res.send(data.data);
+    }
+
+
     exports.createOkResponse = createOkResponse;
     exports.createNotFoundResponse = createNotFoundResponse;
     exports.createFoundResponse = createFoundResponse;
     exports.createBadRequestResponse = createBadRequestResponse;
     exports.createErrorResponse = createErrorResponse;
+    exports.sendResponse = sendResponse;
 }());
