@@ -1,24 +1,50 @@
 /*jslint node:true */
-import * as hauResponse from "../hau-response";
 
 (function () {
     "use strict";
+    let hauDB, safeObjectId, express, validator, app, hauResponse;
 
-    let db, hauDB, safeObjectId, express, validator;
+	express = require('express');
+    app = module.exports = express();
 
     hauDB = require('../hau-db');
     validator = require('./validate-dog');
-    express = require('express');
-    db = hauDB['db'];
-    safeObjectId = hauDB.safeObjectId;
+	hauResponse = require('../hau-response');
 
+    safeObjectId = hauDB.safeObjectId;
+	
+	app.route("\/dogs(\/)?$")
+	.all((req, res, next) => {
+		next();
+	})
+	.get((req, res, next) => {
+		getAll((docs) => hauResponse.sendResponse(res, docs));
+	})
+	.post((req, res, next) => {
+		if (req.get('Content-Type') === 'application/json') {
+            postNew(req.body, (result) => hauResponse.sendResponse(res, result));
+        }
+	});
+	
+	app.route("\/dogs\/:id([0-9a-fA-F]{24})(\/)?$")
+	.all((req, res, next) => {
+		next();
+	})
+	.get((req, res, next) => {
+		getById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
+	})
+	.delete((req, res, next) => {
+		deleteById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
+	});
+	
+	
     function postNew(dog, callback) {
         dog = validator.pruneExcessive(dog);
 
         if (!validator.validateRequired(dog) || !validator.validateOptionals(dog)) {
             callback(hauResponse.createBadRequestResponse());
         } else {
-            db.collection('dogs').insertOne(dog, function (err, result) {
+            hauDB.db.collection('dogs').insertOne(dog, function (err, result) {
                 if (err) {
                     callback(hauResponse.createErrorResponse(err));
                 } else {
@@ -30,7 +56,7 @@ import * as hauResponse from "../hau-response";
     }
 
     function getAll(callback) {
-        db.collection('dogs').find({}).toArray(function(err, docs) {
+        hauDB.db.collection('dogs').find({}).toArray(function(err, docs) {
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
@@ -40,7 +66,7 @@ import * as hauResponse from "../hau-response";
     }
 
     function getById(id, callback) {
-        db.collection('dogs').find({ _id: safeObjectId(id)}).toArray(function(err, docs) {
+        hauDB.db.collection('dogs').find({ _id: safeObjectId(id)}).toArray(function(err, docs) {
             let dog;
 
             if (err) {
@@ -49,7 +75,7 @@ import * as hauResponse from "../hau-response";
                 dog = docs.pop();
 
                 if (dog !== undefined) {
-                    db.collection('pairs').find({ 'dog._id': safeObjectId(dog._id)}, { '_id': 0, 'user._id': 1}).toArray(function(err, pairs) {
+                    hauDB.db.collection('pairs').find({ 'dog._id': safeObjectId(dog._id)}, { '_id': 0, 'user._id': 1}).toArray(function(err, pairs) {
                         let userids = [];
 
                         if (err) {
@@ -61,7 +87,7 @@ import * as hauResponse from "../hau-response";
                             }
 
                             if (userids.length > 0) {
-                                db.collection('users').find({ _id: { $in: userids}}, { _id: 1, firstName: 1, lastName: 1}).toArray(function(err, users) {
+                                hauDB.db.collection('users').find({ _id: { $in: userids}}, { _id: 1, firstName: 1, lastName: 1}).toArray(function(err, users) {
                                     dog.pairedUsers = users;
                                     callback(hauResponse.createOkResponse(dog));
                                 });
@@ -78,12 +104,12 @@ import * as hauResponse from "../hau-response";
     }
 
     function deleteById(dogId, callback) {
-        db.collection('dogs').deleteOne({ _id: safeObjectId(dogId)}, (err, response) => {
+        hauDB.db.collection('dogs').deleteOne({ _id: safeObjectId(dogId)}, (err, response) => {
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
                 if (response.deletedCount === 1) {
-                    db.collection('pairs').deleteMany({ 'dog._id': safeObjectId(dogId)}, (errs, r) => {
+                    hauDB.db.collection('pairs').deleteMany({ 'dog._id': safeObjectId(dogId)}, (errs, r) => {
                         if (errs) {
                             callback(hauResponse.createErrorResponse(errs));
                         } else {
