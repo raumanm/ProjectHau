@@ -1,6 +1,4 @@
 /*jslint node:true */
-import * as hauResponse from "../hau-response";
-
 (function () {
     "use strict";
     let app, hauDB, safeObjectId, express, validator, hauResponse;
@@ -22,6 +20,7 @@ import * as hauResponse from "../hau-response";
         if (req.get('Content-Type') === 'application/json') {
             postNew(req.body, (result) => hauResponse.sendResponse(res, result));
         }
+
     })
     .get((req, res, next) => {
         getAll((docs) => hauResponse.sendResponse(res, docs));

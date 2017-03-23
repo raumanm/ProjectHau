@@ -7,7 +7,7 @@
     function logger(req, res, next) {
         console.log(new Date(), req.ip, req.method, req.url);
         next();
-    }  
+    }
 
     express = require('express');
     bodyParser = require('body-parser');
@@ -15,9 +15,9 @@
 	hauDogs = require('./dogs/hau-dogs');
 	hauUsers = require('./users/hau-users');
 	hauPairs = require('./pairs/hau-pairs');
-	hauPlaces = require('./pairs/hau-pairs');
+	hauPlaces = require('./places/hau-places');
 	hauVisits = require('./visits/hau-visits');
-	
+
     app = express();
 
     app.use( bodyParser.json() );
@@ -33,7 +33,7 @@
 
 	hauMongo.init(function (err) {
 		if (err) throw err;
-		
+
 		app.listen(8080);
 	});
 
