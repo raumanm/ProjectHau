@@ -7,7 +7,7 @@
         return toCheck.hasOwnProperty("visitTime")
             && toCheck.hasOwnProperty("placeId")
             && typeof toCheck["placeId"] === "string"
-            && typeof toCheck["visitTime"] === "string"
+            && Object.prototype.toString.call(visitTime) !== '[object Date]'
             && objectIdRe.test(toCheck["placeId"]);
     }
 

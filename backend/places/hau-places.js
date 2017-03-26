@@ -1,38 +1,63 @@
 /*jslint node:true */
-import * as hauResponse from "../hau-response";
-
 (function () {
     "use strict";
+    let app, hauDB, safeObjectId, express, validator, hauResponse;
 
-    let db, hauDB, safeObjectId, express, validator;
+    express = require('express');
+    app = module.exports = express();
 
     hauDB = require('../hau-db');
     validator = require('./validate-place');
-    express = require('express');
-    db = hauDB['db'];
+    hauResponse = require('../hau-response');
+
     safeObjectId = hauDB.safeObjectId;
+
+    app.route("\/places(\/)?$")
+    .all((req, res, next) => {
+        next();
+    })
+    .post((req, res, next) => {
+        if (req.get('Content-Type') === 'application/json') {
+            postNew(req.body, (result) => hauResponse.sendResponse(res, result));
+        }
+
+    })
+    .get((req, res, next) => {
+        getAll((docs) => hauResponse.sendResponse(res, docs));
+    });
+
+    app.route("\/places\/:id([0-9a-fA-F]{24})(\/)?$")
+    .all((req, res, next) => {
+        next();
+    })
+    .get((req, res, next) => {
+        getById(req.params.id, (place) => hauResponse.sendResponse(res, place));
+    })
+    .delete((req, res, next) => {
+        deleteById(req.params.id, (place) => hauResponse.sendResponse(res, place));
+    });
 
     function postNew(place, callback) {
         place = validator.pruneExcessive(place);
         if (validator.validateRequired(place) && validator.validateOptionals(place)) {
-            callback(hauResponse.createBadRequestResponse());
-        } else {
-            db.collection('places').insertOne(place, (err, result) => {
-                if (err) {
-                    callback(hauResponse.createErrorResponse(err));
-                } else {
+            hauDB.db.collection('places').insertOne(place, (err, result) => {
+                if (!err) {
                     callback(hauResponse.createOkResponse(result));
+                } else {
+                    callback(hauResponse.createErrorResponse(err));
                 }
             });
+        } else {
+            callback(hauResponse.createBadRequestResponse());
         }
     }
 
     function getAll(callback) {
-        db.collection('places').find({}).toArray(function(err, docs) {
-            if (err) {
-                callback(hauResponse.createErrorResponse(err));
-            } else {
+        hauDB.db.collection('places').find({}).toArray(function(err, docs) {
+            if (!err) {
                 callback(hauResponse.createOkResponse(docs));
+            } else {
+                callback(hauResponse.createErrorResponse(err));
             }
         });
     }
@@ -40,47 +65,44 @@ import * as hauResponse from "../hau-response";
     function getById(id, callback) {
         let place;
 
-        db.collection('places').find({
-            _id: safeObjectId(id)
-        }).toArray(function(err, docs) {
-            if (err) {
-                callback(hauResponse.createErrorResponse(err));
-            } else {
-                place = docs.pop();
+        hauDB.db.collection('places')
+            .find({ _id: safeObjectId(id)})
+            .toArray(function(err, docs) {
 
-                if (place !== undefined && place.hasOwnProperty('overseerId')) {
-                    db.collection('users').find({
-                        _id: safeObjectId(place.overseerId)
-                    }, {
-                        '_id': 1,
-                        'firstName': 1,
-                        'lastName': 1
-                    }).toArray(function(err, trusted) {
-                        place.overseerId = trusted.pop();
+                if (!err) {
+                    place = docs.pop();
+
+                    if (place !== undefined && place.hasOwnProperty('overseerId')) {
+                        hauDB.db.collection('users')
+                            .find({_id: safeObjectId(place.overseerId)}, {'_id': 1, 'firstName': 1, 'lastName': 1})
+                            .toArray(function (err, trusted) {
+
+                                place.overseerId = trusted.pop();
+                                callback(hauResponse.createOkResponse(place));
+                            });
+                    } else if (place !== undefined) {
                         callback(hauResponse.createOkResponse(place));
-                    });
-                } else if (place === undefined) {
-                    callback(hauResponse.createNotFoundResponse(id));
+                    } else {
+                        callback(hauResponse.createNotFoundResponse(id));
+                    }
                 } else {
-                    callback(hauResponse.createOkResponse(place));
+                    callback(hauResponse.createErrorResponse(err));
                 }
-            }
         });
     }
 
-    //TODO: PUT update method
-
     function deleteById(placeId, callback) {
-        db.collection('places').deleteOne({ _id: safeObjectId(placeId)}, (err, response) => {
-            if (err) {
-                callback(hauResponse.createErrorResponse(err));
-            } else {
-                if (response.deletedCount === 1) {
-                    callback(hauResponse.createOkResponse(response));
+        hauDB.db.collection('places')
+            .deleteOne({ _id: safeObjectId(placeId)}, (err, response) => {
+                if (!err) {
+                    if (response.deletedCount === 1) {
+                        callback(hauResponse.createOkResponse(response));
+                    } else {
+                        callback(hauResponse.createNotFoundResponse(placeId));
+                    }
                 } else {
-                    callback(hauResponse.createNotFoundResponse(placeId));
+                    callback(hauResponse.createErrorResponse(err));
                 }
-            }
         });
     }
 }());

@@ -25,7 +25,7 @@
             return false;
         }
 
-        if (toCheck.hasOwnProperty(qualificationDate) && typeof toCheck.qualificationDate !== "string") {
+        if (toCheck.hasOwnProperty(qualificationDate) && Object.prototype.toString.call(qualificationDate) !== '[object Date]') {
             return false;
         }
 
