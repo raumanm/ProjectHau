@@ -5,6 +5,8 @@ import { PlaceService } from './add-place.service';
 import { Place } from '../classes/place';
 import { UtilsClass } from '../util/utilsclass';
 
+import { AppComponent } from '../app.component';
+
 @Component({
     moduleId: module.id,
     selector: 'my-add-place',
@@ -14,7 +16,10 @@ import { UtilsClass } from '../util/utilsclass';
 export class AddPlaceComponent {
   myForm: FormGroup;
 
-  constructor(fb: FormBuilder, private placeService: PlaceService) {
+  constructor(appComponent: AppComponent, fb: FormBuilder, private placeService: PlaceService) {
+    
+    appComponent.titleText = "Lisää kohde";
+    
     this.myForm = fb.group({
       'name': ['Tuonelan vanhainkoti'],
       'addressStreet': ['Helvetinjärvenkatu 66'],
