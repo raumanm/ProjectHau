@@ -70,6 +70,7 @@ export class AddUserComponent  {
 
         if(everythingOk) {
           console.log(value);
+          this.userService.create(value);
           alert("Käyttäjä lisätty onnistuneesti");
         } else {
           alert("Virhe! Tarkista syötteesi");
