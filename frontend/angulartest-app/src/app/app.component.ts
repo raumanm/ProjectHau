@@ -12,8 +12,37 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
                 <div id="logo"></div>
                 <h1 id="header">{{titleText}}</h1>
             </header>
-            
-            <div id="content">
+
+
+          <ul>
+            <li><a routerLink = "/mainPage">Etusivu</a></li>
+
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Etsi ja muokkaa</a>
+              <div class="dropdown-content">
+                <a routerLink = "/search">Hae käyttäjiä</a>
+                <a routerLink = "/search">Hae koiria</a>
+                <a routerLink = "/search">Hae kohteita</a>
+                <a routerLink = "/search">Hae käyntejä</a>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Lisää uusi</a>
+              <div class="dropdown-content">
+                <a routerLink="/addUser">Uusi käyttäjä</a>
+                <a routerLink="/addUser">Uusi koira</a>
+                <a routerLink="/addUser">Uusi kohde</a>
+                <a routerLink="/addUser">Uusi käynti</a>
+              </div>
+            </li>
+
+            <li><a routerLink = "/report">Raportit</a></li>
+            <li><a routerLink = "/message">Lähetä viesti</a></li>
+
+          </ul>
+
+          <div id="content">
                 <router-outlet></router-outlet>
             </div>
             
