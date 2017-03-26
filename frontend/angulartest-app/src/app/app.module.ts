@@ -12,6 +12,7 @@ import { PersonalInformationComponent } from './personal-information.component/p
 import { SearchComponent } from './search.component/search.component';
 import { AddDogComponent } from './add-dog.component/add-dog.component';
 import { AddUserComponent } from './add-user.component/add-user.component';
+import { AddPlaceComponent } from './add-place.component/add-place.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
