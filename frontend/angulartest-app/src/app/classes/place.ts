@@ -11,7 +11,7 @@ export class Place {
     public addressCity: string,
     public visitationInterval: string,
     public pairAmount?: number,
-    public overseerId?: string,
+    public overseerId?: string
   ) {}
 
 

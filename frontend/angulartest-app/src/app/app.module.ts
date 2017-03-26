@@ -16,8 +16,9 @@ import { AddPlaceComponent } from './add-place.component/add-place.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
-import { DogFormService } from './dog-form.component/dog-form.service'
+import { DogFormService } from './dog-form.component/dog-form.service';
 import { UserService } from './add-user.component/add-user.service';
+import { PlaceService } from './add-place.component/add-place.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UserService } from './add-user.component/add-user.service';
     SearchComponent,
     AddDogComponent,
     AddUserComponent,
+    AddPlaceComponent,
     ReportComponent,
     MessageComponent
   ],
@@ -41,7 +43,8 @@ import { UserService } from './add-user.component/add-user.service';
   ],
   providers: [
     DogFormService,
-    UserService
+    UserService,
+    PlaceService
   ],
   bootstrap: [ AppComponent ]
 })
