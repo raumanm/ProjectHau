@@ -102,6 +102,7 @@ export class AddDogComponent  {
 
       if(everythingOk) {
         console.log(value);
+        this.dogService.create(value);
         alert("Koira luotu onnistuneesti")
       } else {
         alert("Virhe! Tarkista syötteesi")
