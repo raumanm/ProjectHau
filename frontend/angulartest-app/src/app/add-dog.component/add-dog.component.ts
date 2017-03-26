@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DogFormService } from '../dog-form.component/dog-form.service';
 import { Dog } from '../classes/dog';
 import { UtilsClass } from '../util/utilsclass';
+import { AppComponent } from '../app.component';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +15,10 @@ import { UtilsClass } from '../util/utilsclass';
 export class AddDogComponent  {
      myForm: FormGroup;
 
-    constructor(fb: FormBuilder, private dogService: DogFormService) {
+    constructor(appComponent: AppComponent, fb: FormBuilder, private dogService: DogFormService) {
+        
+        appComponent.titleText = "Lisää koira";
+        
         this.myForm = fb.group({
         'nameFull': ['Bowmores Irish Cream'],
         'nameNickname': ['Sylvi'],
