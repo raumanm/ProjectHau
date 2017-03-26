@@ -8,4 +8,8 @@ moduleId: module.id,
     templateUrl: './personal-information.component.html',
     styleUrls: ['../stylesheets/style.css']
 })
-export class PersonalInformationComponent  {}
+export class PersonalInformationComponent  {
+    constructor(appComponent: AppComponent) {
+        appComponent.titleText = "Omat tiedot";
+    }
+}
