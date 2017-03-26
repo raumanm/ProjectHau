@@ -22,7 +22,8 @@ export class AddPlaceComponent {
       'addressCity': [''],
       'visitationInterval': [''],
       'pairAmount': [''],
-      'overseerId': ['']
+      'overseerId': [''],
+      'details': ['']
     });
   }
 
