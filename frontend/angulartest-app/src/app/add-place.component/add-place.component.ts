@@ -16,14 +16,14 @@ export class AddPlaceComponent {
 
   constructor(fb: FormBuilder, private placeService: PlaceService) {
     this.myForm = fb.group({
-      'name': [''],
-      'addressStreet': [''],
-      'addressCode': [''],
-      'addressCity': [''],
+      'name': ['Tuonelan vanhainkoti'],
+      'addressStreet': ['Helvetinjärvenkatu 66'],
+      'addressCode': ['33560'],
+      'addressCity': ['Tampere'],
       'visitationInterval': [''],
-      'pairAmount': [''],
+      'pairAmount': ['2'],
       'overseerId': [''],
-      'details': ['']
+      'details': ['Ihan ihme paikka']
     });
   }
 
