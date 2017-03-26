@@ -17,14 +17,14 @@ export class AddUserComponent  {
     constructor(fb: FormBuilder, private userService: UserService) {
         this.myForm = fb.group({
         'accessLevel': [''],
-        'username': ['Mikitus'],
-        'firstName': ['Mikko'],
-        'lastName': ['Luhtasaari'],
-        'phone': ['0505895499'],
-        'email': ['mikko.luhtasaari@hotmail.com'],
-        'memberNumber': ['5435555'],
+        'username': ['JaskanKoiruleet'],
+        'firstName': ['Jaakko'],
+        'lastName': ['Jaskanen'],
+        'phone': ['063121582'],
+        'email': ['jaskankoirat@luukku.com'],
+        'memberNumber': ['5366364'],
         'qualificationDate': [''],
-        'details': ['']
+        'details': ['Tietoja']
         });
     }
 
