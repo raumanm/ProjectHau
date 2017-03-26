@@ -4,6 +4,28 @@
 
 export class UtilsClass {
 
+  static validatePairAmount(value: string): boolean {
+    let re = new RegExp("^[0-9]{1,2}$");
+    if (re.test(value)) {
+      console.log("Valid");
+      return true;
+    } else {
+      console.log("Invalid");
+      return false;
+    }
+  }
+
+  static validateZipCode(value: string): boolean {
+    let re = new RegExp("^[0-9]{5}$");
+    if (re.test(value)) {
+      console.log("Valid");
+      return true;
+    } else {
+      console.log("Invalid");
+      return false;
+    }
+  }
+
   static createDate(value: string): Date {
     let year = value["dateBirth"].slice(0,4);
     let month = value["dateBirth"].slice(5,7);
