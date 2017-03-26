@@ -5,6 +5,8 @@ import { UserService } from './add-user.service';
 import { User } from '../classes/user';
 import { UtilsClass } from '../util/utilsclass';
 
+import { AppComponent } from '../app.component';
+
 @Component({
     moduleId: module.id,
     selector: 'my-add-user',
@@ -14,7 +16,10 @@ import { UtilsClass } from '../util/utilsclass';
 export class AddUserComponent  {
       myForm: FormGroup;
 
-    constructor(fb: FormBuilder, private userService: UserService) {
+    constructor(appComponent: AppComponent, fb: FormBuilder, private userService: UserService) {
+        
+        appComponent.titleText = "Lisää käyttäjä";
+        
         this.myForm = fb.group({
         'accessLevel': [''],
         'username': ['JaskanKoiruleet'],

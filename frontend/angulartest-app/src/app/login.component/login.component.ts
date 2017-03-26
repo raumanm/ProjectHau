@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { AppComponent } from '../app.component';
+
 @Component({
 moduleId: module.id,
     selector: 'my-login-page',
@@ -16,4 +18,9 @@ moduleId: module.id,
         <button [routerLink]="['/mainPage']"> Lähetä </button>
     `
 })
-export class LoginPageComponent  {}
+export class LoginPageComponent  {
+
+    constructor(appComponent: AppComponent) {
+        appComponent.titleText = "Sisäänkirjautuminen";
+    }
+}

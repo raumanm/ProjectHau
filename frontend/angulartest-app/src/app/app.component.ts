@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
             
             <header>
                 <div id="logo"></div>
-                <h1 id="header">Otsikko</h1>
+                <h1 id="header">{{titleText}}</h1>
             </header>
             
             <div id="content">
@@ -28,4 +28,5 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
     styleUrls: ['./stylesheets/style.css']
 })
 export class AppComponent {
+    @Input()titleText;
 }
