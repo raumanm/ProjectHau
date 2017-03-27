@@ -17,9 +17,9 @@ export class AddUserComponent  {
       myForm: FormGroup;
 
     constructor(appComponent: AppComponent, fb: FormBuilder, private userService: UserService) {
-        
+
         appComponent.titleText = "Lisää käyttäjä";
-        
+
         this.myForm = fb.group({
         'accessLevel': [''],
         'username': ['JaskanKoiruleet'],
@@ -43,10 +43,9 @@ export class AddUserComponent  {
           everythingOk = false;
         }
 
-        if(UtilsClass.validateEmailStart(value["email"])) {
+        if(UtilsClass.validateEmailStart(value["email"].substring(0,1))) {
 
           if(UtilsClass.validateEmail(value["email"])) {
-            console.log("emailOk")
           } else {
             everythingOk = false;
           }
@@ -56,26 +55,23 @@ export class AddUserComponent  {
 
         if(UtilsClass.validateShortOpenField(value["username"]) && UtilsClass.validateShortOpenField(value["firstName"]) &&
         UtilsClass.validateShortOpenField(value["lastName"]) && UtilsClass.validateShortOpenField(value["memberNumber"])) {
-          console.log("avoimetkentatok");
         } else {
           everythingOk = false;
         }
 
         if(UtilsClass.validateLongOpenField(value["details"])) {
-          console.log("detailsok")
         } else {
           everythingOk = false;
         }
 
         if(UtilsClass.validatePhoneNumber(value["phone"])) {
-          console.log("phoneOk");
         } else {
           everythingOk = false;
         }
 
         if(everythingOk) {
           console.log(value);
-          this.userService.create(value);
+          //this.userService.create(value);
           alert("Käyttäjä lisätty onnistuneesti");
         } else {
           alert("Virhe! Tarkista syötteesi");

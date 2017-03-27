@@ -16,9 +16,9 @@ export class AddDogComponent  {
      myForm: FormGroup;
 
     constructor(appComponent: AppComponent, fb: FormBuilder, private dogService: DogFormService) {
-        
+
         appComponent.titleText = "Lisää koira";
-        
+
         this.myForm = fb.group({
         'nameFull': ['Jepen musta salama'],
         'nameNickname': ['Jaska'],
@@ -96,7 +96,7 @@ export class AddDogComponent  {
 
       if(everythingOk) {
         console.log(value);
-        this.dogService.create(value);
+        //this.dogService.create(value);
         alert("Koira luotu onnistuneesti")
       } else {
         alert("Virhe! Tarkista syötteesi")

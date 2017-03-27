@@ -17,9 +17,9 @@ export class AddPlaceComponent {
   myForm: FormGroup;
 
   constructor(appComponent: AppComponent, fb: FormBuilder, private placeService: PlaceService) {
-    
+
     appComponent.titleText = "Lisää kohde";
-    
+
     this.myForm = fb.group({
       'name': ['Tuonelan vanhainkoti'],
       'addressStreet': ['Helvetinjärvenkatu 66'],
@@ -62,7 +62,7 @@ export class AddPlaceComponent {
     }
 
     if(everythingOk) {
-      this.placeService.create(value);
+      //this.placeService.create(value);
       alert("Kohde lisätty onnistuneesti");
       console.log(value);
     } else {
