@@ -1,18 +1,4 @@
-﻿/* Värit:
-    #C0B283 - kulta
-    #DCD0C0 - puuteri
-    #F4F4F4 - paperi
-    #373737 - tumma harmaa
-
-    teksti:
-    #000000 - musta
-
-ÄLÄ KÄYTÄ MUITA VÄREJÄ 
-pl. kalenterin kuvaavat värit (vihreä-punainen-keltainen-sininen)
-
-*/
-
-form{
+﻿form{
     display: inline-block;
     text-align: center;
     padding-top: 50px;
@@ -20,15 +6,15 @@ form{
 
 button{
     font-size: 20px;
-    font: Verdana, Geneva, sans-serif;
     width: 500px;
     height: 40px;
     margin: 5px;
-    background-color: #DCD0C0;
+    color: black;
+    background-color: coral;
 }
 
 input[type=submit]:hover{
-    background-color: #C0B283;
+    background-color: coral;
     cursor: pointer;
 }
 
@@ -49,6 +35,6 @@ select, input[type=text], input[type=date]{
 }
 
 button:hover{
-    background-color: #C0B283;
+    border: groove 5px lightgray;
     cursor: pointer;
 }
