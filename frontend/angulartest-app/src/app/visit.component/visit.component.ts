@@ -28,13 +28,39 @@ export class VisitComponent {
       'visitTime': [''],
       'placeId': [''],
       'assignedPairId': [''],
-      'assignedPairStatus': ['Tampere'],
+      'assignedPairStatus': [''],
       'details': ['Ihan ihme paikka']
     });
   }
 
   onSubmit(value: string): void {
     let everythingOk = true;
-    console.log(value);
+
+    if(value["visitTime"] != "") {
+      if(UtilsClass.validateDate(value["visitTime"])) {
+        let temp = UtilsClass.createDate(value["visitTime"]);
+        value["visitTime"] = temp;
+      } else {
+        everythingOk = false;
+      }
+    } else {
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateShortOpenField(value["placeId"]) || !UtilsClass.validateShortOpenField(value["assignedPairId"]) ||
+    !UtilsClass.validateShortOpenField(value["assignedPairStatus"])) {
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateLongOpenField(value["details"])) {
+      everythingOk = false;
+    }
+
+    if(everythingOk) {
+      console.log(value);
+      alert("Vierailu lisätty onnistuneesti");
+    } else {
+      alert("Virhe! Tarkista syötteesi");
+    }
   }
 }
