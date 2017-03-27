@@ -9,7 +9,7 @@ export class UtilsClass {
     if (re.test(value)) {
       return true;
     } else {
-      console.log("Invalid");
+      console.log("Invalid pair amount");
       return false;
     }
   }
@@ -19,7 +19,7 @@ export class UtilsClass {
     if (re.test(value)) {
       return true;
     } else {
-      console.log("Invalid");
+      console.log("Invalid zipcode");
       return false;
     }
   }
@@ -47,7 +47,7 @@ export class UtilsClass {
     if (re.test(value)) {
       return true;
     } else {
-      console.log("Invalid");
+      console.log("Invalid email");
       return false;
     }
   }
@@ -57,7 +57,7 @@ export class UtilsClass {
     if (re.test(value)) {
       return true;
     } else {
-      console.log("Invalid");
+      console.log("Invalid email start");
       return false;
     }
   }
@@ -67,7 +67,7 @@ export class UtilsClass {
     if (re.test(value)) {
       return true;
     } else {
-      console.log("Invalid");
+      console.log("Invalid shortopen field");
       return false;
     }
   }
@@ -77,7 +77,7 @@ export class UtilsClass {
     if (re.test(value)) {
       return true;
     } else {
-      console.log("Invalid");
+      console.log("Invalid longopen field");
       return false;
     }
   }
@@ -87,7 +87,7 @@ export class UtilsClass {
     if (re.test(value)) {
       return true;
     } else {
-      console.log("Invalid");
+      console.log("Invalid phonenumber");
       return false;
     }
   }
