@@ -22,7 +22,7 @@ export class AddDogComponent  {
         this.myForm = fb.group({
         'nameFull': ['Jepen musta salama'],
         'nameNickname': ['Jaska'],
-        'dateBirth': ['2006-07-05'],
+        'dateBirth': [''],
         'breed': ['Sekarotuinen'],
         'registerNumber': ['6533TY'],
         'status': [''],
