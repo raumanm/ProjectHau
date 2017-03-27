@@ -5,7 +5,7 @@
 export class UtilsClass {
 
   static validatePairAmount(value: string): boolean {
-    let re = new RegExp("^[0-9]{1,2}$");
+    let re = new RegExp("^[1-9]{1}$");
     if (re.test(value)) {
       return true;
     } else {

@@ -37,17 +37,36 @@ export class AddDogComponent  {
     onSubmit(value: string): void {
       let everythingOk = true;
 
-      if(UtilsClass.validateShortOpenField(value["nameFull"]) && UtilsClass.validateShortOpenField(value["nameNickname"]) &&
-      UtilsClass.validateShortOpenField(value["breed"]) && UtilsClass.validateShortOpenField(value["registerNumber"]) &&
-      UtilsClass.validateShortOpenField(value["status"])) {
-      } else {
+      if(!UtilsClass.validateShortOpenField(value["nameFull"])) {
         everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta koko nimi");
+      }
+
+      if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+      }
+
+      if(!UtilsClass.validateShortOpenField(value["breed"])) {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta rotu");
+      }
+
+      if(!UtilsClass.validateShortOpenField(value["registerNumber"])) {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta rekisterinumero");
+      }
+
+      if(!UtilsClass.validateShortOpenField(value["status"])) {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta tila");
       }
 
       if(value["details"] != "") {
         if(UtilsClass.validateLongOpenField(value["details"])) {
         } else {
           everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
         }
       }
 
@@ -56,6 +75,7 @@ export class AddDogComponent  {
         value["dateBirth"] = temp;
       } else {
         everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta syntymäaika");
       }
 
       if(value["dateQualification"] != "") {
@@ -64,6 +84,7 @@ export class AddDogComponent  {
           value["dateQualification"] = temp;
         } else {
           everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta pätevöitymispäivämäärä");
         }
       }
 
@@ -73,6 +94,7 @@ export class AddDogComponent  {
           value["dateGraduation"] = temp;
         } else {
           everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta valmistumispäivämäärä");
         }
       }
 
@@ -82,6 +104,7 @@ export class AddDogComponent  {
           value["dateMedal"] = temp;
         } else {
           everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta mitalinpäivämäärä");
         }
       }
 
@@ -91,6 +114,7 @@ export class AddDogComponent  {
           value["dateRetired"] = temp;
         } else {
           everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta lopettamispäivämäärä");
         }
       }
 
@@ -98,8 +122,6 @@ export class AddDogComponent  {
         console.log(value);
         //this.dogService.create(value);
         alert("Koira luotu onnistuneesti")
-      } else {
-        alert("Virhe! Tarkista syötteesi")
       }
 
     }

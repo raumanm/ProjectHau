@@ -40,6 +40,7 @@ export class AddUserComponent  {
           let temp = UtilsClass.createDate(value["qualificationDate"]);
           value["qualificationDate"] = temp;
         } else {
+          alert("Virhe! Tarkista syötteesi kohdasta pätevöitymispäivämäärä");
           everythingOk = false;
         }
 
@@ -47,25 +48,41 @@ export class AddUserComponent  {
 
           if(UtilsClass.validateEmail(value["email"])) {
           } else {
+            alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
             everythingOk = false;
           }
         } else {
+          alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
           everythingOk = false;
         }
 
-        if(UtilsClass.validateShortOpenField(value["username"]) && UtilsClass.validateShortOpenField(value["firstName"]) &&
-        UtilsClass.validateShortOpenField(value["lastName"]) && UtilsClass.validateShortOpenField(value["memberNumber"])) {
-        } else {
+        if(!UtilsClass.validateShortOpenField(value["username"])) {
+          alert("Virhe! Tarkista syötteesi kohdasta käyttäjänimi");
           everythingOk = false;
         }
 
-        if(UtilsClass.validateLongOpenField(value["details"])) {
-        } else {
+        if(!UtilsClass.validateShortOpenField(value["firstName"])) {
+          alert("Virhe! Tarkista syötteesi kohdasta etunimi");
           everythingOk = false;
         }
 
-        if(UtilsClass.validatePhoneNumber(value["phone"])) {
-        } else {
+        if(!UtilsClass.validateShortOpenField(value["lastName"])) {
+          alert("Virhe! Tarkista syötteesi kohdasta sukunimi");
+          everythingOk = false;
+        }
+
+        if(!UtilsClass.validateShortOpenField(value["memberNumber"])) {
+          alert("Virhe! Tarkista syötteesi kohdasta jäsennumero");
+          everythingOk = false;
+        }
+
+        if(!UtilsClass.validateLongOpenField(value["details"])) {
+          alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
+          everythingOk = false;
+        }
+
+        if(!UtilsClass.validatePhoneNumber(value["phone"])) {
+          alert("Virhe! Tarkista syötteesi kohdasta puhelinnumero");
           everythingOk = false;
         }
 
@@ -73,8 +90,6 @@ export class AddUserComponent  {
           console.log(value);
           //this.userService.create(value);
           alert("Käyttäjä lisätty onnistuneesti");
-        } else {
-          alert("Virhe! Tarkista syötteesi");
         }
 
     }
