@@ -37,25 +37,21 @@ export class AddPlaceComponent {
 
     if(UtilsClass.validateShortOpenField(value["name"]) && UtilsClass.validateShortOpenField(value["addressStreet"]) &&
     UtilsClass.validateShortOpenField(value["addressCity"]) && UtilsClass.validateShortOpenField(value["overseerId"])) {
-      console.log("open fields ok");
     } else {
       everythingOk = false;
     }
 
     if(UtilsClass.validateZipCode(value["addressCode"])) {
-      console.log("zipOk");
     } else {
       everythingOk = false;
     }
 
     if(UtilsClass.validatePairAmount(value["pairAmount"])) {
-      console.log("pairAmountok");
     } else {
       everythingOk = false;
     }
     if(value["details"] != "") {
       if(UtilsClass.validateLongOpenField(value["details"])) {
-        console.log("detailsOk");
       } else {
         everythingOk = false;
       }
