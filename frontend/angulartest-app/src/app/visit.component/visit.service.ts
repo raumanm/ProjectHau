@@ -10,7 +10,7 @@ import { Visit } from '../classes/visit';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class UserService {
+export class VisitService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private getUrl = 'http://konelandia.bounceme.net/visits/';
