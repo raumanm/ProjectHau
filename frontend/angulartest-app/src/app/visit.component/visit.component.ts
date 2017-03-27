@@ -29,7 +29,7 @@ export class VisitComponent {
       'placeId': [''],
       'assignedPairId': [''],
       'assignedPairStatus': [''],
-      'details': ['Ihan ihme paikka']
+      'details': ['']
     });
   }
 
@@ -41,26 +41,37 @@ export class VisitComponent {
         let temp = UtilsClass.createDate(value["visitTime"]);
         value["visitTime"] = temp;
       } else {
+        alert("Virhe! Tarkista syötteesi kohdasta vierailuaika");
         everythingOk = false;
       }
     } else {
+      alert("Virhe! Tarkista syötteesi kohdasta vierailuaika");
       everythingOk = false;
     }
 
-    if(!UtilsClass.validateShortOpenField(value["placeId"]) || !UtilsClass.validateShortOpenField(value["assignedPairId"]) ||
-    !UtilsClass.validateShortOpenField(value["assignedPairStatus"])) {
+    if(!UtilsClass.validateShortOpenField(value["placeId"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta kohde");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateShortOpenField(value["assignedPairId"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta koirakko");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateShortOpenField(value["assignedPairStatus"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta koirakon tila");
       everythingOk = false;
     }
 
     if(!UtilsClass.validateLongOpenField(value["details"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
       everythingOk = false;
     }
 
     if(everythingOk) {
       console.log(value);
       alert("Vierailu lisätty onnistuneesti");
-    } else {
-      alert("Virhe! Tarkista syötteesi");
     }
   }
 }
