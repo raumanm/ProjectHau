@@ -20,17 +20,17 @@ export class AddDogComponent  {
         appComponent.titleText = "Lisää koira";
         
         this.myForm = fb.group({
-        'nameFull': ['Bowmores Irish Cream'],
-        'nameNickname': ['Sylvi'],
+        'nameFull': ['Jepen musta salama'],
+        'nameNickname': ['Jaska'],
         'dateBirth': ['2006-07-05'],
-        'breed': ['Labradorinnoutaja'],
-        'registerNumber': ['123ASD'],
-        'status': ['Active'],
+        'breed': ['Sekarotuinen'],
+        'registerNumber': ['6533TY'],
+        'status': [''],
         'dateQualification': [''],
         'dateGraduation': [''],
         'dateMedal': [''],
         'dateRetired': [''],
-        'details': ['Best dog']
+        'details': ['Sellanen']
         });
     }
 
@@ -40,14 +40,12 @@ export class AddDogComponent  {
       if(UtilsClass.validateShortOpenField(value["nameFull"]) && UtilsClass.validateShortOpenField(value["nameNickname"]) &&
       UtilsClass.validateShortOpenField(value["breed"]) && UtilsClass.validateShortOpenField(value["registerNumber"]) &&
       UtilsClass.validateShortOpenField(value["status"])) {
-        console.log("shotfieldit ok");
       } else {
         everythingOk = false;
       }
 
       if(value["details"] != "") {
         if(UtilsClass.validateLongOpenField(value["details"])) {
-          console.log("detailsok");
         } else {
           everythingOk = false;
         }
@@ -67,8 +65,6 @@ export class AddDogComponent  {
         } else {
           everythingOk = false;
         }
-      } else {
-        everythingOk = false;
       }
 
       if(value["dateGraduation"] != "") {
@@ -78,8 +74,6 @@ export class AddDogComponent  {
         } else {
           everythingOk = false;
         }
-      } else {
-        everythingOk = false;
       }
 
       if(value["dateMedal"] != "") {
@@ -89,8 +83,6 @@ export class AddDogComponent  {
         } else {
           everythingOk = false;
         }
-      } else {
-        everythingOk = false;
       }
 
       if(value["dateRetired"] != "") {
@@ -100,8 +92,6 @@ export class AddDogComponent  {
         } else {
           everythingOk = false;
         }
-      } else {
-        everythingOk = false;
       }
 
       if(everythingOk) {
