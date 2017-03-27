@@ -13,12 +13,14 @@ import { SearchComponent } from './search.component/search.component';
 import { AddDogComponent } from './add-dog.component/add-dog.component';
 import { AddUserComponent } from './add-user.component/add-user.component';
 import { AddPlaceComponent } from './add-place.component/add-place.component';
+import { VisitComponent } from './visit.component/visit.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
 import { DogFormService } from './dog-form.component/dog-form.service';
 import { UserService } from './add-user.component/add-user.service';
 import { PlaceService } from './add-place.component/add-place.service';
+import { VisitService } from './visit.component/visit.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { PlaceService } from './add-place.component/add-place.service';
     AddDogComponent,
     AddUserComponent,
     AddPlaceComponent,
+    VisitComponent,
     ReportComponent,
     MessageComponent
   ],
@@ -44,7 +47,8 @@ import { PlaceService } from './add-place.component/add-place.service';
   providers: [
     DogFormService,
     UserService,
-    PlaceService
+    PlaceService,
+    VisitService
   ],
   bootstrap: [ AppComponent ]
 })
