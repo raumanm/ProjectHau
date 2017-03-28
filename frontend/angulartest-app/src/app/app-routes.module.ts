@@ -34,7 +34,7 @@ export const routes: Routes = [
 
   { path: 'searchDogs', component: SearchDogsComponent },
 
-  {path: 'showDog/:_id', component: ShowDogComponent }
+  {path: 'showDog/:id', component: ShowDogComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

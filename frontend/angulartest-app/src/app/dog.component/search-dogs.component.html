@@ -12,7 +12,7 @@
   </li>
 </ul>
 --->
-  <button *ngFor="let dog of dogs">
+  <button *ngFor="let dog of dogs" routerLink="/showDog/{{dog._id}}">
     {{dog.nameNickname}}
   </button>
 
