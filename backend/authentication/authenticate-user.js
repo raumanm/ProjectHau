@@ -29,7 +29,7 @@
                         var token = jsonWebToken.sign(user, app.get('authenticationSecret'), {
                             expiresIn : 60*60*24
                         });
-                        res.json(hauResponse.createAuthenticationSucceededResponse(toke));
+                        res.json(hauResponse.createAuthenticationSucceededResponse(token));
                     } else {
                         //If password is wrong
                         res.send(hauResponse.createAuthenticationErrorResponse());

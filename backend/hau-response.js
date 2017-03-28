@@ -80,7 +80,7 @@
 
         response.status = 200;
         response.content = 'application/json';
-        response.data = {toke: token};
+        response.data = {token: token};
         response.data.message = "Authentication succeeded";
 
         return response;
@@ -100,6 +100,7 @@
 
 
     exports.createAuthenticationErrorResponse = createAuthenticationErrorResponse;
+    exports.createAuthenticationSucceededResponse = createAuthenticationSucceededResponse;
     exports.createOkResponse = createOkResponse;
     exports.createNotFoundResponse = createNotFoundResponse;
     exports.createFoundResponse = createFoundResponse;
