@@ -6,7 +6,7 @@ import { Dog } from '../classes/dog';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class DogFormService {
+export class DogService {
    dogs: Dog[] = [];
     private headers = new Headers({'Content-Type': 'application/json'});
     private getUrl = 'http://konelandia.bounceme.net/dogs/';
@@ -16,6 +16,13 @@ export class DogFormService {
       .post(this.getUrl, JSON.stringify(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
+      .catch(this.handleError);
+  }
+
+  getDogs(): Promise<Dog[]> {
+    return this.http
+      .get(this.getUrl).toPromise()
+      .then(response => response.json() as Dog[])
       .catch(this.handleError);
   }
 
