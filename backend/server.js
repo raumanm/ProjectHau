@@ -1,7 +1,7 @@
 /*jslint node:true */
 (function () {
     "use strict";
-    let express, app, hauMongo, bodyParser,
+    let express, app, hauMongo, bodyParser, authentication,
         hauDogs, hauUsers, hauPairs, hauPlaces, hauVisits;
 
     function logger(req, res, next) {
@@ -12,6 +12,8 @@
     express = require('express');
     bodyParser = require('body-parser');
 	hauMongo = require('./hau-db');
+
+    authentication = require('./authentication/authenticate-user');
 	hauDogs = require('./dogs/hau-dogs');
 	hauUsers = require('./users/hau-users');
 	hauPairs = require('./pairs/hau-pairs');
@@ -25,6 +27,7 @@
     app.enable('trust proxy');
     app.use(logger);
 
+    app.use(authentication);
     app.use(hauDogs);
     app.use(hauUsers);
     app.use(hauPairs);

@@ -13,7 +13,7 @@
     safeObjectId = s => objectIdRe.test(s) ? new ObjectId(s) : null;
 
     module.exports.init = function (callback) {
-        MongoClient.connect("mongodb://localhost:27017/hauDb", (err, client) => {
+        MongoClient.connect("mongodb://localhost/hauDb", (err, client) => {
             module.exports.db = client;
 			callback(err);
         });
