@@ -10,17 +10,22 @@ import { MainPageComponent } from './mainpage.component/mainpage.component';
 import { LoginPageComponent } from './login.component/login.component';
 import { PersonalInformationComponent } from './personal-information.component/personal-information.component';
 import { SearchComponent } from './search.component/search.component';
-import { AddDogComponent } from './dog.component/add-dog.component';
-import { AddUserComponent } from './user.component/add-user.component';
-import { AddPlaceComponent } from './place.component/add-place.component';
-import { VisitComponent } from './visit.component/add-visit.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
-import { DogFormService } from './dog.component/dog.service';
+import { AddDogComponent } from './dog.component/add-dog.component';
+import { AddUserComponent } from './user.component/add-user.component';
+import { AddPlaceComponent } from './place.component/add-place.component';
+import { AddVisitComponent } from './visit.component/add-visit.component';
+
+import { SearchDogsComponent } from'./dog.component/search-dogs.component';
+
+import { DogService } from './dog.component/dog.service';
 import { UserService } from './user.component/user.service';
 import { PlaceService } from './place.component/place.service';
 import { VisitService } from './visit.component/visit.service';
+
+import { ShowDogComponent } from './dog.component/show-dog.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +34,17 @@ import { VisitService } from './visit.component/visit.service';
     LoginPageComponent,
     PersonalInformationComponent,
     SearchComponent,
+    ReportComponent,
+    MessageComponent,
+
     AddDogComponent,
     AddUserComponent,
     AddPlaceComponent,
-    VisitComponent,
-    ReportComponent,
-    MessageComponent
+    AddVisitComponent,
+
+    SearchDogsComponent,
+
+    ShowDogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +55,7 @@ import { VisitService } from './visit.component/visit.service';
     routing
   ],
   providers: [
-    DogFormService,
+    DogService,
     UserService,
     PlaceService,
     VisitService

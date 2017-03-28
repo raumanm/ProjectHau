@@ -17,7 +17,7 @@ import { AppComponent } from '../app.component';
   templateUrl: './add-visit.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
 })
-export class VisitComponent {
+export class AddVisitComponent {
   myForm: FormGroup;
 
   constructor(appComponent: AppComponent, fb: FormBuilder, private visitService: VisitService) {
