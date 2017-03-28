@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { UserService } from './add-user.service';
+import { UserService } from './user.service';
 import { User } from '../classes/user';
 import { UtilsClass } from '../util/utilsclass';
 

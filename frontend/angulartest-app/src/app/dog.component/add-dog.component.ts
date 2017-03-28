@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { DogFormService } from '../dog-form.component/dog-form.service';
+import { DogFormService } from './dog.service';
 import { Dog } from '../classes/dog';
 import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
 @Component({
     moduleId: module.id,
     selector: 'my-add-dog',
-    templateUrl: 'add-dog-form.component.html',
+    templateUrl: './add-dog.component.html',
     styleUrls: ['../stylesheets/formstyle.css']
 })
 export class AddDogComponent  {
