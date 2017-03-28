@@ -14,7 +14,7 @@ import { AppComponent } from '../app.component';
 @Component({
   moduleId: module.id,
   selector: 'my-visit',
-  templateUrl: 'visit.component.html',
+  templateUrl: './add-visit.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
 })
 export class VisitComponent {
