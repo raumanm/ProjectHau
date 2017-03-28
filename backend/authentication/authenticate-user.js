@@ -17,7 +17,6 @@
         next();
     })
     .post((req, res, next) => {
-        getById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
         getById(req.params.id, (user) => {
             res.json(user);
         });
