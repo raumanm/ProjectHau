@@ -49,7 +49,11 @@
                 if(err) {
                     res.json(hauResponse.createUnauthorizedResponse());
                 } else {
-                    //Add user
+                    /*
+                    Add user id and access level to reuest so
+                    users gredentials can be defined and right
+                    data can be fetched.
+                    */
                     req.userData = {
                         _id: user._id,
                         accessLevel: user.accessLevel
