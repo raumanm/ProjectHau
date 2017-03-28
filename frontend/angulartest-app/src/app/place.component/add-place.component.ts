@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { PlaceService } from './add-place.service';
+import { PlaceService } from './place.service';
 import { Place } from '../classes/place';
 import { UtilsClass } from '../util/utilsclass';
 
