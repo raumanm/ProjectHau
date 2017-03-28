@@ -1,6 +1,5 @@
-<button class="buttonL" style="margin-top: 50px">Kohdekohtainen käyntitilasto</button><br>
-<button class="buttonL">Kaikkien kohteiden käyntitilasto</button><br>
-<button class="buttonL">Koirakohtainen käyntitilasto</button><br>
-<button class="buttonL">Koiramäärä suhteessa optimiin</button><br>
-<button class="buttonL">Kohteen vakikoirakot</button><br>
-<button class="buttonL">Muokattu haku</button><br>
+<h1>{{reportTitle}}</h1>
+<p (click)="exportToExcel()" style="color:blue; cursor: pointer; "><u>Tulosta Exceliin</u></p>
+<br>
+<br>
+<p style="font-style: italic">{{reportContent}}</p>
