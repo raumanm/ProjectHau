@@ -16,7 +16,7 @@ import { AddVisitComponent } from './visit.component/add-visit.component';
 
 import { SearchDogsComponent } from './dog.component/search-dogs.component';
 
-import { ShowDogComponent } from './dog.component/showDog.component';
+import { ShowDogComponent } from './dog.component/show-dog.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
