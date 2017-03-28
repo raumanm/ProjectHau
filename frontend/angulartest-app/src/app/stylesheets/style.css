@@ -26,26 +26,28 @@ ul {
   margin: 0 auto;
 }
 
-#logo{
-padding: 0;
-margin-left: 10%;
-float: left;
-width: 110px;
-height: 110px;
-background-image: url("../assets/logo.png");
-background-size: 100% 100%;
+#title{
+  height: 110px;
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
 }
+
+#logo{
+width: 110px;
+  height: 110px;
+  margin: 0;
+  position: absolute;
+  background-image: url("../assets/logo.png");
+  background-size: 100% 100%;
+}
+
 
 
 h1, h2 {
   padding: 15px 0;
   font: 1.5em 'Open Sans', sans-serif;
   text-align: center;
-}
-
-
-#title{
-  margin-right: 20%;
 }
 
 nav {
@@ -188,7 +190,17 @@ input[type=text], input[type=password]{
 
 /* Responsive*/
 
+@media only screen and (max-width: 1150px) {
+  #title{
+    width: 70%;
+  }
+}
+
 @media only screen and (max-width: 800px) {
+
+  #title{
+    width: 100%;
+  }
 
   .hamburger {
     cursor: pointer;
@@ -218,5 +230,11 @@ input[type=text], input[type=password]{
 
   .open {
     height: 346px;
+  }
+
+  @media only screen and (max-width: 520px) {
+    #logo{
+      visibility: hidden;
+    }
   }
 }
