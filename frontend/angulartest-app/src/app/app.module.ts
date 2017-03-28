@@ -13,7 +13,7 @@ import { SearchComponent } from './search.component/search.component';
 import { AddDogComponent } from './dog.component/add-dog.component';
 import { AddUserComponent } from './user.component/add-user.component';
 import { AddPlaceComponent } from './place.component/add-place.component';
-import { VisitComponent } from './visit.component/add-visit.component';
+import { AddVisitComponent } from './visit.component/add-visit.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
@@ -32,7 +32,7 @@ import { VisitService } from './visit.component/visit.service';
     AddDogComponent,
     AddUserComponent,
     AddPlaceComponent,
-    VisitComponent,
+    AddVisitComponent,
     ReportComponent,
     MessageComponent
   ],
