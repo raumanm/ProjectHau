@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { DogFormService } from './dog-form.service';
+import { DogFormService } from './dog.service';
 import { Dog } from '../classes/dog';
 import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
