@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
 @Component({
     moduleId: module.id,
     selector: 'my-add-dog',
-    templateUrl: 'add-dog-form.component.html',
+    templateUrl: './add-dog.component.html',
     styleUrls: ['../stylesheets/formstyle.css']
 })
 export class AddDogComponent  {
