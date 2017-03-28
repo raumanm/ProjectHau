@@ -19,50 +19,34 @@
     })
     .post((req, res, next) => {
         getById(req.params.id, (user) => {
-            res.json(user);
+            
+            if(user.password == req.body.password) {
+                res.json({
+                    success: true,
+                    user_password: user.password,
+                    requested_password: req.body.password
+                });
+            } else {
+                res.json({
+                    success: false,
+                    user_password: user.password,
+                    requested_password: req.body.password
+                });
+            }
         });
     });
 
     function getById(id, callback) {
 
-        hauDB.db.collection('users').find({ _id: safeObjectId(id)}, { password: 0}).toArray(function(err, docs) {
+        hauDB.db.collection('users').find({ _id: safeObjectId(id)}, {}).toArray(function(err, docs) {
             let user;
 
             if (err) {
                 callback(hauResponse.createErrorResponse(err));
             } else {
                 user = docs.pop();
-
-                if (user !== undefined) {
-                    hauDB.db.collection('pairs').find({ 'user._id': safeObjectId(user._id)}, { '_id': 0, 'dog._id': 1 }).toArray(function(err, pairs) {
-                        let dogids = [];
-
-                        while (pairs.length > 0) {
-                            dogids.push(safeObjectId(pairs.pop().dog._id));
-                        }
-
-                        if (err) {
-                            callback(hauResponse.createErrorResponse(err));
-                        } else {
-
-                            if (dogids.length > 0) {
-                                hauDB.db.collection('dogs').find({ _id: { $in: dogids}}, { _id: 1, nameFull: 1, nameNickname: 1}).toArray(function(err, dogs) {
-                                    user.pairedDogs = dogs;
-                                    callback(hauResponse.createOkResponse(user));
-                                });
-                            } else {
-                                callback(hauResponse.createOkResponse(user));
-                            }
-                        }
-                    })
-                } else {
-                    callback(hauResponse.createNotFoundResponse(id));
-                }
+                callback(user);
             }
         });
     }
 }());
-
-module.exports = {
-    'secret': 'superduperultradifficultysecretpecter69'
-}
