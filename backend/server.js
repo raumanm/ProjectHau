@@ -27,13 +27,40 @@
     app.set('json spaces', 2);
     app.enable('trust proxy');
     app.use(logger);
-
+    
+    var apiRoute = express.Router();
+    var jsonWebToken = require('jsonwebtoken');
+    
     app.use(authentication);
-    app.use(hauDogs);
-    app.use(hauUsers);
-    app.use(hauPairs);
-    app.use(hauPlaces);
-    app.use(hauVisits);
+
+    app.use((req, res, next)=> {
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        
+        if(token) {
+            jsonWebToken.verify(token, app.get('authenticationSecret'), (err, decoded)=> {
+                if(err) {
+                    return res.json({
+                        success: false,
+                        message: 'Authenticatoin failed'});
+                } else {
+                    req.decoded = decoded;
+                    next();
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                message: 'No token'
+            });
+        }
+    });
+
+    apiRoute.use(hauDogs);
+    apiRoute.use(hauUsers);
+    apiRoute.use(hauPairs);
+    apiRoute.use(hauPlaces);
+    apiRoute.use(hauVisits);
+    app.use(apiRoute);
 
 	hauMongo.init(function (err) {
 		if (err) throw err;

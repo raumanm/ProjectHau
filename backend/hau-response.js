@@ -75,6 +75,17 @@
         return response;
     }
 
+    function createUnauthorizedResponse() {
+        let response = {};
+
+        response.status = 403;
+        response.content = 'application/json';
+        response.data = {};
+        response.data.message = "Unauthorized access";
+
+        return response;
+    }
+
     function createAuthenticationSucceededResponse(token) {
         let response = {};
 
@@ -98,7 +109,7 @@
         res.send(data.data);
     }
 
-
+    exports.createUnauthorizedResponse = createUnauthorizedResponse;
     exports.createAuthenticationErrorResponse = createAuthenticationErrorResponse;
     exports.createAuthenticationSucceededResponse = createAuthenticationSucceededResponse;
     exports.createOkResponse = createOkResponse;
