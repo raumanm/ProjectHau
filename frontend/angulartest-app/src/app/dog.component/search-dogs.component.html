@@ -5,7 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-<p>testText</p>
+<!----
+<ul>
+  <li *ngFor="let dog of dogs">
+    <span>{{dog.nameNickname}}</span>
+  </li>
+</ul>
+--->
+  <button *ngFor="let dog of dogs">
+    {{dog.nameNickname}}
+  </button>
 
 </body>
 </html>
