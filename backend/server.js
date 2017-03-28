@@ -2,7 +2,8 @@
 (function () {
     "use strict";
     let express, app, hauMongo, bodyParser, authentication,
-        hauDogs, hauUsers, hauPairs, hauPlaces, hauVisits;
+        hauDogs, hauUsers, hauPairs, hauPlaces, hauVisits,
+        hauResponse;
 
     function logger(req, res, next) {
         console.log(new Date(), req.ip, req.method, req.url);
@@ -44,11 +45,16 @@
         var token = req.body.token || req.query.token || req.headers['x-access-token'];
         
         if(token) {
-            jsonWebToken.verify(token, app.get('authenticationSecret'), (err, decoded)=> {
+            jsonWebToken.verify(token, app.get('authenticationSecret'), (err, user)=> {
                 if(err) {
                     res.json(hauResponse.createUnauthorizedResponse());
                 } else {
-                    req.decoded = decoded;
+                    //Add user
+                    req.userData = {
+                        _id: user._id,
+                        accessLevel: user.accessLevel
+                    };
+                    console.log(req.userData);
                     next();
                 }
             });
