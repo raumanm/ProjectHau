@@ -106,6 +106,7 @@
             res.setHeader('Content-Type', data.content);
         }
 
+        console.log(res.token);
         res.send(data.data);
     }
 

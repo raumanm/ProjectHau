@@ -58,7 +58,7 @@
                         _id: user._id,
                         accessLevel: user.accessLevel
                     };
-                    console.log(req.userData);
+                    res.token = token;
                     next();
                 }
             });
