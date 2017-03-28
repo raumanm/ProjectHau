@@ -5,7 +5,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
-import { DogFormService } from './dog.service';
+import { DogService } from './dog.service';
 import { Dog } from '../classes/dog';
 import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
@@ -29,7 +29,7 @@ export class ShowDogComponent implements OnInit {
   dog: Dog;
   dogId: string;
 
-  constructor(appComponent: AppComponent, private dogService: DogFormService, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private dogService: DogService, private route: ActivatedRoute) {
     //this.dog = this.dogService.getDog(params("id"));
     appComponent.titleText = "Näytä koira";
     console.log(this.dogId);
