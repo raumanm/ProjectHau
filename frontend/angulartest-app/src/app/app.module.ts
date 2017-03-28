@@ -20,7 +20,7 @@ import { AddVisitComponent } from './visit.component/add-visit.component';
 
 import { SearchDogsComponent } from'./dog.component/search-dogs.component';
 
-import { DogFormService } from './dog.component/dog.service';
+import { DogService } from './dog.component/dog.service';
 import { UserService } from './user.component/user.service';
 import { PlaceService } from './place.component/place.service';
 import { VisitService } from './visit.component/visit.service';
@@ -55,7 +55,7 @@ import { ShowDogComponent } from './dog.component/show-dog.component';
     routing
   ],
   providers: [
-    DogFormService,
+    DogService,
     UserService,
     PlaceService,
     VisitService
