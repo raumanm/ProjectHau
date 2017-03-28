@@ -21,7 +21,7 @@
 	hauVisits = require('./visits/hau-visits');
 
     app = express();
-    app.set('authenticationSecret', require('./authentication/authentication-config'));
+    app.set('authenticationSecret', require('./authentication/authentication-config').secret);
 
     app.use( bodyParser.json() );
     app.set('json spaces', 2);

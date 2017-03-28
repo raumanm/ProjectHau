@@ -18,29 +18,41 @@
         next();
     })
     .post((req, res, next) => {
-        getByName(req.body.username, (user) => {
+        getByName(req.body.username, (err, user) => {
             
-            if(user.password === req.body.password) {
-                res.json({
-                    success: true,
-                    user_password: user.password,
-                    requested_password: req.body.password
-                });
-            } else {
-                res.json({
-                    success: false,
-                    user_password: user.password,
-                    requested_password: req.body.password
-                });
+            //Check whether there was an error while fetching user data
+            if(err) res.send(hauResponse.createErrorResponse(err));
+            else {
+                if(user) {
+                    if(user.password == req.body.password) {
+                        //If authentication succeeded
+                        var token = jsonWebToken.sign(user, app.get('authenticationSecret'), {
+                            expiresIn : 60*60*24
+                        });
+
+                        res.json({
+                            success: true,
+                            message: 'Enjoy your token!',
+                            token: token
+                        });
+                    } else {
+                        //If password is wrong
+                        res.send(hauResponse.createAuthenticationErrorResponse());
+                    }
+                } else {
+                    //If user does not exist
+                    res.send(hauResponse.createAuthenticationErrorResponse());
+                }
             }
         });
     });
 
+    //Returns user by given name
     function getByName(username, callback) {
 
         hauDB.db.collection('users').find({ username: username}, {}).toArray(function(err, docs) {
-            if (err) callback(hauResponse.createErrorResponse(err));
-            callback(docs.pop());
+            if (err) callback(err, null);
+            callback(null, docs.pop());
         });
     }
 }());

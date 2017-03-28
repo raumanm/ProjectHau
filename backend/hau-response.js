@@ -64,6 +64,17 @@
         return response;
     }
 
+    function createAuthenticationErrorResponse() {
+        let response = {};
+
+        response.status = 401;
+        response.content = 'application/json';
+        response.data = {};
+        response.data.message = "Authentication failed";
+
+        return response;
+    }
+
     function sendResponse(res, data) {
 
         if (data.hasOwnProperty('status')) {
@@ -77,6 +88,7 @@
     }
 
 
+    exports.createAuthenticationErrorResponse = createAuthenticationErrorResponse;
     exports.createOkResponse = createOkResponse;
     exports.createNotFoundResponse = createNotFoundResponse;
     exports.createFoundResponse = createFoundResponse;
