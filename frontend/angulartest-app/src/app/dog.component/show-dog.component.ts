@@ -2,11 +2,8 @@
  * Created by M1k1tus on 28-Mar-17.
  */
 
-/**
- * Created by M1k1tus on 28-Mar-17.
- */
-
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import { DogFormService } from './dog.service';
 import { Dog } from '../classes/dog';
@@ -19,19 +16,36 @@ import { AppComponent } from '../app.component';
   templateUrl: './show-dog.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
 })
-export class ShowDogComponent  {
+export class ShowDogComponent implements OnInit {
+  /*ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      let dogId = params['id'];
+      //console.log(dogId);
+      //this.dog = this.dogService.getDog(params['id']);
+      //this.dog => this.dogService.getDog(params['id']);
+      //this.dogService.getDog(params['id']).subscribe(dog => this.dog = dog);
+    });
+  }*/
   dog: Dog;
+  dogId: string;
 
-  constructor(appComponent: AppComponent, private dogService: DogFormService) {
+  constructor(appComponent: AppComponent, private dogService: DogFormService, private route: ActivatedRoute) {
     //this.dog = this.dogService.getDog(params("id"));
     appComponent.titleText = "Näytä koira";
+    console.log(this.dogId);
 
   }
 
-  /*ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.dogService.getDog(+params['_id']))
-      .subscribe(dog => this.dog = dog);
-  }*/
+  ngOnInit() {
+    // Capture the access token and code
+    this.route
+      .queryParams
+      .subscribe(params => {
+        this.dogId = params['id'];
+      });
+
+    // do something with this.code and this.accesstoken
+  }
+
 
 }
