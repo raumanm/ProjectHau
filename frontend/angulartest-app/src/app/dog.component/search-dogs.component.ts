@@ -4,7 +4,7 @@
 
 import { Component } from '@angular/core';
 
-import { DogFormService } from './dog.service';
+import { DogService } from './dog.service';
 import { Dog } from '../classes/dog';
 import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
@@ -18,10 +18,19 @@ import { AppComponent } from '../app.component';
 export class SearchDogsComponent  {
   dogs: Dog[] = [];
 
-  constructor(appComponent: AppComponent, private dogService: DogFormService) {
+  constructor(appComponent: AppComponent, private dogService: DogService) {
 
     appComponent.titleText = "Näytä koirat";
-    this.dogs = this.dogService.dogs;
+    //this.dogs = this.dogService.dogs;
+    this.dogService.getDogs().then(values=>this.addValues(values));
 
+  }
+
+  private addValues(values: Dog[]) {
+    this.dogs = values;
+
+    for (var i=0; i<values.length; i++) {
+      console.log("search-dogs.component.ts: " + this.dogs[i].breed);
+    }
   }
 }
