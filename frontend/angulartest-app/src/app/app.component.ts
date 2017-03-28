@@ -38,7 +38,7 @@ import { Component, Input } from '@angular/core';
                   <a routerLink="/addVisit">Uusi käynti</a>
                 </div>
               </li>
-              <li><a routerLink="/report">Raportit</a></li>
+              <li><a routerLink="/reports">Raportit</a></li>
               <li><a routerLink="/message">Lähetä viesti</a></li>
             </ul>
           </nav>
