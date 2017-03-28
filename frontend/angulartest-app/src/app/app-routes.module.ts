@@ -6,7 +6,7 @@ import { MainPageComponent } from './mainpage.component/mainpage.component';
 import { LoginPageComponent } from './login.component/login.component';
 import { PersonalInformationComponent } from './personal-information.component/personal-information.component';
 import { SearchComponent } from './search.component/search.component';
-import { AddDogComponent } from './add-dog.component/add-dog.component';
+import { AddDogComponent } from './dog.component/add-dog.component';
 import { AddPlaceComponent } from './add-place.component/add-place.component';
 import { AddUserComponent } from './add-user.component/add-user.component';
 import { VisitComponent } from './visit.component/visit.component';

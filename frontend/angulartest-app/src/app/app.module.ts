@@ -10,14 +10,14 @@ import { MainPageComponent } from './mainpage.component/mainpage.component';
 import { LoginPageComponent } from './login.component/login.component';
 import { PersonalInformationComponent } from './personal-information.component/personal-information.component';
 import { SearchComponent } from './search.component/search.component';
-import { AddDogComponent } from './add-dog.component/add-dog.component';
+import { AddDogComponent } from './dog.component/add-dog.component';
 import { AddUserComponent } from './add-user.component/add-user.component';
 import { AddPlaceComponent } from './add-place.component/add-place.component';
 import { VisitComponent } from './visit.component/visit.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
-import { DogFormService } from './dog-form.component/dog-form.service';
+import { DogFormService } from './dog.component/dog-form.service';
 import { UserService } from './add-user.component/add-user.service';
 import { PlaceService } from './add-place.component/add-place.service';
 import { VisitService } from './visit.component/visit.service';
