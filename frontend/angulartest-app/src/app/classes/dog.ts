@@ -3,7 +3,7 @@ constructor(
     public _id: string,
     public nameFull: string,
     public nameNickname: string,
-    public dateBirth: string,
+    public dateBirth: Date,
     public breed: string,
     public registerNumber: string,
     public status: string,
