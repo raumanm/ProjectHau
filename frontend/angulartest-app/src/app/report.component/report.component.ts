@@ -15,10 +15,13 @@ export class ReportComponent {
   private reportContent: String;
 
   constructor(appComponent: AppComponent, private route: ActivatedRoute) {
+
     this.route.params.subscribe((params: Params) => {
       let title = params['title'];
+
       this.reportTitle = title;
       this.reportContent = "- NO CONTENT -";
+      appComponent.titleText = title;
     });
   }
 
