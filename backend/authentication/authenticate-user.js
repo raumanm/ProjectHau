@@ -13,14 +13,14 @@
 
     safeObjectId = hauDB.safeObjectId;
 
-    app.route("\/authentication\/:id([0-9a-fA-F]{24})(\/)?$")
+    app.route("\/authentication")
     .all((req, res, next) => {
         next();
     })
     .post((req, res, next) => {
-        getById(req.params.id, (user) => {
+        getByName(req.body.username, (user) => {
             
-            if(user.password == req.body.password) {
+            if(user.password === req.body.password) {
                 res.json({
                     success: true,
                     user_password: user.password,
@@ -36,17 +36,11 @@
         });
     });
 
-    function getById(id, callback) {
+    function getByName(username, callback) {
 
-        hauDB.db.collection('users').find({ _id: safeObjectId(id)}, {}).toArray(function(err, docs) {
-            let user;
-
-            if (err) {
-                callback(hauResponse.createErrorResponse(err));
-            } else {
-                user = docs.pop();
-                callback(user);
-            }
+        hauDB.db.collection('users').find({ username: username}, {}).toArray(function(err, docs) {
+            if (err) callback(hauResponse.createErrorResponse(err));
+            callback(docs.pop());
         });
     }
 }());
