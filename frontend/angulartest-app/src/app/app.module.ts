@@ -11,15 +11,15 @@ import { LoginPageComponent } from './login.component/login.component';
 import { PersonalInformationComponent } from './personal-information.component/personal-information.component';
 import { SearchComponent } from './search.component/search.component';
 import { AddDogComponent } from './dog.component/add-dog.component';
-import { AddUserComponent } from './add-user.component/add-user.component';
-import { AddPlaceComponent } from './add-place.component/add-place.component';
-import { VisitComponent } from './visit.component/visit.component';
+import { AddUserComponent } from './user.component/add-user.component';
+import { AddPlaceComponent } from './place.component/add-place.component';
+import { VisitComponent } from './visit.component/add-visit.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
-import { DogFormService } from './dog.component/dog-form.service';
-import { UserService } from './add-user.component/add-user.service';
-import { PlaceService } from './add-place.component/add-place.service';
+import { DogFormService } from './dog.component/dog.service';
+import { UserService } from './user.component/user.service';
+import { PlaceService } from './place.component/place.service';
 import { VisitService } from './visit.component/visit.service';
 
 @NgModule({
