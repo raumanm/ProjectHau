@@ -1,6 +1,6 @@
 export class Dog {
 constructor(
-    public _id: string,
+    public dogId: string,
     public nameFull: string,
     public nameNickname: string,
     public dateBirth: Date,

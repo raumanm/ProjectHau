@@ -26,19 +26,12 @@ export class DogService {
       .catch(this.handleError);
   }
 
-  getDog(id: number): Dog {
-    /*return this.dogs
-      .then(heroes => heroes.find(hero => hero.id === id));*/
-    return this.dogs.find(dog => dog._id === id.toString());
+  getDog(id: string): Promise<Dog> {
+    return this.getDogs()
+      .then(dogs => dogs.find(dog => dog.dogId === id));
   }
 
-    constructor(private http: Http) {
-        this.dogs.push(new Dog("111ID", "Bowmores Irish Cream", "Sylvi", new Date(2003,0,28), "Labradorinnoutaja", "444RN", "Active"));
-        this.dogs.push(new Dog("222ID", "Jepen musta salama", "Jaska", new Date(2005,4,12), "Sekarotuinen", "231RN", "Passive"));
-        this.dogs.push(new Dog("333ID", "Jaskan ruskea salama", "Jeppe", new Date(2006,6,17), "Sekarotuinen", "4475RN", "Active"));
-        this.dogs.push(new Dog("444ID", "Raisan hurtta", "Musti", new Date(2003,7,22), "Kultainennoutaja", "4334RN", "Active"));
-
-    }
+    constructor(private http: Http) {}
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
