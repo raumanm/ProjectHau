@@ -23,7 +23,7 @@ export class ShowDogComponent  {
   dog: Dog;
 
   constructor(appComponent: AppComponent, private dogService: DogFormService) {
-
+    //this.dog = this.dogService.getDog(params("id"));
     appComponent.titleText = "Näytä koira";
 
   }
