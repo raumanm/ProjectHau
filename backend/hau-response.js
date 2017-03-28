@@ -75,6 +75,17 @@
         return response;
     }
 
+    function createAuthenticationSucceededResponse(token) {
+        let response = {};
+
+        response.status = 200;
+        response.content = 'application/json';
+        response.data = {toke: token};
+        response.data.message = "Authentication succeeded";
+
+        return response;
+    }
+
     function sendResponse(res, data) {
 
         if (data.hasOwnProperty('status')) {
