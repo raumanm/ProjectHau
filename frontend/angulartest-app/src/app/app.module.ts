@@ -10,6 +10,7 @@ import { MainPageComponent } from './mainpage.component/mainpage.component';
 import { LoginPageComponent } from './login.component/login.component';
 import { PersonalInformationComponent } from './personal-information.component/personal-information.component';
 import { SearchComponent } from './search.component/search.component';
+import { ReportsComponent } from './report.component/reports.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
@@ -34,6 +35,7 @@ import { ShowDogComponent } from './dog.component/show-dog.component';
     LoginPageComponent,
     PersonalInformationComponent,
     SearchComponent,
+    ReportsComponent,
     ReportComponent,
     MessageComponent,
 

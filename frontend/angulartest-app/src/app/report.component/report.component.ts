@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
 
-import { AppComponent } from 'app/app.component';
+import { AppComponent } from '../app.component';
+
 
 @Component({
 moduleId: module.id,
@@ -8,9 +10,81 @@ moduleId: module.id,
     templateUrl: './report.component.html',
     styleUrls: ['../stylesheets/style.css']
 })
-export class ReportComponent  {
+export class ReportComponent {
+  private reportTitle: String;
+  private reportContent: String;
 
-    constructor(appComponent: AppComponent) {
-        appComponent.titleText = "Raportit";
-    }
+  constructor(appComponent: AppComponent, private route: ActivatedRoute) {
+
+    this.route.params.subscribe((params: Params) => {
+      let title = params['title'];
+
+      this.reportTitle = title;
+      this.reportContent = "- NO CONTENT -";
+      appComponent.titleText = title;
+    });
+  }
+
+  exportToExcel(){
+    var saveData = (function () {
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      return function (data, fileName) {
+        var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"});
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      };
+    }());
+
+    var data = this.reportContent,
+      fileName = this.reportTitle + ".xls";
+
+    saveData(data, fileName);
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   exportToExcel(){
+//     var saveData = (function () {
+//       var a = document.createElement("a");
+//       document.body.appendChild(a);
+//       return function (data, fileName) {
+//         var json = JSON.stringify(data),
+//           blob = new Blob([json], {type: "octet/stream"}),
+//           url = window.URL.createObjectURL(blob);
+//         a.href = url;
+//         a.download = fileName;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       };
+//     }());
+//
+//     // var data = { search: this.fileName };
+//     // saveData(data, this.fileName);
+//   }
+// }

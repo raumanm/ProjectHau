@@ -6,6 +6,7 @@ import { MainPageComponent } from './mainpage.component/mainpage.component';
 import { LoginPageComponent } from './login.component/login.component';
 import { PersonalInformationComponent } from './personal-information.component/personal-information.component';
 import { SearchComponent } from './search.component/search.component';
+import { ReportsComponent } from './report.component/reports.component';
 import { ReportComponent } from './report.component/report.component';
 import { MessageComponent } from './message.component/message.component';
 
@@ -24,17 +25,18 @@ export const routes: Routes = [
     { path: 'loginPage', component: LoginPageComponent },
     { path: 'personalInformation', component: PersonalInformationComponent },
     { path: 'search', component: SearchComponent },
-    { path: 'report', component: ReportComponent },
+    { path: 'report/:title', component: ReportComponent },
+    { path: 'reports', component: ReportsComponent},
     { path: 'message', component: MessageComponent },
 
-  { path: 'addDog', component: AddDogComponent },
-  { path: 'addPlace', component: AddPlaceComponent },
-  { path: 'addUser', component: AddUserComponent },
-  { path: 'addVisit', component: AddVisitComponent },
+    { path: 'addDog', component: AddDogComponent },
+    { path: 'addPlace', component: AddPlaceComponent },
+    { path: 'addUser', component: AddUserComponent },
+    { path: 'addVisit', component: AddVisitComponent },
 
-  { path: 'searchDogs', component: SearchDogsComponent },
+    { path: 'searchDogs', component: SearchDogsComponent },
 
-  {path: 'showDog/:id', component: ShowDogComponent }
+    {path: 'showDog/:id', component: ShowDogComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
