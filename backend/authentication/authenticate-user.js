@@ -62,3 +62,7 @@
         });
     }
 }());
+
+module.exports = {
+    'secret': 'superduperultradifficultysecretpecter69'
+}
