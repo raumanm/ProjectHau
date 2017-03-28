@@ -1,10 +1,11 @@
 /*jslint node:true */
 (function (){
     "use strict";
-    let hauDB, safeObjectId, express, validator, app, hauResponse;
+    let hauDB, safeObjectId, express, validator, app, hauResponse, jsonWebToken;
 
     express = require('express');
     app = module.exports = express();
+    jsonWebToken = require('jsonwebtoken');
 
     hauDB = require('../hau-db');
     validator = require('../users/validate-user');
