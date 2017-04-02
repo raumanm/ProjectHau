@@ -5,17 +5,26 @@
     <title>Title</title>
 </head>
 <body>
-<!----
+
+
 <ul>
-  <li *ngFor="let dog of dogs">
-    <span>{{dog.nameFull}}</span>
+  <li *ngFor="let dog of dogs" [class.selected]="dog === selectedDog"
+      (click)="onSelect(dog)">
+    <button>{{dog.nameFull}}</button>
   </li>
 </ul>
-  -->
-
+<!-- IMPORTANT. Not working components but do not remove them. --->
+<!---
+<ul>
+  <li *ngFor="let dog of dogs" routerLink="/showDog/{{dog.dogId}}">
+    <button  routerLink="/showDog/{{dog.dogId}}">{{dog.nameFull}}</button>
+  </li>
+</ul>
+---->
+<!----
   <button *ngFor="let dog of dogs" routerLink="/showDog/{{dog.dogId}}">
     {{dog.nameFull}}
   </button><br>
-
+  -->
 </body>
 </html>
