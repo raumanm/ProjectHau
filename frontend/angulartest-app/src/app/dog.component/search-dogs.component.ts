@@ -10,7 +10,7 @@ import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
 
 @Component({
-  moduleId: module.id,
+  //moduleId: module.id,
   selector: 'my-search-dogs',
   templateUrl: './search-dogs.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
@@ -21,7 +21,6 @@ export class SearchDogsComponent  {
   constructor(appComponent: AppComponent, private dogService: DogService) {
 
     appComponent.titleText = "Näytä koirat";
-    //this.dogs = this.dogService.dogs;
     this.dogService.getDogs().then(values=>this.addValues(values));
 
   }
@@ -30,7 +29,7 @@ export class SearchDogsComponent  {
     this.dogs = values;
 
     for (var i=0; i<values.length; i++) {
-      console.log("search-dogs.component.ts: " + this.dogs[i].breed);
+      console.log("search-dogs.component.ts: " + this.dogs[i].dogId);
     }
   }
 }
