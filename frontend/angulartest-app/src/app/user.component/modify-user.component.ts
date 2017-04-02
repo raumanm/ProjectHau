@@ -16,7 +16,7 @@ import { AppComponent } from '../app.component';
   templateUrl: './modify-user.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
 })
-export class ShowUserComponent implements OnInit {
+export class ModifyUserComponent implements OnInit {
   user: User;
 
   constructor(appComponent: AppComponent, private userService: UserService, private route: ActivatedRoute) {
