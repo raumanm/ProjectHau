@@ -15,7 +15,7 @@ import { AppComponent } from '../app.component';
   templateUrl: './search-users.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
 })
-export class SearchDogsComponent  {
+export class SearchUsersComponent  {
   users: User[] = [];
   selectedUser: User;
 
