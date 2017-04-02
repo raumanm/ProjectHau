@@ -4,6 +4,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { UserService } from './user.service';
 import { User } from '../classes/user';
@@ -13,14 +14,28 @@ import { AppComponent } from '../app.component';
 @Component({
   //moduleId: module.id,
   selector: 'my-modify-user',
+  //TODO find out why form doesn't work!
   templateUrl: './modify-user.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
 })
 export class ModifyUserComponent implements OnInit {
   user: User;
+  myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private userService: UserService, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private userService: UserService, fb: FormBuilder, private route: ActivatedRoute) {
     appComponent.titleText = "Muokkaa käyttäjää";
+
+    this.myForm = fb.group({
+      'accessLevel': [''],
+      'username': [''],
+      'firstName': [''],
+      'lastName': [''],
+      'phone': [''],
+      'email': [''],
+      'memberNumber': [''],
+      'qualificationDate': [''],
+      'details': ['']
+    });
   }
 
   ngOnInit(): void {
@@ -28,6 +43,71 @@ export class ModifyUserComponent implements OnInit {
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.user = user);
   }
+
+  onSubmit(value: string): void {
+    console.log(value);
+  }
+
+  /*onSubmit(value: string): void {
+    let everythingOk = true;
+
+    if(UtilsClass.validateDate(value["qualificationDate"])) {
+      let temp = UtilsClass.createDate(value["qualificationDate"]);
+      value["qualificationDate"] = temp;
+    } else {
+      alert("Virhe! Tarkista syötteesi kohdasta pätevöitymispäivämäärä");
+      everythingOk = false;
+    }
+
+    if(UtilsClass.validateEmailStart(value["email"].substring(0,1))) {
+
+      if(UtilsClass.validateEmail(value["email"])) {
+      } else {
+        alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
+        everythingOk = false;
+      }
+    } else {
+      alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateShortOpenField(value["username"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta käyttäjänimi");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateShortOpenField(value["firstName"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta etunimi");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateShortOpenField(value["lastName"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta sukunimi");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateShortOpenField(value["memberNumber"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta jäsennumero");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validateLongOpenField(value["details"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
+      everythingOk = false;
+    }
+
+    if(!UtilsClass.validatePhoneNumber(value["phone"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta puhelinnumero");
+      everythingOk = false;
+    }
+
+    if(everythingOk) {
+      console.log(value);
+      //this.userService.create(value);
+      alert("Käyttäjä lisätty onnistuneesti");
+    }
+
+  }*/
 
 
 }
