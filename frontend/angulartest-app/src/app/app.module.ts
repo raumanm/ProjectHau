@@ -28,7 +28,9 @@ import { PlaceService } from './place.component/place.service';
 import { VisitService } from './visit.component/visit.service';
 
 import { ShowDogComponent } from './dog.component/show-dog.component';
-import { ShowUserComponent } from './user.component/show-user.component'
+import { ShowUserComponent } from './user.component/show-user.component';
+
+import { ModifyUserComponent } from './user.component/modify-user.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { ShowUserComponent } from './user.component/show-user.component'
     SearchUsersComponent,
 
     ShowDogComponent,
-    ShowUserComponent
+    ShowUserComponent,
+
+    ModifyUserComponent
   ],
   imports: [
     BrowserModule,
