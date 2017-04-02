@@ -35,7 +35,7 @@ export class SearchUsersComponent  {
     this.users = values;
 
     for (var i=0; i<values.length; i++) {
-      console.log("search-dogs.component.ts: " + this.users[i]._id);
+      console.log("search-users.component.ts: " + this.users[i]._id);
     }
   }
 }
