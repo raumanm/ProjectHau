@@ -23,7 +23,7 @@ import { Component, Input } from '@angular/core';
               <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Etsi ja muokkaa</a>
                 <div class="dropdown-content">
-                  <a routerLink="/search">Hae käyttäjiä</a>
+                  <a routerLink="/searchUsers">Hae käyttäjiä</a>
                   <a routerLink="/searchDogs">Hae koiria</a>
                   <a routerLink="/search">Hae kohteita</a>
                   <a routerLink="/search">Hae käyntejä</a>
