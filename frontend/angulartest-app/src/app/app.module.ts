@@ -28,6 +28,7 @@ import { PlaceService } from './place.component/place.service';
 import { VisitService } from './visit.component/visit.service';
 
 import { ShowDogComponent } from './dog.component/show-dog.component';
+import { ShowUserComponent } from './user.component/show-user.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ShowDogComponent } from './dog.component/show-dog.component';
     SearchDogsComponent,
     SearchUsersComponent,
 
-    ShowDogComponent
+    ShowDogComponent,
+    ShowUserComponent
   ],
   imports: [
     BrowserModule,
