@@ -16,10 +16,12 @@ import { AddUserComponent } from './user.component/add-user.component';
 import { AddVisitComponent } from './visit.component/add-visit.component';
 
 import { SearchDogsComponent } from './dog.component/search-dogs.component';
+import { SearchUsersComponent } from './user.component/search-users.component';
 
 import { ShowDogComponent } from './dog.component/show-dog.component';
-import {SearchUsersComponent} from "./user.component/search-users.component";
-import {ShowUserComponent} from "./user.component/show-user.component";
+import { ShowUserComponent } from './user.component/show-user.component';
+
+import { ModifyUserComponent } from './user.component/modify-user.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
@@ -40,7 +42,9 @@ export const routes: Routes = [
     { path: 'searchUsers', component: SearchUsersComponent },
 
     { path: 'showDog/:id', component: ShowDogComponent },
-    { path: 'showUser/:id', component: ShowUserComponent }
+    { path: 'showUser/:id', component: ShowUserComponent },
+
+    {path : 'modifyUser/:id', component: ModifyUserComponent}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
