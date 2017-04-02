@@ -27,7 +27,6 @@ export class ShowUserComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.user = user);
-    console.log(this.user);
   }
 
 
