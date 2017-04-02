@@ -3,6 +3,7 @@
  */
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { DogService } from './dog.service';
 import { Dog } from '../classes/dog';
@@ -17,12 +18,19 @@ import { AppComponent } from '../app.component';
 })
 export class SearchDogsComponent  {
   dogs: Dog[] = [];
+  selectedDog: Dog;
 
-  constructor(appComponent: AppComponent, private dogService: DogService) {
+  constructor(appComponent: AppComponent, private dogService: DogService, private router: Router) {
 
     appComponent.titleText = "Näytä koirat";
     this.dogService.getDogs().then(values=>this.addValues(values));
 
+  }
+
+  //TODO get id working. Navigating through names is not recommended.
+  onSelect(dog: Dog): void {
+    this.selectedDog = dog;
+    this.router.navigate(['/showDog', this.selectedDog.nameFull]);
   }
 
   private addValues(values: Dog[]) {
