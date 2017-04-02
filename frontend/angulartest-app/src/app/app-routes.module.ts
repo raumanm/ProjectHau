@@ -18,6 +18,7 @@ import { AddVisitComponent } from './visit.component/add-visit.component';
 import { SearchDogsComponent } from './dog.component/search-dogs.component';
 
 import { ShowDogComponent } from './dog.component/show-dog.component';
+import {SearchUsersComponent} from "./user.component/search-users.component";
 
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
@@ -35,8 +36,9 @@ export const routes: Routes = [
     { path: 'addVisit', component: AddVisitComponent },
 
     { path: 'searchDogs', component: SearchDogsComponent },
+    { path: 'searchUsers', component: SearchUsersComponent },
 
-    {path: 'showDog/:id', component: ShowDogComponent }
+    { path: 'showDog/:id', component: ShowDogComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
