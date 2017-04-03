@@ -27,17 +27,16 @@ export class SearchDogsComponent  {
 
   }
 
-  //TODO get id working. Navigating through names is not recommended.
   onSelect(dog: Dog): void {
     this.selectedDog = dog;
-    this.router.navigate(['/showDog', this.selectedDog.nameFull]);
+    this.router.navigate(['/showDog', this.selectedDog._id]);
   }
 
   private addValues(values: Dog[]) {
     this.dogs = values;
 
     for (var i=0; i<values.length; i++) {
-      console.log("search-dogs.component.ts: " + this.dogs[i].dogId);
+      console.log("search-dogs.component.ts: " + this.dogs[i]._id);
     }
   }
 }

@@ -28,7 +28,7 @@ export class DogService {
 
   getDog(id: string): Promise<Dog> {
     return this.getDogs()
-      .then(dogs => dogs.find(dog => dog.dogId === id));
+      .then(dogs => dogs.find(dog => dog._id === id));
   }
 
     constructor(private http: Http) {}
