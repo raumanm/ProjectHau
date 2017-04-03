@@ -8,13 +8,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { UserService } from './user.service';
 import { User } from '../classes/user';
-import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
 
 @Component({
-  //moduleId: module.id,
   selector: 'my-modify-user',
-  //TODO find out why form doesn't work!
   templateUrl: './modify-user.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
 })
@@ -22,10 +19,16 @@ export class ModifyUserComponent implements OnInit {
   user: User;
   myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private userService: UserService, fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute) {
     appComponent.titleText = "Muokkaa käyttäjää";
+  }
 
-    this.myForm = fb.group({
+  ngOnInit(): void {
+    this.route.params
+      .switchMap((params: Params) => this.userService.getUser(params['id']))
+      .subscribe(user => this.user = user);
+
+    this.myForm = this.fb.group({
       'accessLevel': [''],
       'username': [''],
       'firstName': [''],
@@ -36,12 +39,19 @@ export class ModifyUserComponent implements OnInit {
       'qualificationDate': [''],
       'details': ['']
     });
-  }
 
-  ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.userService.getUser(params['id']))
-      .subscribe(user => this.user = user);
+    // TODO after the promise is fulfilled update the form values.
+    this.myForm.setValue({
+      'accessLevel': [''],
+      'username': [''],
+      'firstName': [''],
+      'lastName': [''],
+      'phone': [''],
+      'email': [''],
+      'memberNumber': [''],
+      'qualificationDate': [''],
+      'details': ['']
+    });
   }
 
   onSubmit(value: string): void {
