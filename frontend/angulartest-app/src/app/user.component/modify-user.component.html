@@ -1,5 +1,4 @@
 <form [formGroup]="myForm" (ngSubmit)=onSubmit(myForm.value)>
-  <div ngIf="user">
   <table>
     <tr>
       <th><label for="accessLevel">K&#228;ytt&#246;taso:</label></th>
@@ -34,10 +33,12 @@
     </tr>
 
     <tr>
-      <th colspan="2"><label for="qualificationDate">P&#228;tev&#246;itymisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+      <th><label for="qualificationDate">P&#228;tev&#246;itymisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+      <th><label for="memberNumber">Jäsennumero:</label></th>
     </tr>
     <tr>
-      <th colspan="2"><input type="date" data-date-inline-picker="true" id="qualificationDate" [formControl]="myForm.controls['qualificationDate']"></th>
+      <th><input type="date" data-date-inline-picker="true" id="qualificationDate" [formControl]="myForm.controls['qualificationDate']"></th>
+      <th><input type="text" id="memberNumber" required [formControl]="myForm.controls['memberNumber']"></th>
     </tr>
 
     <tr>
@@ -50,5 +51,4 @@
       <th colspan="2"><button type="submit">Lis&#228;&#228;</button></th>
     </tr>
   </table>
-  </div>
 </form>
