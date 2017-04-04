@@ -8,7 +8,7 @@
             && toCheck.hasOwnProperty("breed")
             && toCheck.hasOwnProperty("status")
             && typeof toCheck["nameFull"] === "string"
-            && Object.prototype.toString.call(dateBirth) === '[object Date]'
+            && Object.prototype.toString.call(toCheck["dateBirth"]) === '[object Date]'
             && typeof toCheck["breed"] === "string"
             && typeof toCheck["status"] === "string"
             && (toCheck["status"] === "Active" ||
@@ -26,19 +26,19 @@
             return false;
         }
 
-        if (toCheck.hasOwnProperty('dateQualification') && Object.prototype.toString.call(dateQualification) !== '[object Date]') {
+        if (toCheck.hasOwnProperty('dateQualification') && Object.prototype.toString.call(toCheck["dateQualification"]) !== '[object Date]') {
             return false;
         }
 
-        if (toCheck.hasOwnProperty('dateGraduation') && Object.prototype.toString.call(dateGraduation) !== '[object Date]') {
+        if (toCheck.hasOwnProperty('dateGraduation') && Object.prototype.toString.call(toCheck["dateGraduation"]) !== '[object Date]') {
             return false;
         }
 
-        if (toCheck.hasOwnProperty('dateMedal') && Object.prototype.toString.call(dateMedal) !== '[object Date]') {
+        if (toCheck.hasOwnProperty('dateMedal') && Object.prototype.toString.call(toCheck["dateMedal"]) !== '[object Date]') {
             return false;
         }
 
-        if (toCheck.hasOwnProperty('dateRetired') && Object.prototype.toString.call(dateRetired) !== '[object Date]') {
+        if (toCheck.hasOwnProperty('dateRetired') && Object.prototype.toString.call(toCheck["dateRetired"]) !== '[object Date]') {
             return false;
         }
 
