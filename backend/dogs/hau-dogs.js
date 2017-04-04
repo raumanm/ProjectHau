@@ -34,7 +34,7 @@
 	.get((req, res, next) => {
 		getById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
 	})
-    .update((req, res, next) => {
+    .put((req, res, next) => {
         if (req.get('Content-Type') === 'application/json') {
             updateById(req.params.id, req.body, (result) => hauResponse(res, result));
         }
