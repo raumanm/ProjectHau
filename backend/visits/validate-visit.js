@@ -7,7 +7,7 @@
         return toCheck.hasOwnProperty("visitTime")
             && toCheck.hasOwnProperty("placeId")
             && typeof toCheck["placeId"] === "string"
-            && Object.prototype.toString.call(visitTime) !== '[object Date]'
+            && Object.prototype.toString.call(toCheck["visitTime"]) !== '[object Date]'
             && objectIdRe.test(toCheck["placeId"]);
     }
 
@@ -19,7 +19,7 @@
 
             for (let obj of toCheck.assignedPairs) {
 
-                if (obj.length !== 2 || !obj.hasOwnProperty('pairId') || !obj.hasOwnProperty('status')) {
+                if (Object.keys(obj).length !== 2 || !obj.hasOwnProperty('pairId') || !obj.hasOwnProperty('status')) {
                     return false;
                 } else if ( objectIdRe.test(obj['pairId']) || typeof obj['status'] !== 'string') {
                     return false;
@@ -37,10 +37,10 @@
     function pruneExcessive(toPrune) {
         let pruned = {};
 
-        pruned.visitTime = (toPrune.hasOwnProperty('visitTime')) ? new Date(toPrune.visitTime) : undefined;
-        pruned.placeId = (toPrune.hasOwnProperty('placeId')) ? toPrune.placeId : undefined;
-        pruned.assignedPairs = (toPrune.hasOwnProperty('assignedPairs')) ? toPrune.assignedPairs : undefined;
-        pruned.details = (toPrune.hasOwnProperty('details')) ? toPrune.details : undefined;
+        (toPrune.hasOwnProperty('visitTime')) ? pruned.visitTime = new Date(toPrune.visitTime) : undefined;
+        (toPrune.hasOwnProperty('placeId')) ? pruned.placeId = toPrune.placeId : undefined;
+        (toPrune.hasOwnProperty('assignedPairs')) ? pruned.assignedPairs = toPrune.assignedPairs : undefined;
+        (toPrune.hasOwnProperty('details')) ? pruned.details = toPrune.details : undefined;
 
         return pruned;
     }

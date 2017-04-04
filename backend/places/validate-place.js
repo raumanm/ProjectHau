@@ -51,17 +51,17 @@
     function pruneExcessive(toPrune) {
         let pruned = {};
 
-        pruned.name = (toPrune.hasOwnProperty('name')) ? toPrune.name : undefined;
-        pruned.addressStreet = (toPrune.hasOwnProperty('addressStreet')) ? toPrune.addressStreet : undefined;
-        pruned.addressCode = (toPrune.hasOwnProperty('addressCode')) ? toPrune.addressCode : undefined;
-        pruned.addressCity = (toPrune.hasOwnProperty('addressCity')) ? toPrune.addressCity : undefined;
-        pruned.visitationInterval = (toPrune.hasOwnProperty('visitationInterval')) ? toPrune.visitationInterval : undefined;
-        pruned.contactName = (toPrune.hasOwnProperty('contactName')) ? toPrune.contactName : undefined;
-        pruned.contactPhone = (toPrune.hasOwnProperty('contactPhone')) ? toPrune.contactPhone : undefined;
-        pruned.regularPairs = (toPrune.hasOwnProperty('regularPairs')) ? toPrune.regularPairs : undefined;
-        pruned.pairAmount = (toPrune.hasOwnProperty('pairAmount')) ? toPrune.pairAmount : undefined;
-        pruned.details = (toPrune.hasOwnProperty('details')) ? toPrune.details : undefined;
-        pruned.overseerId = (toPrune.hasOwnProperty('overseerId')) ? toPrune.overseerId : undefined;
+        (toPrune.hasOwnProperty('name')) ? pruned.name = toPrune.name : undefined;
+        (toPrune.hasOwnProperty('addressStreet')) ? pruned.addressStreet = toPrune.addressStreet : undefined;
+        (toPrune.hasOwnProperty('addressCode')) ? pruned.addressCode = toPrune.addressCode : undefined;
+        (toPrune.hasOwnProperty('addressCity')) ? pruned.addressCity = toPrune.addressCity : undefined;
+        (toPrune.hasOwnProperty('visitationInterval')) ? pruned.visitationInterval = toPrune.visitationInterval : undefined;
+        (toPrune.hasOwnProperty('contactName')) ? pruned.contactName = toPrune.contactName : undefined;
+        (toPrune.hasOwnProperty('contactPhone')) ? pruned.contactPhone = toPrune.contactPhone : undefined;
+        (toPrune.hasOwnProperty('regularPairs')) ? pruned.regularPairs = toPrune.regularPairs : undefined;
+        (toPrune.hasOwnProperty('pairAmount')) ? pruned.pairAmount = toPrune.pairAmount : undefined;
+        (toPrune.hasOwnProperty('details')) ? pruned.details = toPrune.details : undefined;
+        (toPrune.hasOwnProperty('overseerId')) ? pruned.overseerId = toPrune.overseerId : undefined;
 
         return pruned;
     }
