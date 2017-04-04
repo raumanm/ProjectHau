@@ -12,7 +12,7 @@
 	hauResponse = require('../hau-response');
 
     safeObjectId = hauDB.safeObjectId;
-	
+
 	app.route("\/dogs(\/)?$")
     .all((req, res, next) => {
         next();
@@ -26,7 +26,7 @@
         getAll((docs) => hauResponse.sendResponse(res, docs));
 	});
 
-	
+
 	app.route("\/dogs\/:id([0-9a-fA-F]{24})(\/)?$")
 	.all((req, res, next) => {
 		next();
@@ -42,8 +42,8 @@
 	.delete((req, res, next) => {
 		deleteById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
 	});
-	
-	
+
+
     function postNew(dog, callback) {
         dog = validator.pruneExcessive(dog);
 
@@ -115,13 +115,10 @@
     function updateById(dogId, replacement, callback) {
         let dog = validator.pruneExcessive(replacement);
         if (validator.validateRequired(dog) && validator.validateOptionals(dog)) {
-            hauDB.db.collection('dogs').updateOne({ _id: safeObjectId(dogId) }, dog, function (err, count, result) {
+            hauDB.db.collection('dogs').updateOne({ _id: safeObjectId(dogId) }, dog, function (err, result) {
+                console.log(result);
                 if (!err) {
-                    if( count > 0 ) {
-                        callback(hauResponse.createOkResponse(result));
-                    } else {
-                        callback(hauResponse.createNotFoundResponse(dogId))
-                    }
+                    callback(hauResponse.createOkResponse(result));
                 } else {
                     callback(hauResponse.createErrorResponse(err));
                 }
