@@ -33,6 +33,11 @@
         .get((req, res, next) => {
             getById(req.params.id, (visit) => hauResponse.sendResponse(res, visit));
         })
+        .put((req, res, next) => {
+            if (req.get('Content-Type') === 'application/json') {
+                updateById(req.params.id, req.body, (result) => hauResponse.sendResponse(res, result));
+            }
+        })
         .delete((req, res, next) => {
             deleteById(req.params.id, (visit) => hauResponse.sendResponse(res, visit));
         });
@@ -77,6 +82,22 @@
                 callback(hauResponse.createErrorResponse(err))
             }
         });
+    }
+
+    function updateById(visitId, replacement, callback) {
+        let visit = validator.pruneExcessive(replacement);
+        if (validator.validateRequired(visit) && validator.validateOptionals(visit)) {
+            hauDB.db.collection('visits').updateOne({ _id: safeObjectId(visitId) }, visit, function (err, result) {
+                console.log(result);
+                if (!err) {
+                    callback(hauResponse.createOkResponse(result));
+                } else {
+                    callback(hauResponse.createErrorResponse(err));
+                }
+            });
+        } else {
+            callback(hauResponse.createBadRequestResponse());
+        }
     }
 
     function deleteById(visitId, callback) {
