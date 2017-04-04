@@ -34,6 +34,11 @@
 	.get((req, res, next) => {
 		getById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
 	})
+    .update((req, res, next) => {
+        if (req.get('Content-Type') === 'application/json') {
+            updateById(req.params.id, req.body, (result) => hauResponse(res, result));
+        }
+    })
 	.delete((req, res, next) => {
 		deleteById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
 	});
@@ -105,6 +110,25 @@
                 callback(hauResponse.createErrorResponse(err));
             }
         });
+    }
+
+    function updateById(dogId, replacement, callback) {
+        let dog = validator.pruneExcessive(replacement);
+        if (validator.validateRequired(dog) && validator.validateOptionals(dog)) {
+            hauDB.db.collection('dogs').updateOne({ _id: safeObjectId(dogId) }, dog, function (err, count, result) {
+                if (!err) {
+                    if( count > 0 ) {
+                        callback(hauResponse.createOkResponse(result));
+                    } else {
+                        callback(hauResponse.createNotFoundResponse(dogId))
+                    }
+                } else {
+                    callback(hauResponse.createErrorResponse(err));
+                }
+            });
+        } else {
+            callback(hauResponse.createBadRequestResponse());
+        }
     }
 
     function deleteById(dogId, callback) {
