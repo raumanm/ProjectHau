@@ -19,7 +19,7 @@ export class PlaceService {
       .catch(this.handleError);
   }
 
-  getDogs(): Promise<Place[]> {
+  getPlaces(): Promise<Place[]> {
     return this.http
       .get(this.getUrl).toPromise()
       .then(response => response.json() as Place[])
