@@ -25,7 +25,7 @@ export class ShowPlaceComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
-      .subscribe(user => this.user = user);
+      .subscribe(place => this.place = place);
   }
 
 
