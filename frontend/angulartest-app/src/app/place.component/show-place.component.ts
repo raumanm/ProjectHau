@@ -5,10 +5,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
+import { UserService } from '../user.component/user.service';
 import { PlaceService } from './place.service';
 import { Place } from '../classes/place';
 import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
+import { User } from "../classes/user";
 
 @Component({
   selector: 'my-show-place',
@@ -17,8 +19,9 @@ import { AppComponent } from '../app.component';
 })
 export class ShowPlaceComponent implements OnInit {
   place: Place;
+  overseer: User;
 
-  constructor(appComponent: AppComponent, private placeService: PlaceService, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private placeService: PlaceService, private route: ActivatedRoute, private userService: UserService) {
     appComponent.titleText = "Näytä kohde";
   }
 
@@ -26,6 +29,7 @@ export class ShowPlaceComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place => this.place = place);
+    this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
   }
 
 
