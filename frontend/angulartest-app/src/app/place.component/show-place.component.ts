@@ -29,7 +29,13 @@ export class ShowPlaceComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place => this.place = place);
-    this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
+
+
+    /*if(this.place != null) {
+      this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
+      console.log("käyttäjä haettu");
+    }*/
+    //this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
   }
 
 
