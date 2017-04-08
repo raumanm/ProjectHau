@@ -29,27 +29,31 @@ export class ModifyDogComponent implements OnInit {
       .subscribe(dog => this.dog = dog);
 
     this.myForm = this.fb.group({
-      'accessLevel': [''],
-      'username': [''],
-      'firstName': [''],
-      'lastName': [''],
-      'phone': [''],
-      'email': [''],
-      'memberNumber': [''],
-      'qualificationDate': [''],
+      'nameFull': [''],
+      'nameNickname': [''],
+      'dateBirth': [''],
+      'breed': [''],
+      'registerNumber': [''],
+      'status': [''],
+      'dateQualification': [''],
+      'dateGraduation': [''],
+      'dateMedal': [''],
+      'dateRetired': [''],
       'details': ['']
     });
 
     // TODO after the promise is fulfilled update the form values.
     this.myForm.setValue({
-      'accessLevel': [''],
-      'username': [''],
-      'firstName': [''],
-      'lastName': [''],
-      'phone': [''],
-      'email': [''],
-      'memberNumber': [''],
-      'qualificationDate': [''],
+      'nameFull': [''],
+      'nameNickname': [''],
+      'dateBirth': [''],
+      'breed': [''],
+      'registerNumber': [''],
+      'status': [''],
+      'dateQualification': [''],
+      'dateGraduation': [''],
+      'dateMedal': [''],
+      'dateRetired': [''],
       'details': ['']
     });
   }
