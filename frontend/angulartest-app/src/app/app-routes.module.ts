@@ -22,6 +22,7 @@ import { ShowDogComponent } from './dog.component/show-dog.component';
 import { ShowUserComponent } from './user.component/show-user.component';
 
 import { ModifyUserComponent } from './user.component/modify-user.component';
+import { ModifyDogComponent } from './dog.component/modify-dog.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
@@ -44,7 +45,8 @@ export const routes: Routes = [
     { path: 'showDog/:id', component: ShowDogComponent },
     { path: 'showUser/:id', component: ShowUserComponent },
 
-    {path : 'modifyUser/:id', component: ModifyUserComponent}
+    {path : 'modifyUser/:id', component: ModifyUserComponent},
+    {path : 'modifyDog/:id', component: ModifyDogComponent}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

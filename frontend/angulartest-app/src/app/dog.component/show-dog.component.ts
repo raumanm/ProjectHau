@@ -11,7 +11,6 @@ import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
 
 @Component({
-  //moduleId: module.id,
   selector: 'my-show-dog',
   templateUrl: './show-dog.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
@@ -27,7 +26,6 @@ export class ShowDogComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.dogService.getDog(params['id']))
       .subscribe(dog => this.dog = dog);
-    console.log(this.dog);
   }
 
 

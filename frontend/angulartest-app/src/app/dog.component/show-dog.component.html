@@ -1,12 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 <div *ngIf="dog">
-  <h2>{{dog.nameFull}} details!</h2>
+    <table>
+      <tr>
+        <th><label for="nameFull">Koko nimi:</label></th>
+        <th><label for="nameNickname">Kutsumanimi:</label></th>
+      </tr>
+      <tr>
+        <th><p id="nameFull">{{dog.nameFull}}</p></th>
+        <th><p id="nameNickname">{{dog.nameNickname}}</p></th>
+      </tr>
+
+      <tr>
+        <th><label for="dateBirth">Syntym&#228;aika:</label></th>
+        <th><label for="breed">Rotu:</label></th>
+      </tr>
+      <tr>
+        <th><p id="dateBirth">{{dog.dateBirth}}</p></th>
+        <th><p id="breed">{{dog.breed}}</p></th>
+      </tr>
+
+      <tr>
+        <th><label for="registerNumber">Rekisterinumero:</label></th>
+        <th><label for="status">Tila:</label></th>
+      </tr>
+      <tr>
+        <th><p id="registerNumber">{{dog.registerNumber}}</p></th>
+        <th><p id="status">{{dog.status}}</p></th>
+      </tr>
+
+      <tr>
+        <th><label for="dateQualification">P&#228;tev&#246;itymisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+        <th><label for="dateGraduation">Valmistumisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+      </tr>
+      <tr>
+        <th><p id="dateQualification">{{dog.dateQualification}}</p></th>
+        <th><p id="dateGraduation">{{dog.dateGraduation}}</p></th>
+      </tr>
+
+      <tr>
+        <th><label for="dateMedal">Mitalin p&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+        <th><label for="dateRetired">Lopettamisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+      </tr>
+      <tr>
+        <th><p id="dateMedal">{{dog.dateMedal}}</p></th>
+        <th><p id="dateRetired">{{dog.dateRetired}}</p></th>
+      </tr>
+
+      <tr>
+        <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
+      </tr>
+      <tr>
+        <th><p id="details">{{dog.details}}</p></th>
+      </tr>
+
+      <tr>
+        <th colspan="2">
+          <button routerLink="/modifyDog/{{dog._id}}">Muokkaa</button>
+        </th>
+      </tr>
+    </table>
 </div>
-</body>
-</html>
