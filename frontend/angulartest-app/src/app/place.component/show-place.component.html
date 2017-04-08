@@ -3,7 +3,6 @@
   <table>
     <!-- SUPER IMPORTANT IN ORDER TO AVOID NULLPOINTERS --->
     <div *ngIf="place">
-      <div *ngIf="overseer">
 
       <tr>
         <th><label for="name">Nimi:</label></th>
@@ -36,11 +35,12 @@
       </tr>
 
       <tr>
-        <th><label for="overseerId">Kohdevastaava:</label></th>
+        <th colspan="2"><label for="overseerId">Kohdevastaava:</label></th>
       </tr>
 
       <tr>
-        <th colspan="2"><p id="overseerId">{{overseer.firstName}}{{overseer.lastName}}</p></th>
+        <!-- <th colspan="2"><p id="overseerId">{{overseer.firstName}}{{overseer.lastName}}</p></th> -->
+        <th colspan="2"><p id="overseerId">NotWorking</p></th>
       </tr>
 
       <tr>
@@ -56,7 +56,6 @@
           <button routerLink="/modifyPlace/{{place._id}}">Muokkaa</button>
         </th>
       </tr>
-      </div>
     </div>
   </table>
 </form>
