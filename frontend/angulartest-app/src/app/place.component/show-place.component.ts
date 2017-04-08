@@ -30,7 +30,7 @@ export class ShowPlaceComponent implements OnInit {
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place => this.place = place);
 
-
+    //TODO fetch user after place is succesfully fecthed
     /*if(this.place != null) {
       this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
       console.log("käyttäjä haettu");
