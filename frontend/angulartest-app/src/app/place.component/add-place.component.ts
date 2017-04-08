@@ -73,7 +73,7 @@ export class AddPlaceComponent {
     }
 
     if(everythingOk) {
-      //this.placeService.create(value);
+      this.placeService.create(value);
       alert("Kohde lisätty onnistuneesti");
       console.log(value);
     }
