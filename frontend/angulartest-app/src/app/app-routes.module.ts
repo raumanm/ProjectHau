@@ -21,6 +21,7 @@ import { SearchPlacesComponent } from './place.component/search-places.component
 
 import { ShowDogComponent } from './dog.component/show-dog.component';
 import { ShowUserComponent } from './user.component/show-user.component';
+import { ShowPlaceComponent } from './place.component/show-place.component';
 
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from './dog.component/modify-dog.component';
@@ -46,6 +47,7 @@ export const routes: Routes = [
 
     { path: 'showDog/:id', component: ShowDogComponent },
     { path: 'showUser/:id', component: ShowUserComponent },
+    { path: 'showPlace/:id', component: ShowPlaceComponent},
 
     { path : 'modifyUser/:id', component: ModifyUserComponent},
     { path : 'modifyDog/:id', component: ModifyDogComponent}
