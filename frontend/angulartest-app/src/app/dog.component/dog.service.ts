@@ -26,10 +26,13 @@ export class DogService {
       .catch(this.handleError);
   }
 
+  //TODO get just one dog from fetch
   getDog(id: string): Promise<Dog> {
     return this.getDogs()
       .then(dogs => dogs.find(dog => dog._id === id));
   }
+
+  //TODO create put method
 
     constructor(private http: Http) {}
 
