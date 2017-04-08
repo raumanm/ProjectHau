@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<form>
+  <table>
+    <!-- SUPER IMPORTANT IN ORDER TO AVOID NULLPOINTERS --->
+    <div *ngIf="place">
+      <div *ngIf="overseer">
+
+      <tr>
+        <th><label for="name">Nimi:</label></th>
+        <th><label for="addressStreet">Katu:</label></th>
+      </tr>
+
+      <tr>
+        <th><p id="name">{{place.name}}</p></th>
+        <th><p id="addressStreet">{{place.addressStreet}}</p></th>
+      </tr>
+
+      <tr>
+        <th><label for="addressCode">Postinumero:</label></th>
+        <th><label for="addressCity">Kaupunki:</label></th>
+      </tr>
+
+      <tr>
+        <th><p id="addressCode">{{place.addressCode}}</p></th>
+        <th><p id="addressCity">{{place.addressCity}}</p></th>
+      </tr>
+
+      <tr>
+        <th><label for="visitationInterval">Vakikohde vai kertaluontoinen:</label></th>
+        <th><label for="pairAmount">Optimikoirakkomäärä:</label></th>
+      </tr>
+
+      <tr>
+        <th><p id="visitationInterval">{{place.visitationInterval}}</p></th>
+        <th><p id="pairAmount">{{place.pairAmount}}</p></th>
+      </tr>
+
+      <tr>
+        <th><label for="overseerId">Kohdevastaava:</label></th>
+      </tr>
+
+      <tr>
+        <th colspan="2"><p id="overseerId">{{overseer.firstName}}{{overseer.lastName}}</p></th>
+      </tr>
+
+      <tr>
+        <th colspan="2"><label for="details">Lisätietoja:</label></th>
+      </tr>
+
+      <tr>
+        <th colspan="2"><p id="details">{{place.details}}</p></th>
+      </tr>
+
+      <tr>
+        <th colspan="2">
+          <button routerLink="/modifyPlace/{{place._id}}">Muokkaa</button>
+        </th>
+      </tr>
+      </div>
+    </div>
+  </table>
+</form>
