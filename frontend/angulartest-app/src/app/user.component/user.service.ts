@@ -19,6 +19,20 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  getUsers(): Promise<User[]> {
+    return this.http
+      .get(this.getUrl).toPromise()
+      .then(response => response.json() as User[])
+      .catch(this.handleError);
+  }
+  //TODO update fetch to get one user only.
+  getUser(id: string): Promise<User> {
+    return this.getUsers()
+      .then(users => users.find(user => user._id === id));
+  }
+
+  //TODO put method
+
     constructor(private http: Http) { }
 
     private handleError(error: any): Promise<any> {
