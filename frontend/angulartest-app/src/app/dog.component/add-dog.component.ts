@@ -120,7 +120,7 @@ export class AddDogComponent  {
 
       if(everythingOk) {
         console.log(value);
-        //this.dogService.create(value);
+        this.dogService.create(value);
         alert("Koira luotu onnistuneesti")
       }
 
