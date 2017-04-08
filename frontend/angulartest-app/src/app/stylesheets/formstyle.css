@@ -1,0 +1,40 @@
+﻿form{
+    display: inline-block;
+    text-align: center;
+    padding-top: 50px;
+}
+
+button{
+    font-size: 20px;
+    width: 500px;
+    height: 40px;
+    margin: 5px;
+    color: black;
+    background-color: coral;
+}
+
+input[type=submit]:hover{
+    background-color: coral;
+    cursor: pointer;
+}
+
+textarea{
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+select, input[type=text], input[type=date]{
+    width: 250px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+button:hover{
+    border: groove 5px lightgray;
+    cursor: pointer;
+}

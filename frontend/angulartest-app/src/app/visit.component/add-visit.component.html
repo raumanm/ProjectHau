@@ -1,0 +1,47 @@
+<form [formGroup]="myForm" (ngSubmit)=onSubmit(myForm.value)>
+  <table>
+    <tr>
+      <th><label for="visitTime">Vierailupäivä:</label></th>
+      <th><label for="placeId">Kohde:</label></th>
+    </tr>
+    <tr>
+      <th><input type="date" data-date-inline-picker="true" required id="visitTime" placeholder="Vierailupäivä" [formControl]="myForm.controls['visitTime']"></th>
+      <th>
+        <select id ="placeId" name="placeId" required [formControl]="myForm.controls['placeId']">
+          <option value="58c6dd2a1b9805befd07b7ac">Vanhojen loppusijoituspaikka 1</option>
+          <option value="58c6dd2a1b9805befd07b7ad">Keinokoti</option>
+        </select>
+      </th>
+    </tr>
+
+    <tr>
+      <th><label for="assignedPairId">Koirakko:</label></th>
+      <th><label for="assignedPairStatus">Koirakon tila:</label></th>
+    </tr>
+    <tr>
+      <th>
+        <select id ="assignedPairId" name="assignedPairId" required [formControl]="myForm.controls['assignedPairId']">
+          <option value="placeholderID1">Jeppe ja Mari</option>
+          <option value="placeholderID2">Musti ja Jeppe</option>
+        </select>
+      </th>
+      <th>
+        <select id ="assignedPairStatus" name="assignedPairStatus" required [formControl]="myForm.controls['assignedPairStatus']">
+          <option value="Reserved">Varattu</option>
+          <option value="Confirmed">Vahvistettu</option>
+          <option value="Cancelled">Peruttu</option>
+        </select>
+      </th>
+    </tr>
+
+    <tr>
+      <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
+    </tr>
+    <tr>
+      <th colspan="2"><textarea id ="details" name="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></th>
+    </tr>
+    <tr>
+      <th colspan="2"><button type="submit">Lis&#228;&#228;</button></th>
+    </tr>
+  </table>
+</form>

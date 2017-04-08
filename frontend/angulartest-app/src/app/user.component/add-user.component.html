@@ -1,0 +1,52 @@
+    <form [formGroup]="myForm" (ngSubmit)=onSubmit(myForm.value)>
+        <table>
+            <tr>
+                <th><label for="accessLevel">K&#228;ytt&#246;taso:</label></th>
+                <th><label for="username">K&#228;ytt&#228;j&#228;nimi:</label></th>
+            </tr>
+            <tr>
+                <th><select id ="accessLevel" name="accessLevel" required [formControl]="myForm.controls['accessLevel']">
+                    <option value="1">Perusk&#228;ytt&#228;j&#228;</option>
+                    <option value="2">Kohdevastaava</option>
+                    <option value="3">Admin</option>
+                    </select>
+                </th>
+                <th><input type="text" id="username" required placeholder="Käyttäjänimi" [formControl]="myForm.controls['username']"></th>
+            </tr>
+
+            <tr>
+                <th><label for="firstName">Etunimi:</label></th>
+                <th><label for="lastName">Sukunimi:</label></th>
+            </tr>
+            <tr>
+                <th><input type="text" id="firstName" required placeholder="Etunimi" [formControl]="myForm.controls['firstName']"></th>
+                <th><input type="text" id="lastName" required placeholder="Sukunimi" [formControl]="myForm.controls['lastName']"></th>
+            </tr>
+
+            <tr>
+                <th><label for="phone">Puhelinnumero:</label></th>
+                <th><label for="email">S&#228;hk&#246;posti:</label></th>
+            </tr>
+            <tr>
+                <th><input type="text" id="phone" required placeholder="Puhelinnumero" [formControl]="myForm.controls['phone']"></th>
+				<th><input type="text" id="email" required placeholder="Sähköposti" [formControl]="myForm.controls['email']"></th>
+            </tr>
+
+            <tr>
+                <th colspan="2"><label for="qualificationDate">P&#228;tev&#246;itymisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+            </tr>
+            <tr>
+                <th colspan="2"><input type="date" data-date-inline-picker="true" id="qualificationDate" placeholder="P�tev�itymisp�iv�m��r�" [formControl]="myForm.controls['qualificationDate']"></th>
+            </tr>
+
+            <tr>
+                <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
+            </tr>
+            <tr>
+                <th colspan="2"><textarea name="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></th>
+            </tr>
+            <tr>
+                <th colspan="2"><button type="submit">Lis&#228;&#228;</button></th>
+            </tr>
+        </table>
+    </form>
