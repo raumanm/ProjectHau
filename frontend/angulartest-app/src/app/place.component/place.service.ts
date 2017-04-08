@@ -25,6 +25,15 @@ export class PlaceService {
       .then(response => response.json() as Place[])
       .catch(this.handleError);
   }
+
+  //TODO update fetch to get one user only.
+  getUser(id: string): Promise<Place> {
+    return this.getPlaces()
+      .then(places => places.find(place => place._id === id));
+  }
+
+  //TODO put method
+
     constructor(private http: Http) { }
 
     private handleError(error: any): Promise<any> {
