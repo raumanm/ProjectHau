@@ -1,4 +1,4 @@
-import { Dog } from './dog';
+import { UserPairedDog } from './userPairedDog';
 
 export class User {
 constructor(
@@ -12,6 +12,6 @@ constructor(
     public qualificationDate?: Date,
     public details?: string,
 	  public _id?: string,
-    public dogs?: Dog[]
+    public pairedDogs?: UserPairedDog[]
 ) {}
 }
