@@ -27,8 +27,10 @@ export class UserService {
   }
   //TODO update fetch to get one user only.
   getUser(id: string): Promise<User> {
-    return this.getUsers()
-      .then(users => users.find(user => user._id === id));
+    return this.http
+      .get(this.getUrl+id).toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
   }
 
   //TODO put method
