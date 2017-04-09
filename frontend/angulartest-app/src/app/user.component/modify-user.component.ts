@@ -30,6 +30,7 @@ export class ModifyUserComponent implements OnInit {
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.user = user);
 
+    //TODO add dogs to form
     //Create form
     this.myForm = this.fb.group({
       'accessLevel': [''],
