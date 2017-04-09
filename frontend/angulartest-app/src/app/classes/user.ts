@@ -1,3 +1,5 @@
+import { Dog } from './dog';
+
 export class User {
 constructor(
 	public accessLevel: number,
@@ -9,6 +11,7 @@ constructor(
     public memberNumber: string,
     public qualificationDate?: Date,
     public details?: string,
-	public _id?: string
+	  public _id?: string,
+    public dogs?: Dog[]
 ) {}
 }
