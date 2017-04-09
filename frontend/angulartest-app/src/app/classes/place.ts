@@ -4,7 +4,6 @@
 
 export class Place {
   constructor(
-    public _id: string,
     public name: string,
     public addressStreet: string,
     public addressCode: string,
@@ -12,7 +11,8 @@ export class Place {
     public visitationInterval: string,
     public pairAmount?: number,
     public overseerId?: string,
-    public details?: string
+    public details?: string,
+    public _id?: string
   ) {}
 
 

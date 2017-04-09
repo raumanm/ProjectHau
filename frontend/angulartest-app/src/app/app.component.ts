@@ -25,7 +25,7 @@ import { Component, Input } from '@angular/core';
                 <div class="dropdown-content">
                   <a routerLink="/searchUsers">Hae käyttäjiä</a>
                   <a routerLink="/searchDogs">Hae koiria</a>
-                  <a routerLink="/search">Hae kohteita</a>
+                  <a routerLink="/searchPlaces">Hae kohteita</a>
                   <a routerLink="/search">Hae käyntejä</a>
                 </div>
               </li>

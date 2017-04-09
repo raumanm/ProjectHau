@@ -20,7 +20,8 @@ import { AddPlaceComponent } from './place.component/add-place.component';
 import { AddVisitComponent } from './visit.component/add-visit.component';
 
 import { SearchDogsComponent } from'./dog.component/search-dogs.component';
-import { SearchUsersComponent } from './user.component/search-users.component'
+import { SearchUsersComponent } from './user.component/search-users.component';
+import { SearchPlacesComponent } from './place.component/search-places.component';
 
 import { DogService } from './dog.component/dog.service';
 import { UserService } from './user.component/user.service';
@@ -29,6 +30,7 @@ import { VisitService } from './visit.component/visit.service';
 
 import { ShowDogComponent } from './dog.component/show-dog.component';
 import { ShowUserComponent } from './user.component/show-user.component';
+import { ShowPlaceComponent } from "./place.component/show-place.component";
 
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from "./dog.component/modify-dog.component";
@@ -51,9 +53,11 @@ import { ModifyDogComponent } from "./dog.component/modify-dog.component";
 
     SearchDogsComponent,
     SearchUsersComponent,
+    SearchPlacesComponent,
 
     ShowDogComponent,
     ShowUserComponent,
+    ShowPlaceComponent,
 
     ModifyUserComponent,
     ModifyDogComponent

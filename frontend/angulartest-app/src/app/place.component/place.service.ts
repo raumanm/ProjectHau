@@ -19,6 +19,21 @@ export class PlaceService {
       .catch(this.handleError);
   }
 
+  getPlaces(): Promise<Place[]> {
+    return this.http
+      .get(this.getUrl).toPromise()
+      .then(response => response.json() as Place[])
+      .catch(this.handleError);
+  }
+
+  //TODO fetch one place from DB
+  getPlace(id: string): Promise<Place> {
+    return this.getPlaces()
+      .then(places => places.find(place => place._id === id));
+  }
+
+  //TODO put method
+
     constructor(private http: Http) { }
 
     private handleError(error: any): Promise<any> {
