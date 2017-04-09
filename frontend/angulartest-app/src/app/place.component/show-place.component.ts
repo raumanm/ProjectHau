@@ -23,13 +23,14 @@ export class ShowPlaceComponent implements OnInit {
 
   constructor(appComponent: AppComponent, private placeService: PlaceService, private route: ActivatedRoute, private userService: UserService) {
     appComponent.titleText = "Näytä kohde";
+    console.log(this.place);
   }
 
   ngOnInit(): void {
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place => this.place = place);
-
+    console.log(this.place);
     //TODO fetch user after place is succesfully fecthed
     /*if(this.place != null) {
       this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
@@ -37,6 +38,12 @@ export class ShowPlaceComponent implements OnInit {
     }*/
     //this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
   }
+  /*onSelect(): void {
+    console.log(this.place);
+    console.log(this.overseer);
+    this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
+    //parseTemplate.name.small().replace("NotWorking",this.overseer.firstName);
+  }*/
 
 
 }
