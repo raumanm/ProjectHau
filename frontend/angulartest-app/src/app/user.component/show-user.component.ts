@@ -7,11 +7,11 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import { UserService } from './user.service';
 import { User } from '../classes/user';
+import { UserPairedDog } from '../classes/userPairedDog';
 import { UtilsClass } from '../util/utilsclass';
 import { AppComponent } from '../app.component';
 
 @Component({
-  //moduleId: module.id,
   selector: 'my-show-user',
   templateUrl: './show-user.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
@@ -28,6 +28,10 @@ export class ShowUserComponent implements OnInit {
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.user = user);
   }
+
+  onSelect(): void {
+    console.log(this.user);
+   }
 
 
 }
