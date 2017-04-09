@@ -25,7 +25,6 @@ export class UserService {
       .then(response => response.json() as User[])
       .catch(this.handleError);
   }
-  //TODO update fetch to get one user only.
   getUser(id: string): Promise<User> {
     return this.http
       .get(this.getUrl+id).toPromise()
