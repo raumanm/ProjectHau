@@ -62,6 +62,7 @@ export class ModifyUserComponent implements OnInit {
   }
 
   onSubmit(value: string): void {
+    value["_id"] = this.user._id;
     console.log(value);
   }
 
