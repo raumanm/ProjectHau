@@ -11,6 +11,7 @@ import { User } from '../classes/user';
 import { AppComponent } from '../app.component';
 
 @Component({
+  moduleId: module.id,
   selector: 'my-modify-user',
   templateUrl: './modify-user.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
@@ -24,10 +25,12 @@ export class ModifyUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Fetch user
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.user = user);
 
+    //Create form
     this.myForm = this.fb.group({
       'accessLevel': [''],
       'username': [''],
@@ -40,18 +43,22 @@ export class ModifyUserComponent implements OnInit {
       'details': ['']
     });
 
-    // TODO after the promise is fulfilled update the form values.
-    this.myForm.setValue({
-      'accessLevel': [''],
-      'username': [''],
-      'firstName': [''],
-      'lastName': [''],
-      'phone': [''],
-      'email': [''],
-      'memberNumber': [''],
-      'qualificationDate': [''],
-      'details': ['']
-    });
+    //Update form values
+    this.route.params
+      .switchMap((params: Params) => this.userService.getUser(params['id']))
+      .subscribe(user =>
+        this.myForm.patchValue({
+          accessLevel: user.accessLevel,
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          phone: user.phone,
+          email: user.email,
+          memberNumber: user.memberNumber,
+          qualificationDate: user.qualificationDate,
+          details: user.details
+        })
+      );
   }
 
   onSubmit(value: string): void {
