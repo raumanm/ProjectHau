@@ -25,7 +25,7 @@
             return false;
         }
 
-        if (toCheck.hasOwnProperty(qualificationDate) && Object.prototype.toString.call(qualificationDate) !== '[object Date]') {
+        if (toCheck.hasOwnProperty(qualificationDate) && Object.prototype.toString.call(toCheck["qualificationDate"]) !== '[object Date]') {
             return false;
         }
 
@@ -39,16 +39,16 @@
     function pruneExcessive(toPrune) {
         let pruned = {};
 
-        pruned.accessLevel = (toPrune.hasOwnProperty('accessLevel')) ? toPrune.accessLevel : undefined;
-        pruned.username = (toPrune.hasOwnProperty('username')) ? toPrune.username : undefined;
-        pruned.password = (toPrune.hasOwnProperty('password')) ? toPrune.password : undefined;
-        pruned.firstName = (toPrune.hasOwnProperty('firstName')) ? toPrune.firstName : undefined;
-        pruned.lastName = (toPrune.hasOwnProperty('lastName')) ? toPrune.lastName : undefined;
-        pruned.phone = (toPrune.hasOwnProperty('phone')) ? toPrune.phone : undefined;
-        pruned.email = (toPrune.hasOwnProperty('email')) ? toPrune.email : undefined;
-        pruned.memberNumber = (toPrune.hasOwnProperty('memberNumber')) ? toPrune.memberNumber : undefined;
-        pruned.qualificationDate = (toPrune.hasOwnProperty('qualificationDate')) ? new Date(toPrune.qualificationDate) : undefined;
-        pruned.details = (toPrune.hasOwnProperty('details')) ? toPrune.details : undefined;
+        (toPrune.hasOwnProperty('accessLevel')) ? pruned.accessLevel = toPrune.accessLevel : undefined;
+        (toPrune.hasOwnProperty('username')) ? pruned.username = toPrune.username : undefined;
+        (toPrune.hasOwnProperty('password')) ? pruned.password = toPrune.password : undefined;
+        (toPrune.hasOwnProperty('firstName')) ? pruned.firstName = toPrune.firstName : undefined;
+        (toPrune.hasOwnProperty('lastName')) ? pruned.lastName = toPrune.lastName : undefined;
+        (toPrune.hasOwnProperty('phone')) ? pruned.phone = toPrune.phone : undefined;
+        (toPrune.hasOwnProperty('email')) ? pruned.email = toPrune.email : undefined;
+        (toPrune.hasOwnProperty('memberNumber')) ? pruned.memberNumber = toPrune.memberNumber : undefined;
+        (toPrune.hasOwnProperty('qualificationDate')) ? pruned.qualificationDate = new Date(toPrune.qualificationDate) : undefined;
+        (toPrune.hasOwnProperty('details')) ? pruned.details = toPrune.details : undefined;
 
         return pruned;
     }

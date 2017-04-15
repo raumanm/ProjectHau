@@ -33,6 +33,11 @@
     .get((req, res, next) => {
         getById(req.params.id, (place) => hauResponse.sendResponse(res, place));
     })
+    .put((req, res, next) => {
+        if (req.get('Content-Type') === 'application/json') {
+            updateById(req.params.id, req.body, (result) => hauResponse.sendResponse(res, result));
+        }
+    })
     .delete((req, res, next) => {
         deleteById(req.params.id, (place) => hauResponse.sendResponse(res, place));
     });
@@ -89,6 +94,22 @@
                     callback(hauResponse.createErrorResponse(err));
                 }
         });
+    }
+
+    function updateById(placeId, replacement, callback) {
+        let place = validator.pruneExcessive(replacement);
+        if (validator.validateRequired(place) && validator.validateOptionals(place)) {
+            hauDB.db.collection('places').updateOne({ _id: safeObjectId(placeId) }, place, function (err, result) {
+                console.log(result);
+                if (!err) {
+                    callback(hauResponse.createOkResponse(result));
+                } else {
+                    callback(hauResponse.createErrorResponse(err));
+                }
+            });
+        } else {
+            callback(hauResponse.createBadRequestResponse());
+        }
     }
 
     function deleteById(placeId, callback) {

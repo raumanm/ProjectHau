@@ -32,6 +32,11 @@
     .get((req, res, next) => {
         getById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
     })
+    .put((req, res, next) => {
+        if (req.get('Content-Type') === 'application/json') {
+            updateById(req.params.id, req.body, (result) => hauResponse.sendResponse(res, result));
+        }
+    })
     .delete((req, res, next) => {
         deleteById(req.params.id, (dog) => hauResponse.sendResponse(res, dog));
     });
@@ -111,7 +116,21 @@
         });
     }
 
-    //TODO: PUT update method
+    function updateById(userId, replacement, callback) {
+        let user = validator.pruneExcessive(replacement);
+        if (validator.validateRequired(user) && validator.validateOptionals(user)) {
+            hauDB.db.collection('users').updateOne({ _id: safeObjectId(userId) }, user, function (err, result) {
+                console.log(result);
+                if (!err) {
+                    callback(hauResponse.createOkResponse(result));
+                } else {
+                    callback(hauResponse.createErrorResponse(err));
+                }
+            });
+        } else {
+            callback(hauResponse.createBadRequestResponse());
+        }
+    }
 
     function deleteById(userid, callback) {
         hauDB.db.collection('users').deleteOne({ _id: safeObjectId(userid)}, (err, response) => {
