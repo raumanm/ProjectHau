@@ -21,7 +21,7 @@ export class ModifyUserComponent implements OnInit {
   user: User;
   myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     appComponent.titleText = "Muokkaa käyttäjää";
   }
 
@@ -61,6 +61,11 @@ export class ModifyUserComponent implements OnInit {
           details: user.details
         })
       );
+  }
+
+  addDogToUser() : void {
+    console.log("addDog");
+    this.router.navigate(['/addDogToUser', this.user._id]);
   }
 
   onSubmit(value: string): void {
