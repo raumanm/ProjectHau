@@ -40,8 +40,6 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  //TODO put method
-
     constructor(private http: Http) { }
 
     private handleError(error: any): Promise<any> {
