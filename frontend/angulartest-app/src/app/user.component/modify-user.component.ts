@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from './user.service';
 import { User } from '../classes/user';
 import { AppComponent } from '../app.component';
+import {UtilsClass} from "../util/utilsclass";
 
 @Component({
   moduleId: module.id,
@@ -63,12 +64,8 @@ export class ModifyUserComponent implements OnInit {
   }
 
   onSubmit(value: string): void {
-    value["_id"] = this.user._id;
-    console.log(value);
-  }
-
-  /*onSubmit(value: string): void {
     let everythingOk = true;
+    value["_id"] = this.user._id;
 
     if(UtilsClass.validateDate(value["qualificationDate"])) {
       let temp = UtilsClass.createDate(value["qualificationDate"]);
@@ -122,11 +119,11 @@ export class ModifyUserComponent implements OnInit {
 
     if(everythingOk) {
       console.log(value);
-      //this.userService.create(value);
+      this.userService.create(value);
       alert("Käyttäjä lisätty onnistuneesti");
     }
 
-  }*/
+  }
 
 
 }
