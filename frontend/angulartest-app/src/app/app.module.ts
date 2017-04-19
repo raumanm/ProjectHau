@@ -35,6 +35,8 @@ import { ShowPlaceComponent } from "./place.component/show-place.component";
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from "./dog.component/modify-dog.component";
 
+import { AddDogToUserComponent } from './user.component/add-dog-to-user';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +62,9 @@ import { ModifyDogComponent } from "./dog.component/modify-dog.component";
     ShowPlaceComponent,
 
     ModifyUserComponent,
-    ModifyDogComponent
+    ModifyDogComponent,
+
+    AddDogToUserComponent
   ],
   imports: [
     BrowserModule,
