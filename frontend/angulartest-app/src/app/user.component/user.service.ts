@@ -19,6 +19,14 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  modify(data: string): Promise<User> {
+    return this.http
+      .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
+
   getUsers(): Promise<User[]> {
     return this.http
       .get(this.getUrl).toPromise()
