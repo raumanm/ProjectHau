@@ -26,6 +26,8 @@ import { ShowPlaceComponent } from './place.component/show-place.component';
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from './dog.component/modify-dog.component';
 
+import { AddDogToUserComponent } from './user.component/add-dog-to-user';
+
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
     { path: 'mainPage',  component: MainPageComponent },
@@ -50,7 +52,9 @@ export const routes: Routes = [
     { path: 'showPlace/:id', component: ShowPlaceComponent},
 
     { path : 'modifyUser/:id', component: ModifyUserComponent},
-    { path : 'modifyDog/:id', component: ModifyDogComponent}
+    { path : 'modifyDog/:id', component: ModifyDogComponent},
+
+    { path: 'addDogToUser/:id', component: AddDogToUserComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
