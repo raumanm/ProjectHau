@@ -9,3 +9,7 @@
     </ul>
   </div>
 </div>
+<div *ngIf="selectedDog">
+  <p>Lisätään koira</p>
+  <button type="button" (click)="submitSelect()">{{selectedDog.nameFull}}</button>
+</div>

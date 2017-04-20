@@ -66,7 +66,9 @@ export class AddDogToUserComponent implements OnInit {
 
   onSelect(selectedDog: Dog): void {
     this.selectedDog = selectedDog;
-    console.log(this.selectedDog);
+  }
+
+  submitSelect(): void {
 
   }
 
