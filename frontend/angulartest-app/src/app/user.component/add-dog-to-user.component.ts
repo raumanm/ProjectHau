@@ -51,12 +51,16 @@ export class AddDogToUserComponent implements OnInit {
 
   compareDogs(dogs: Dog[]): void {
     this.dogs = dogs;
-    for(let i = 0; i < dogs.length; i++) {
-      for(let j = 0; j < this.user.pairedDogs.length; j++) {
-        if(dogs[i]._id != this.user.pairedDogs[j]._id) {
-          this.avaibleDogs.push(this.dogs[i]);
+    if(this.user.pairedDogs != null) {
+      for (let i = 0; i < dogs.length; i++) {
+        for (let j = 0; j < this.user.pairedDogs.length; j++) {
+          if (dogs[i]._id != this.user.pairedDogs[j]._id) {
+            this.avaibleDogs.push(this.dogs[i]);
+          }
         }
       }
+    } else {
+      this.avaibleDogs = dogs;
     }
   }
 
