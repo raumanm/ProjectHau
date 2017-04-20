@@ -33,8 +33,6 @@ export class AddDogToUserComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.fetchDogs(user));
-    //TODO fetch dogs
-    //TODO compare dog ids to paired dog ids
   }
 
   fetchDogs(user: User): void {
