@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DogService } from './dog.service';
 import { Dog } from '../classes/dog';
 import { AppComponent } from '../app.component';
+import {UtilsClass} from "../util/utilsclass";
 
 @Component({
   selector: 'my-modify-dog',
@@ -24,9 +25,12 @@ export class ModifyDogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /*this.route.params
+      .switchMap((params: Params) => this.dogService.getDog(params['id']))
+      .subscribe(dog => this.dog = dog);*/
     this.route.params
       .switchMap((params: Params) => this.dogService.getDog(params['id']))
-      .subscribe(dog => this.dog = dog);
+      .subscribe(dog => this.modifyDates(dog));
 
     this.myForm = this.fb.group({
       'nameFull': [''],
@@ -43,7 +47,7 @@ export class ModifyDogComponent implements OnInit {
     });
 
     //Update form values
-    this.route.params
+    /*this.route.params
       .switchMap((params: Params) => this.dogService.getDog(params['id']))
       .subscribe(dog =>
         this.myForm.patchValue({
@@ -59,11 +63,54 @@ export class ModifyDogComponent implements OnInit {
           dateRetired: dog.dateRetired,
           details: dog.details
         })
-      );
+      );*/
   }
 
   onSubmit(value: string): void {
     console.log(value);
+  }
+
+  modifyDates(dog: Dog) {
+    this.dog = dog;
+
+    this.myForm.patchValue({
+      nameFull: dog.nameFull,
+      nameNickname: dog.nameNickname,
+      breed: dog.breed,
+      registerNumber: dog.registerNumber,
+      status: dog.status,
+      details: dog.details
+    })
+
+    if(this.dog.dateBirth != null) {
+      this.myForm.patchValue({
+        dateBirth: UtilsClass.createDateToBrowser(this.dog.dateBirth.toString())
+      });
+    }
+
+    if(this.dog.dateQualification != null) {
+      this.myForm.patchValue({
+        dateQualification: UtilsClass.createDateToBrowser(this.dog.dateQualification.toString())
+      });
+    }
+
+    if(this.dog.dateGraduation != null) {
+      this.myForm.patchValue({
+        dateGraduation: UtilsClass.createDateToBrowser(this.dog.dateGraduation.toString())
+      });
+    }
+
+    if(this.dog.dateMedal != null) {
+      this.myForm.patchValue({
+        dateMedal: UtilsClass.createDateToBrowser(this.dog.dateMedal.toString())
+      });
+    }
+
+    if(this.dog.dateRetired != null) {
+      this.myForm.patchValue({
+        dateRetired: UtilsClass.createDateToBrowser(this.dog.dateRetired.toString())
+      });
+    }
   }
 
   /*onSubmit(value: string): void {
