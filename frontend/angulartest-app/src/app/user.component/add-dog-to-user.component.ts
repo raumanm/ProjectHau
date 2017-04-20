@@ -69,7 +69,8 @@ export class AddDogToUserComponent implements OnInit {
   }
 
   submitSelect(): void {
-    this.userService.
+    this.userService.addDog("userId:"+this.user._id+",dogId:"+this.selectedDog._id);
+    this.router.navigate(['/showUser', this.user._id]);
   }
 
 
