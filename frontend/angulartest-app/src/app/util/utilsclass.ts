@@ -4,6 +4,14 @@
 
 export class UtilsClass {
 
+  static createDateToBrowser(value: string): string {
+    let date = new Date(value);
+    let temp = date.getFullYear()+"-";
+    temp += ('0' + (date.getMonth()+1).toString().slice(-2))+"-";
+    temp += ('0' + date.getDay().toString().slice(-2));
+    return temp;
+  }
+
   static validatePairAmount(value: string): boolean {
     let re = new RegExp("^[1-9]{1}$");
     if (re.test(value)) {
