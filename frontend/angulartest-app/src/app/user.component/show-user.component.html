@@ -3,7 +3,6 @@
 <table>
 <!-- SUPER IMPORTANT IN ORDER TO AVOID NULLPOINTERS --->
 <div *ngIf="user">
-
   <tr>
     <th><label for="firstName">Etunimi:</label></th>
     <th><label for="lastName">Sukunimi:</label></th>
@@ -45,6 +44,18 @@
   </tr>
 
   <tr>
+    <th colspan="2"><label for="pairedDogs">Koirat:</label></th>
+  </tr>
+
+  <tr>
+    <th colspan="2" id="pairedDogs">
+    <ul>
+      <li *ngFor="let userPairedDog of user.pairedDogs">{{userPairedDog.nameNickname}}</li>
+    </ul>
+    </th>
+  </tr>
+
+  <tr>
     <th colspan="2"><label for="details">Lisätietoja:</label></th>
   </tr>
 
@@ -54,7 +65,7 @@
 
   <tr>
     <th colspan="2">
-      <button routerLink="/modifyUser/{{user._id}}">Muokkaa</button>
+      <button type="button" routerLink="/modifyUser/{{user._id}}">Muokkaa</button>
     </th>
   </tr>
 

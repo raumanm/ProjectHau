@@ -19,19 +19,26 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  modify(data: string): Promise<User> {
+    return this.http
+      .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
+
   getUsers(): Promise<User[]> {
     return this.http
       .get(this.getUrl).toPromise()
       .then(response => response.json() as User[])
       .catch(this.handleError);
   }
-  //TODO update fetch to get one user only.
   getUser(id: string): Promise<User> {
-    return this.getUsers()
-      .then(users => users.find(user => user._id === id));
+    return this.http
+      .get(this.getUrl+id).toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
   }
-
-  //TODO put method
 
     constructor(private http: Http) { }
 

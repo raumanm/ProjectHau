@@ -9,8 +9,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from './user.service';
 import { User } from '../classes/user';
 import { AppComponent } from '../app.component';
+import {UtilsClass} from "../util/utilsclass";
 
 @Component({
+  moduleId: module.id,
   selector: 'my-modify-user',
   templateUrl: './modify-user.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
@@ -19,15 +21,18 @@ export class ModifyUserComponent implements OnInit {
   user: User;
   myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     appComponent.titleText = "Muokkaa käyttäjää";
   }
 
   ngOnInit(): void {
+    //Fetch user
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.user = user);
 
+    //TODO add dogs to form
+    //Create form
     this.myForm = this.fb.group({
       'accessLevel': [''],
       'username': [''],
@@ -40,26 +45,32 @@ export class ModifyUserComponent implements OnInit {
       'details': ['']
     });
 
-    // TODO after the promise is fulfilled update the form values.
-    this.myForm.setValue({
-      'accessLevel': [''],
-      'username': [''],
-      'firstName': [''],
-      'lastName': [''],
-      'phone': [''],
-      'email': [''],
-      'memberNumber': [''],
-      'qualificationDate': [''],
-      'details': ['']
-    });
+    //Update form values
+    this.route.params
+      .switchMap((params: Params) => this.userService.getUser(params['id']))
+      .subscribe(user =>
+        this.myForm.patchValue({
+          accessLevel: user.accessLevel,
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          phone: user.phone,
+          email: user.email,
+          memberNumber: user.memberNumber,
+          qualificationDate: user.qualificationDate,
+          details: user.details
+        })
+      );
+  }
+
+  addDogToUser() : void {
+    console.log("addDog");
+    this.router.navigate(['/addDogToUser', this.user._id]);
   }
 
   onSubmit(value: string): void {
-    console.log(value);
-  }
-
-  /*onSubmit(value: string): void {
     let everythingOk = true;
+    value["_id"] = this.user._id;
 
     if(UtilsClass.validateDate(value["qualificationDate"])) {
       let temp = UtilsClass.createDate(value["qualificationDate"]);
@@ -113,11 +124,11 @@ export class ModifyUserComponent implements OnInit {
 
     if(everythingOk) {
       console.log(value);
-      //this.userService.create(value);
+      this.userService.create(value);
       alert("Käyttäjä lisätty onnistuneesti");
     }
 
-  }*/
+  }
 
 
 }
