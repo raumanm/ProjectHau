@@ -21,21 +21,21 @@ export class SearchVisitsComponent  {
 
   constructor(appComponent: AppComponent, private visitService: VisitService, private router: Router) {
 
-    appComponent.titleText = "Näytä käynnit";
+    appComponent.titleText = "Näytä kännit";
     this.visitService.getVisits().then(values=>this.addValues(values));
 
   }
 
   onSelect(visit: Visit): void {
     this.selectedVisit = visit;
-    this.router.navigate(['/showVisit', this.selectedVisit._id]);
+    this.router.navigate(['/showVisit', (this.selectedVisit.visitTime + this.selectedVisit.placeId)]);
   }
 
   private addValues(values: Visit[]) {
     this.visits = values;
 
     for (let i=0; i<values.length; i++) {
-      console.log("search-visits.component.ts: " + this.visits[i]._id);
+      console.log("search-visits.component.ts: " + (this.visits[i].visitTime + this.selectedVisit.placeId));
     }
   }
 }
