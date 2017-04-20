@@ -25,9 +25,6 @@ export class ModifyDogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*this.route.params
-      .switchMap((params: Params) => this.dogService.getDog(params['id']))
-      .subscribe(dog => this.dog = dog);*/
     this.route.params
       .switchMap((params: Params) => this.dogService.getDog(params['id']))
       .subscribe(dog => this.modifyDates(dog));
@@ -45,25 +42,6 @@ export class ModifyDogComponent implements OnInit {
       'dateRetired': [''],
       'details': ['']
     });
-
-    //Update form values
-    /*this.route.params
-      .switchMap((params: Params) => this.dogService.getDog(params['id']))
-      .subscribe(dog =>
-        this.myForm.patchValue({
-          nameFull: dog.nameFull,
-          nameNickname: dog.nameNickname,
-          dateBirth: dog.dateBirth,
-          breed: dog.breed,
-          registerNumber: dog.registerNumber,
-          status: dog.status,
-          dateQualification: dog.dateQualification,
-          dateGraduation: dog.dateGraduation,
-          dateMedal: dog.dateMedal,
-          dateRetired: dog.dateRetired,
-          details: dog.details
-        })
-      );*/
   }
 
   onSubmit(value: string): void {
