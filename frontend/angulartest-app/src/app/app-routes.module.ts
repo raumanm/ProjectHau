@@ -23,9 +23,11 @@ import { SearchVisitsComponent } from './visit.component/search-visits.component
 import { ShowDogComponent } from './dog.component/show-dog.component';
 import { ShowUserComponent } from './user.component/show-user.component';
 import { ShowPlaceComponent } from './place.component/show-place.component';
+import { ShowVisitComponent } from "./visit.component/show-visit.component";
 
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from './dog.component/modify-dog.component';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
@@ -50,6 +52,7 @@ export const routes: Routes = [
     { path: 'showDog/:id', component: ShowDogComponent },
     { path: 'showUser/:id', component: ShowUserComponent },
     { path: 'showPlace/:id', component: ShowPlaceComponent},
+    { path: 'showVisit/:id', component: ShowVisitComponent},
 
     { path : 'modifyUser/:id', component: ModifyUserComponent},
     { path : 'modifyDog/:id', component: ModifyDogComponent}
