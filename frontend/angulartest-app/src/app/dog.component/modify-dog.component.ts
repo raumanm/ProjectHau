@@ -2,14 +2,14 @@
  * Created by M1k1tus on 08-Apr-17.
  */
 
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { DogService } from './dog.service';
 import { Dog } from '../classes/dog';
 import { AppComponent } from '../app.component';
-import {UtilsClass} from "../util/utilsclass";
+import { UtilsClass } from "../util/utilsclass";
 
 @Component({
   selector: 'my-modify-dog',
@@ -178,6 +178,4 @@ export class ModifyDogComponent implements OnInit {
     }
 
   }
-
-
 }
