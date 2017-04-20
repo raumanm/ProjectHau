@@ -41,8 +41,6 @@ export class DogService {
       .catch(this.handleError);
   }
 
-  //TODO get just one dog from fetch
-
     constructor(private http: Http) {}
 
     private handleError(error: any): Promise<any> {
