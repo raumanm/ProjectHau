@@ -69,7 +69,7 @@ export class AddDogToUserComponent implements OnInit {
   }
 
   submitSelect(): void {
-
+    this.userService.
   }
 
 

@@ -19,14 +19,6 @@ export class DogService {
       .catch(this.handleError);
   }
 
-  addDog(data:string): Promise<Dog> {
-    return this.http
-      .post(this.getUrl, JSON.stringify(data), {headers: this.headers})
-      .toPromise()
-      .then(res => res.json().data)
-      .catch(this.handleError);
-  }
-
   getDogs(): Promise<Dog[]> {
     return this.http
       .get(this.getUrl).toPromise()
