@@ -18,6 +18,7 @@ import { AddVisitComponent } from './visit.component/add-visit.component';
 import { SearchDogsComponent } from './dog.component/search-dogs.component';
 import { SearchUsersComponent } from './user.component/search-users.component';
 import { SearchPlacesComponent } from './place.component/search-places.component';
+import { SearchVisitsComponent } from './visit.component/search-visits.component';
 
 import { ShowDogComponent } from './dog.component/show-dog.component';
 import { ShowUserComponent } from './user.component/show-user.component';
@@ -44,6 +45,7 @@ export const routes: Routes = [
     { path: 'searchDogs', component: SearchDogsComponent },
     { path: 'searchUsers', component: SearchUsersComponent },
     { path: 'searchPlaces', component: SearchPlacesComponent},
+    { path: 'searchVisits', component: SearchVisitsComponent},
 
     { path: 'showDog/:id', component: ShowDogComponent },
     { path: 'showUser/:id', component: ShowUserComponent },
