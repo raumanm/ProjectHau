@@ -20,7 +20,7 @@ export class ModifyDogComponent implements OnInit {
   dog: Dog;
   myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private dogService: DogService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private dogService: DogService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     appComponent.titleText = "Muokkaa koiraa";
   }
 
@@ -88,65 +88,96 @@ export class ModifyDogComponent implements OnInit {
   }
 
   onSubmit(value: string): void {
-   let everythingOk = true;
+    let everythingOk = true;
 
-   if(UtilsClass.validateDate(value["qualificationDate"])) {
-   let temp = UtilsClass.createDate(value["qualificationDate"]);
-   value["qualificationDate"] = temp;
-   } else {
-   alert("Virhe! Tarkista syötteesi kohdasta pätevöitymispäivämäärä");
-   everythingOk = false;
-   }
+    if(!UtilsClass.validateShortOpenField(value["nameFull"])) {
+      everythingOk = false;
+      alert("Virhe! Tarkista syötteesi kohdasta koko nimi");
+    }
 
-   if(UtilsClass.validateEmailStart(value["email"].substring(0,1))) {
+    if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
+      everythingOk = false;
+      alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+    }
 
-   if(UtilsClass.validateEmail(value["email"])) {
-   } else {
-   alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
-   everythingOk = false;
-   }
-   } else {
-   alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
-   everythingOk = false;
-   }
+    if(!UtilsClass.validateShortOpenField(value["breed"])) {
+      everythingOk = false;
+      alert("Virhe! Tarkista syötteesi kohdasta rotu");
+    }
 
-   if(!UtilsClass.validateShortOpenField(value["username"])) {
-   alert("Virhe! Tarkista syötteesi kohdasta käyttäjänimi");
-   everythingOk = false;
-   }
+    if(!UtilsClass.validateShortOpenField(value["registerNumber"])) {
+      everythingOk = false;
+      alert("Virhe! Tarkista syötteesi kohdasta rekisterinumero");
+    }
 
-   if(!UtilsClass.validateShortOpenField(value["firstName"])) {
-   alert("Virhe! Tarkista syötteesi kohdasta etunimi");
-   everythingOk = false;
-   }
+    if(!UtilsClass.validateShortOpenField(value["status"])) {
+      everythingOk = false;
+      alert("Virhe! Tarkista syötteesi kohdasta tila");
+    }
 
-   if(!UtilsClass.validateShortOpenField(value["lastName"])) {
-   alert("Virhe! Tarkista syötteesi kohdasta sukunimi");
-   everythingOk = false;
-   }
+    if(value["details"] != "") {
+      if(UtilsClass.validateLongOpenField(value["details"])) {
+      } else {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
+      }
+    }
 
-   if(!UtilsClass.validateShortOpenField(value["memberNumber"])) {
-   alert("Virhe! Tarkista syötteesi kohdasta jäsennumero");
-   everythingOk = false;
-   }
+    if(UtilsClass.validateDate(value["dateBirth"])) {
+      let temp = UtilsClass.createDate(value["dateBirth"]);
+      value["dateBirth"] = temp;
+    } else {
+      everythingOk = false;
+      alert("Virhe! Tarkista syötteesi kohdasta syntymäaika");
+    }
 
-   if(!UtilsClass.validateLongOpenField(value["details"])) {
-   alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
-   everythingOk = false;
-   }
+    if(value["dateQualification"] != "") {
+      if(UtilsClass.validateDate(value["dateQualification"])) {
+        let temp = UtilsClass.createDate(value["dateQualification"]);
+        value["dateQualification"] = temp;
+      } else {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta pätevöitymispäivämäärä");
+      }
+    }
 
-   if(!UtilsClass.validatePhoneNumber(value["phone"])) {
-   alert("Virhe! Tarkista syötteesi kohdasta puhelinnumero");
-   everythingOk = false;
-   }
+    if(value["dateGraduation"] != "") {
+      if(UtilsClass.validateDate(value["dateGraduation"])) {
+        let temp = UtilsClass.createDate(value["dateGraduation"]);
+        value["dateGraduation"] = temp;
+      } else {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta valmistumispäivämäärä");
+      }
+    }
 
-   if(everythingOk) {
-   console.log(value);
-   this.userService.create(value);
-   alert("Käyttäjä lisätty onnistuneesti");
-   }
+    if(value["dateMedal"] != "") {
+      if(UtilsClass.validateDate(value["dateMedal"])) {
+        let temp = UtilsClass.createDate(value["dateMedal"]);
+        value["dateMedal"] = temp;
+      } else {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta mitalinpäivämäärä");
+      }
+    }
 
-   }
+    if(value["dateRetired"] != "") {
+      if(UtilsClass.validateDate(value["dateRetired"])) {
+        let temp = UtilsClass.createDate(value["dateRetired"]);
+        value["dateRetired"] = temp;
+      } else {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta lopettamispäivämäärä");
+      }
+    }
+
+    if(everythingOk) {
+      console.log(value);
+      this.dogService.modify(value);
+      this.router.navigate(['/showDog', this.dog._id]);
+    }
+
+  }
 
 
 }
