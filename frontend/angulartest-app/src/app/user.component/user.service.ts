@@ -4,6 +4,7 @@ import { Headers, Http } from '@angular/http';
 import { User } from '../classes/user';
 
 import 'rxjs/add/operator/toPromise';
+import {Dog} from "../classes/dog";
 
 @Injectable()
 export class UserService {
@@ -12,6 +13,14 @@ export class UserService {
     private getUrl = 'http://konelandia.bounceme.net/users/';
 
   create(data: string): Promise<User> {
+    return this.http
+      .post(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
+
+  addDog(data:string): Promise<Dog> {
     return this.http
       .post(this.getUrl, JSON.stringify(data), {headers: this.headers})
       .toPromise()
