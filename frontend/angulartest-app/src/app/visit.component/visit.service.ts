@@ -23,6 +23,20 @@ export class VisitService {
       .catch(this.handleError);
   }
 
+  getVisits(): Promise<Visit[]> {
+    return this.http
+      .get(this.getUrl).toPromise()
+      .then(response => response.json() as Visit[])
+      .catch(this.handleError);
+  }
+
+  getVisit(id: string): Promise<Visit> {
+    return this.http
+      .get(this.getUrl+id).toPromise()
+      .then(response => response.json() as Visit)
+      .catch(this.handleError);
+  }
+
   constructor(private http: Http) { }
 
   private handleError(error: any): Promise<any> {
