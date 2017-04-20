@@ -7,8 +7,16 @@ export class UtilsClass {
   static createDateToBrowser(value: string): string {
     let date = new Date(value);
     let temp = date.getFullYear()+"-";
+    if(date.getMonth() < 9) {
     temp += ('0' + (date.getMonth()+1).toString().slice(-2))+"-";
-    temp += ('0' + date.getDay().toString().slice(-2));
+    } else {
+      temp += (date.getMonth()+1).toString()+"-";
+    }
+    if(date.getDay() < 9) {
+      temp += ('0' + date.getDay().toString().slice(-2));
+    } else {
+      temp += date.getDay().toString();
+    }
     return temp;
   }
 
