@@ -10,8 +10,7 @@ import { UserService } from './user.service';
 import { User } from '../classes/user';
 import { Dog } from '../classes/dog';
 import { AppComponent } from '../app.component';
-import {UtilsClass} from "../util/utilsclass";
-import {DogService} from "../dog.component/dog.service";
+import { DogService } from "../dog.component/dog.service";
 
 @Component({
   moduleId: module.id,
@@ -31,10 +30,6 @@ export class AddDogToUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //Fetch user
-    /*this.route.params
-      .switchMap((params: Params) => this.userService.getUser(params['id']))
-      .subscribe(user => this.user = user);*/
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.fetchDogs(user));
