@@ -71,6 +71,7 @@ export class AddVisitComponent {
 
     if(everythingOk) {
       console.log(value);
+      this.visitService.create(value);
       alert("Vierailu lisätty onnistuneesti");
     }
   }
