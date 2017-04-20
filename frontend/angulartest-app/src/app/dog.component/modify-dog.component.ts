@@ -44,10 +44,6 @@ export class ModifyDogComponent implements OnInit {
     });
   }
 
-  onSubmit(value: string): void {
-    console.log(value);
-  }
-
   modifyDates(dog: Dog) {
     this.dog = dog;
 
@@ -91,7 +87,7 @@ export class ModifyDogComponent implements OnInit {
     }
   }
 
-  /*onSubmit(value: string): void {
+  onSubmit(value: string): void {
    let everythingOk = true;
 
    if(UtilsClass.validateDate(value["qualificationDate"])) {
@@ -146,11 +142,11 @@ export class ModifyDogComponent implements OnInit {
 
    if(everythingOk) {
    console.log(value);
-   //this.userService.create(value);
+   this.userService.create(value);
    alert("Käyttäjä lisätty onnistuneesti");
    }
 
-   }*/
+   }
 
 
 }

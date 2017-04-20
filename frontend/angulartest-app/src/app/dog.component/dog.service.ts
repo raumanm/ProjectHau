@@ -40,8 +40,6 @@ export class DogService {
       .then(dogs => dogs.find(dog => dog._id === id));
   }
 
-  //TODO create put method
-
     constructor(private http: Http) {}
 
     private handleError(error: any): Promise<any> {
