@@ -1,0 +1,15 @@
+<div *ngIf="user">
+  <h1>{{user.firstName}}{{user.lastName}}</h1>
+  <div *ngIf="avaibleDogs">
+    <ul>
+      <li *ngFor="let dog of avaibleDogs" [class.selected]="dog === selectedDog"
+          (click)="onSelect(dog)">
+        <button>{{dog.nameFull}}</button>
+      </li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="selectedDog">
+  <p>Lisätään koira</p>
+  <button type="button" (click)="submitSelect()">{{selectedDog.nameFull}}</button>
+</div>
