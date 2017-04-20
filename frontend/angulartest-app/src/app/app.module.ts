@@ -22,6 +22,7 @@ import { AddVisitComponent } from './visit.component/add-visit.component';
 import { SearchDogsComponent } from'./dog.component/search-dogs.component';
 import { SearchUsersComponent } from './user.component/search-users.component';
 import { SearchPlacesComponent } from './place.component/search-places.component';
+import { SearchVisitsComponent } from './visit.component/search-visits.component';
 
 import { DogService } from './dog.component/dog.service';
 import { UserService } from './user.component/user.service';
@@ -54,6 +55,7 @@ import { ModifyDogComponent } from "./dog.component/modify-dog.component";
     SearchDogsComponent,
     SearchUsersComponent,
     SearchPlacesComponent,
+    SearchVisitsComponent,
 
     ShowDogComponent,
     ShowUserComponent,
