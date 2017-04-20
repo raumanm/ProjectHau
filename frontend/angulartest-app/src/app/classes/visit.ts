@@ -8,8 +8,7 @@ export class Visit {
     public placeId: string,
     public assignedPairId: string,
     public assignedPairStatus: string,
-    public details?: string,
-    public _id?: string
+    public details?: string
   ) {}
 
 
