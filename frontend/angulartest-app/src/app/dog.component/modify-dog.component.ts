@@ -42,7 +42,6 @@ export class ModifyDogComponent implements OnInit {
       'details': ['']
     });
 
-    // TODO after the promise is fulfilled update the form values.
     //Update form values
     this.route.params
       .switchMap((params: Params) => this.dogService.getDog(params['id']))
