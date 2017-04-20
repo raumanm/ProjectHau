@@ -43,19 +43,24 @@ export class ModifyDogComponent implements OnInit {
     });
 
     // TODO after the promise is fulfilled update the form values.
-    this.myForm.setValue({
-      'nameFull': [''],
-      'nameNickname': [''],
-      'dateBirth': [''],
-      'breed': [''],
-      'registerNumber': [''],
-      'status': [''],
-      'dateQualification': [''],
-      'dateGraduation': [''],
-      'dateMedal': [''],
-      'dateRetired': [''],
-      'details': ['']
-    });
+    //Update form values
+    this.route.params
+      .switchMap((params: Params) => this.dogService.getDog(params['id']))
+      .subscribe(dog =>
+        this.myForm.patchValue({
+          nameFull: dog.nameFull,
+          nameNickname: dog.nameNickname,
+          dateBirth: dog.dateBirth,
+          breed: dog.breed,
+          registerNumber: dog.registerNumber,
+          status: dog.status,
+          dateQualification: dog.dateQualification,
+          dateGraduation: dog.dateGraduation,
+          dateMedal: dog.dateMedal,
+          dateRetired: dog.dateRetired,
+          details: dog.details
+        })
+      );
   }
 
   onSubmit(value: string): void {
