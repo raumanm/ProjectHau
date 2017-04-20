@@ -79,7 +79,7 @@ export class UtilsClass {
   }
 
   static validateShortOpenField(value: string): boolean {
-    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€ ]{2,50}$");
+    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€' ]{2,50}$");
     if (re.test(value)) {
       return true;
     } else {
@@ -89,7 +89,7 @@ export class UtilsClass {
   }
 
   static validateLongOpenField(value: string): boolean {
-    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€\.\n\, ]{2,64000}$");
+    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€'\.\n\, ]{2,64000}$");
     if (re.test(value)) {
       return true;
     } else {
