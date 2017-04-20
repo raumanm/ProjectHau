@@ -23,7 +23,7 @@ export class AddDogToUserComponent implements OnInit {
   user: User;
   dogs: Dog[];
   selectedDog: Dog;
-  avaibleDogs: Dog[];
+  avaibleDogs: Dog[] = [];
   myForm: FormGroup;
 
   constructor(appComponent: AppComponent, private dogService: DogService, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
@@ -52,19 +52,17 @@ export class AddDogToUserComponent implements OnInit {
   compareDogs(dogs: Dog[]): void {
     this.dogs = dogs;
     for(let i = 0; i < dogs.length; i++) {
-      console.log(dogs[i]);
       for(let j = 0; j < this.user.pairedDogs.length; j++) {
-        console.log(this.user.pairedDogs[j]);
         if(dogs[i]._id != this.user.pairedDogs[j]._id) {
-          console.log("eri idt");
-          this.avaibleDogs[0] = this.dogs[i];
+          this.avaibleDogs.push(this.dogs[i]);
         }
       }
     }
   }
 
-  onSubmit(value: string): void {
-    console.log("works");
+  onSelect(selectedDog: Dog): void {
+    this.selectedDog = selectedDog;
+    console.log(this.selectedDog);
 
   }
 
