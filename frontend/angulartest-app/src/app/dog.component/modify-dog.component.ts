@@ -82,31 +82,31 @@ export class ModifyDogComponent implements OnInit {
       details: dog.details
     })
 
-    if(this.dog.dateBirth != null) {
+    if(this.dog.dateBirth != null && this.dog.dateBirth.toString() != "") {
       this.myForm.patchValue({
         dateBirth: UtilsClass.createDateToBrowser(this.dog.dateBirth.toString())
       });
     }
 
-    if(this.dog.dateQualification != null) {
+    if(this.dog.dateQualification != null && this.dog.dateQualification.toString() != "") {
       this.myForm.patchValue({
         dateQualification: UtilsClass.createDateToBrowser(this.dog.dateQualification.toString())
       });
     }
 
-    if(this.dog.dateGraduation != null) {
+    if(this.dog.dateGraduation != null && this.dog.dateGraduation.toString() != "") {
       this.myForm.patchValue({
         dateGraduation: UtilsClass.createDateToBrowser(this.dog.dateGraduation.toString())
       });
     }
 
-    if(this.dog.dateMedal != null) {
+    if(this.dog.dateMedal != null && this.dog.dateMedal.toString() != "") {
       this.myForm.patchValue({
         dateMedal: UtilsClass.createDateToBrowser(this.dog.dateMedal.toString())
       });
     }
 
-    if(this.dog.dateRetired != null) {
+    if(this.dog.dateRetired != null && this.dog.dateRetired.toString() != "") {
       this.myForm.patchValue({
         dateRetired: UtilsClass.createDateToBrowser(this.dog.dateRetired.toString())
       });
