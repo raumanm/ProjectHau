@@ -19,11 +19,9 @@ import { User } from "../classes/user";
 })
 export class ShowPlaceComponent implements OnInit {
   place: Place;
-  overseer: User;
 
   constructor(appComponent: AppComponent, private placeService: PlaceService, private route: ActivatedRoute, private userService: UserService) {
     appComponent.titleText = "Näytä kohde";
-    console.log(this.place);
   }
 
   ngOnInit(): void {
