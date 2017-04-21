@@ -43,6 +43,7 @@ export class ModifyPlaceComponent implements OnInit {
       'details': ['']
     });
 
+    // Update form values
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place =>
