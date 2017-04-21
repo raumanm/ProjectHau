@@ -10,8 +10,8 @@
       </tr>
 
       <tr>
-        <th><p id="name">{{place.name}}</p></th>
-        <th><p id="addressStreet">{{place.addressStreet}}</p></th>
+        <td><p id="name">{{place.name}}</p></td>
+        <td><p id="addressStreet">{{place.addressStreet}}</p></td>
       </tr>
 
       <tr>
@@ -20,8 +20,8 @@
       </tr>
 
       <tr>
-        <th><p id="addressCode">{{place.addressCode}}</p></th>
-        <th><p id="addressCity">{{place.addressCity}}</p></th>
+        <td><p id="addressCode">{{place.addressCode}}</p></td>
+        <td><p id="addressCity">{{place.addressCity}}</p></td>
       </tr>
 
       <tr>
@@ -30,8 +30,8 @@
       </tr>
 
       <tr>
-        <th><p id="visitationInterval">{{place.visitationInterval}}</p></th>
-        <th><p id="pairAmount">{{place.pairAmount}}</p></th>
+        <td><p id="visitationInterval">{{place.visitationInterval}}</p></td>
+        <td><p id="pairAmount">{{place.pairAmount}}</p></td>
       </tr>
 
       <tr>
@@ -40,7 +40,7 @@
 
       <tr>
         <!-- <th colspan="2"><p id="overseerId">{{place.overseer.firstName}}{{place.overseer.lastName}}</p></th> -->
-        <th colspan="2"><p id="overseerId">NotWorking</p></th>
+        <td colspan="2"><p id="overseerId">NotWorking</p></td>
       </tr>
 
       <tr>
@@ -48,13 +48,11 @@
       </tr>
 
       <tr>
-        <th colspan="2"><p id="details">{{place.details}}</p></th>
+        <td colspan="2"><p id="details">{{place.details}}</p></td>
       </tr>
 
       <tr>
-        <th colspan="2">
-          <button type="button" routerLink="/modifyPlace/{{place._id}}">Muokkaa</button>
-        </th>
+          <button type="button" class="bottomButt" routerLink="/modifyPlace/{{place._id}}">Muokkaa</button>
       </tr>
     </div>
   </table>
