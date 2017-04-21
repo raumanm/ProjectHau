@@ -68,7 +68,6 @@ export class ModifyUserComponent implements OnInit {
   }
 
   addDogToUser() : void {
-    console.log("addDog");
     this.router.navigate(['/addDogToUser', this.user._id]);
   }
 
@@ -127,7 +126,6 @@ export class ModifyUserComponent implements OnInit {
     }
 
     if(everythingOk) {
-      console.log(value);
       this.userService.create(value);
       alert("Käyttäjä lisätty onnistuneesti");
     }
