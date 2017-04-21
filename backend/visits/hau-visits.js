@@ -43,16 +43,30 @@
         });
 
     function postNew(visit, callback) {
-        visit = validator.pruneExcessive(visit);
+        var pruned = validator.pruneExcessive(visit),
+            place;
 
-        if (!validator.validateRequired(visit) || !validator.validateOptionals()) {
+        if (!validator.validateRequired(pruned) || !validator.validateOptionals(pruned)) {
             callback(hauResponse.createBadRequestResponse());
         } else {
-            hauDB.db.collection('visits').insertOne(visit, (err, result) => {
+            hauDB.db.collection('places').find({'_id': safeObjectId(pruned.placeId) },{'name':1}).toArray((err, places) => {
                 if (err) {
                     callback(hauResponse.createErrorResponse(err));
+                }
+                if(places === undefined || places === null || places.length === 0) {
+                    console.log(places);
+                    callback(hauResponse.createNotFoundResponse(pruned.placeId));
                 } else {
-                    callback(hauResponse.createOkResponse(result));
+                    place = places.pop();
+                    pruned.placeName = place.name;
+                    hauDB.db.collection('visits').insertOne(pruned, (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            callback(hauResponse.createErrorResponse(err));
+                        } else {
+                            callback(hauResponse.createOkResponse(result));
+                        }
+                    });
                 }
             });
         }
