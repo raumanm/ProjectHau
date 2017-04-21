@@ -28,7 +28,8 @@ export class SearchVisitsComponent  {
 
   onSelect(visit: Visit): void {
     this.selectedVisit = visit;
-    this.router.navigate(['/showPlace', this.selectedVisit._id]);
+    console.log(this.selectedVisit);
+    //this.router.navigate(['/showPlace', this.selectedVisit._id]);
   }
 
   private addValues(values: Visit[]) {
