@@ -45,9 +45,7 @@ export class AddVisitComponent implements OnInit {
   }
 
   addValues(values: Pair[]): void {
-    console.log(values);
     this.pairs = values;
-    console.log(this.pairs);
   }
 
   onSubmit(value: string): void {
