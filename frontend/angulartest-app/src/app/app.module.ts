@@ -37,6 +37,7 @@ import { ShowVisitComponent } from './visit.component/show-visit.component';
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from "./dog.component/modify-dog.component";
 import { ModifyPlaceComponent } from './place.component/modify-place.component';
+import { ModifyVisitComponent } from './visit.component/modify-visit.component';
 
 import { AddDogToUserComponent } from './user.component/add-dog-to-user.component';
 
@@ -69,6 +70,7 @@ import { AddDogToUserComponent } from './user.component/add-dog-to-user.componen
     ModifyUserComponent,
     ModifyDogComponent,
     ModifyPlaceComponent,
+    ModifyVisitComponent,
 
     AddDogToUserComponent
   ],
