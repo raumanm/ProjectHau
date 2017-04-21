@@ -1,8 +1,9 @@
 /*jslint node:true */
 (function () {
     "use strict";
-    let express, app, hauMongo, bodyParser,
-        hauDogs, hauUsers, hauPairs, hauPlaces, hauVisits;
+    let express, app, hauMongo, bodyParser, authentication,
+        hauDogs, hauUsers, hauPairs, hauPlaces, hauVisits,
+        hauResponse;
 
     function logger(req, res, next) {
         console.log(new Date(), req.ip, req.method, req.url);
@@ -12,30 +13,70 @@
     express = require('express');
     bodyParser = require('body-parser');
 	hauMongo = require('./hau-db');
-	hauDogs = require('./dogs/hau-dogs');
-	hauUsers = require('./users/hau-users');
-	hauPairs = require('./pairs/hau-pairs');
+    hauResponse = require('./hau-response');
+
+    //Authentication resource
+    authentication = require('./authentication/authenticate-user');
+	
+    //Rest resources
+    hauDogs =   require('./dogs/hau-dogs');
+	hauUsers =  require('./users/hau-users');
+	hauPairs =  require('./pairs/hau-pairs');
 	hauPlaces = require('./places/hau-places');
 	hauVisits = require('./visits/hau-visits');
 
+    //Set up application
     app = express();
-
+    app.set('authenticationSecret', require('./authentication/authentication-config').secret);
     app.use( bodyParser.json() );
     app.set('json spaces', 2);
     app.enable('trust proxy');
     app.use(logger);
+    app.use(authentication); //Set authentication route to app
 
-    app.use(hauDogs);
-    app.use(hauUsers);
-    app.use(hauPairs);
-    app.use(hauPlaces);
-    app.use(hauVisits);
+    //JsonWebToken used for user authentication
+    var jsonWebToken = require('jsonwebtoken');
+    var apiRoute = express.Router();
+
+    //Verify that user is logged in correctly
+    app.use((req, res, next)=> {
+        
+        //Require authentication token from requests body or query
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        
+        if(token) {
+            jsonWebToken.verify(token, app.get('authenticationSecret'), (err, user)=> {
+                if(err) {
+                    res.json(hauResponse.createUnauthorizedResponse());
+                } else {
+                    /*
+                    Add user id and access level to reuest so
+                    users gredentials can be defined and right
+                    data can be fetched.
+                    */
+                    req.userData = {
+                        _id: user._id,
+                        accessLevel: user.accessLevel
+                    };
+                    res.token = token;
+                    next();
+                }
+            });
+        } else {
+            res.json(hauResponse.createUnauthorizedResponse());
+        }
+    });
+
+    //Set Rest resources under apiRoute
+    apiRoute.use(hauDogs);
+    apiRoute.use(hauUsers);
+    apiRoute.use(hauPairs);
+    apiRoute.use(hauPlaces);
+    apiRoute.use(hauVisits);
+    app.use(apiRoute);
 
 	hauMongo.init(function (err) {
 		if (err) throw err;
-
 		app.listen(8080);
 	});
-
-
 }());
