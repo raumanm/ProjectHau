@@ -8,6 +8,7 @@ import { Headers, Http } from '@angular/http';
 import { Visit } from '../classes/visit';
 
 import 'rxjs/add/operator/toPromise';
+import {Pair} from "../classes/pair";
 
 @Injectable()
 export class VisitService {
@@ -20,6 +21,13 @@ export class VisitService {
       .post(this.getUrl, JSON.stringify(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
+      .catch(this.handleError);
+  }
+
+  getPairs(): Promise<Pair[]> {
+    return this.http
+      .get(this.getUrl).toPromise()
+      .then(response => response.json() as Pair[])
       .catch(this.handleError);
   }
 
