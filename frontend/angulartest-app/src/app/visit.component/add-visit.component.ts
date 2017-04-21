@@ -13,6 +13,7 @@ import { Place } from '../classes/place';
 import { PlaceService } from '../place.component/place.service';
 
 import { AppComponent } from '../app.component';
+import {Pair} from "../classes/pair";
 
 @Component({
   moduleId: module.id,
@@ -23,6 +24,7 @@ import { AppComponent } from '../app.component';
 export class AddVisitComponent implements OnInit {
   myForm: FormGroup;
   places: Place[];
+  pairs: Pair[];
 
   constructor(appComponent: AppComponent, fb: FormBuilder, private visitService: VisitService, private placeService: PlaceService) {
 
@@ -39,6 +41,13 @@ export class AddVisitComponent implements OnInit {
 
   ngOnInit(): void {
     this.placeService.getPlaces().then(places=>this.places = places);
+    this.visitService.getPairs().then(pairs=> this.addValues(pairs));
+  }
+
+  addValues(values: Pair[]): void {
+    console.log(values);
+    this.pairs = values;
+    console.log(this.pairs);
   }
 
   onSubmit(value: string): void {
