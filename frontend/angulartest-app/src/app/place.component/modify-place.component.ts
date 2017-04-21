@@ -4,6 +4,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { UserService } from '../user.component/user.service';
 import { PlaceService } from './place.service';
@@ -19,14 +20,28 @@ import { User } from "../classes/user";
 })
 export class ModifyPlaceComponent implements OnInit {
   place: Place;
+  myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private placeService: PlaceService, private route: ActivatedRoute, private userService: UserService) {
+  constructor(appComponent: AppComponent, private placeService: PlaceService, private route: ActivatedRoute, private userService: UserService, private fb: FormBuilder) {
     appComponent.titleText = "Muokkaa kohdetta";
   }
 
   ngOnInit(): void {
+    // Fetch place
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place => this.place = place);
+
+    //Create form
+    this.myForm = this.fb.group({
+      'name': [''],
+      'addressStreet': [''],
+      'addressCode': [''],
+      'addressCity': [''],
+      'visitationInterval': [''],
+      'pairAmount': [''],
+      'overseerId': [''],
+      'details': ['']
+    });
   }
 }
