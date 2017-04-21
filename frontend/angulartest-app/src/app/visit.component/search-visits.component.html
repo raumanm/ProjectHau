@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let visit of visits" [class.selected]="visit === selectedVisit"
+      (click)="onSelect(visit)">
+    <button>{{visit.placeId}}</button>
+  </li>
+</ul>
