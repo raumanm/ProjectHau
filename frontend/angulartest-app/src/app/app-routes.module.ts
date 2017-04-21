@@ -25,6 +25,7 @@ import { ShowPlaceComponent } from './place.component/show-place.component';
 
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from './dog.component/modify-dog.component';
+import { ModifyPlaceComponent } from './place.component/modify-place.component';
 
 import { AddDogToUserComponent } from './user.component/add-dog-to-user.component';
 
@@ -51,8 +52,9 @@ export const routes: Routes = [
     { path: 'showUser/:id', component: ShowUserComponent },
     { path: 'showPlace/:id', component: ShowPlaceComponent},
 
-    { path : 'modifyUser/:id', component: ModifyUserComponent},
-    { path : 'modifyDog/:id', component: ModifyDogComponent},
+    { path : 'modifyUser/:id', component: ModifyUserComponent },
+    { path : 'modifyDog/:id', component: ModifyDogComponent },
+    { path: 'modifyPlace/:id', component: ModifyPlaceComponent },
 
     { path: 'addDogToUser/:id', component: AddDogToUserComponent }
 ];

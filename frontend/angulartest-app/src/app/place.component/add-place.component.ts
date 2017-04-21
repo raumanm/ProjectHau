@@ -85,7 +85,6 @@ export class AddPlaceComponent implements OnInit {
     if(everythingOk) {
       this.placeService.create(value);
       alert("Kohde lisätty onnistuneesti");
-      console.log(value);
     }
   }
 }
