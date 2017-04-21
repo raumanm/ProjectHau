@@ -40,8 +40,21 @@ export class ModifyPlaceComponent implements OnInit {
       'addressCity': [''],
       'visitationInterval': [''],
       'pairAmount': [''],
-      'overseerId': [''],
       'details': ['']
     });
+
+    this.route.params
+      .switchMap((params: Params) => this.placeService.getPlace(params['id']))
+      .subscribe(place =>
+        this.myForm.patchValue({
+          name: place.name,
+          addressStreet: place.addressStreet,
+          addressCode: place.addressCode,
+          addressCity: place.addressCity,
+          visitationInterval: place.visitationInterval,
+          pairAmount: place.pairAmount,
+          details: place.details
+        })
+      );
   }
 }
