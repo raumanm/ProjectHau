@@ -7,7 +7,7 @@
         return toCheck.hasOwnProperty("visitTime")
             && toCheck.hasOwnProperty("placeId")
             && typeof toCheck["placeId"] === "string"
-            && Object.prototype.toString.call(toCheck["visitTime"]) !== '[object Date]'
+            && Object.prototype.toString.call(toCheck["visitTime"]) === '[object Date]'
             && objectIdRe.test(toCheck["placeId"]);
     }
 
@@ -15,13 +15,14 @@
 
         if (toCheck.hasOwnProperty('assignedPairs') && typeof toCheck.assignedPairs !== "object") {
             return false;
-        } else if (toCheck.hasOwnProperty('assignedPairs') && Array.isArray(toCheck.assignedPairs) && toCheck.assignedPairs.length > 0) {
-
+        } else if (toCheck.hasOwnProperty('assignedPairs')) {
+            if (!Array.isArray(toCheck.assignedPairs)) {
+                return false;
+            }
             for (let obj of toCheck.assignedPairs) {
-
                 if (Object.keys(obj).length !== 2 || !obj.hasOwnProperty('pairId') || !obj.hasOwnProperty('status')) {
                     return false;
-                } else if ( objectIdRe.test(obj['pairId']) || typeof obj['status'] !== 'string') {
+                } else if ( !objectIdRe.test(obj['pairId']) || typeof obj['status'] !== 'string') {
                     return false;
                 }
             }
@@ -30,7 +31,7 @@
         if (toCheck.hasOwnProperty('details') && typeof toCheck.details !== "string") {
             return false;
         }
-
+        
         return true;
     }
 
