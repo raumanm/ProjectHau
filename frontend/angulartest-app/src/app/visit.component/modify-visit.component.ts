@@ -1,13 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+/**
+ * Created by M1k1tus on 08-Apr-17.
+ */
+
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { VisitService } from './visit.service';
 import { Visit } from '../classes/visit';
 import { AppComponent } from '../app.component';
+import { UtilsClass } from "../util/utilsclass";
+import {Pair} from "../classes/pair";
 
 @Component({
-  moduleId: module.id,
   selector: 'my-modify-visit',
   templateUrl: './modify-visit.component.html',
   styleUrls: ['../stylesheets/formstyle.css']
@@ -15,85 +20,76 @@ import { AppComponent } from '../app.component';
 export class ModifyVisitComponent implements OnInit {
   visit: Visit;
   myForm: FormGroup;
+  pairs: Pair[];
 
-  constructor(appComponent: AppComponent, private visitService: VisitService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private visitService: VisitService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     appComponent.titleText = "Muokkaa käyntiä";
   }
 
   ngOnInit(): void {
-    //Fetch visit
     this.route.params
-      .switchMap((params: Params) => this.visitService.getVisit(params[('visitTime' + 'placeId')]))
-      .subscribe(visit => this.visit = visit);
+      .switchMap((params: Params) => this.visitService.getVisit(params['id']))
+      .subscribe(visit => this.modifyDates(visit));
+    this.visitService.getPairs().then(pairs=> this.addValues(pairs));
 
-    //Create form
     this.myForm = this.fb.group({
       'visitTime': [''],
-      'place': [''],
-      'assignedPair': [''],
+      'placeName': [''],
+      'assignedPairId': [''],
       'assignedPairStatus': [''],
       'details': ['']
     });
+  }
 
-    //Update form values
-    this.route.params
-      .switchMap((params: Params) => this.visitService.getVisit(params[('visitTime' + 'placeId')]))
-      .subscribe(visit =>
-        this.myForm.patchValue({
-          visitTime: visit.visitTime,
-          place: visit.placeId,
-          assignedPair: visit.assignedPairId,
-          assignedPairStatus: visit.assignedPairStatus,
-          details: visit.details
-        })
-      );
+  addValues(values: Pair[]): void {
+    this.pairs = values;
+  }
+
+  modifyDates(visit: Visit) {
+    this.visit = visit;
+
+    this.myForm.patchValue({
+      placeName: visit.placeName,
+      assignedPairId: visit.assignedPairId,
+      assignedPairStatus: visit.assignedPairStatus,
+      details: visit.details
+    });
+
+    if(this.visit.visitTime != null && this.visit.visitTime.toString() != "") {
+      this.myForm.patchValue({
+        visitTime: UtilsClass.createDateToBrowser(this.visit.visitTime.toString())
+      });
+    }
   }
 
   onSubmit(value: string): void {
-    value['visitTime'] = this.visit.visitTime;
-    console.log(value);
-  }
-
-  /*onSubmit(value: string): void {
     let everythingOk = true;
 
-    if(UtilsClass.validateDate(value["qualificationDate"])) {
-      let temp = UtilsClass.createDate(value["qualificationDate"]);
-      value["qualificationDate"] = temp;
-    } else {
-      alert("Virhe! Tarkista syötteesi kohdasta pätevöitymispäivämäärä");
-      everythingOk = false;
-    }
-
-    if(UtilsClass.validateEmailStart(value["email"].substring(0,1))) {
-
-      if(UtilsClass.validateEmail(value["email"])) {
+    if(value["visitTime"] != "") {
+      if(UtilsClass.validateDate(value["visitTime"])) {
+        let temp = UtilsClass.createDate(value["visitTime"]);
+        value["visitTime"] = temp;
       } else {
-        alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
+        alert("Virhe! Tarkista syötteesi kohdasta vierailuaika");
         everythingOk = false;
       }
     } else {
-      alert("Virhe! Tarkista syötteesi kohdasta sähköposti");
+      alert("Virhe! Tarkista syötteesi kohdasta vierailuaika");
       everythingOk = false;
     }
 
-    if(!UtilsClass.validateShortOpenField(value["username"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta käyttäjänimi");
+    if(!UtilsClass.validateShortOpenField(value["placeName"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta kohteen nimi");
       everythingOk = false;
     }
 
-    if(!UtilsClass.validateShortOpenField(value["firstName"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta etunimi");
+    if(!UtilsClass.validateShortOpenField(value["assignedPairId"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta koirakko");
       everythingOk = false;
     }
 
-    if(!UtilsClass.validateShortOpenField(value["lastName"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta sukunimi");
-      everythingOk = false;
-    }
-
-    if(!UtilsClass.validateShortOpenField(value["memberNumber"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta jäsennumero");
+    if(!UtilsClass.validateShortOpenField(value["assignedPairStatus"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta koirakon tila");
       everythingOk = false;
     }
 
@@ -102,18 +98,10 @@ export class ModifyVisitComponent implements OnInit {
       everythingOk = false;
     }
 
-    if(!UtilsClass.validatePhoneNumber(value["phone"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta puhelinnumero");
-      everythingOk = false;
-    }
-
     if(everythingOk) {
       console.log(value);
-      //this.userService.create(value);
-      alert("Käyttäjä lisätty onnistuneesti");
+      this.visitService.modify(value);
+      this.router.navigate(['/showVisit', this.visit._id]);
     }
-
-  }*/
-
-
+  }
 }
