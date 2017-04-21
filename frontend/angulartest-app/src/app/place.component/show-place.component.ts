@@ -28,7 +28,5 @@ export class ShowPlaceComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place => this.place = place);
-    console.log(this.place);
-    //TODO fetch user after place is succesfully fecthed
   }
 }
