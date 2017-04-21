@@ -33,9 +33,5 @@ export class SearchUsersComponent  {
 
   private addValues(values: User[]) {
     this.users = values;
-
-    for (let i=0; i<values.length; i++) {
-      console.log("search-users.component.ts: " + this.users[i]._id);
-    }
   }
 }
