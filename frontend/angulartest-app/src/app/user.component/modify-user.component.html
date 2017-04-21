@@ -5,13 +5,13 @@
       <th><label for="username">K&#228;ytt&#228;j&#228;nimi:</label></th>
     </tr>
     <tr>
-      <th><select id ="accessLevel" name="accessLevel" required [formControl]="myForm.controls['accessLevel']">
+      <td><select id ="accessLevel" name="accessLevel" required [formControl]="myForm.controls['accessLevel']">
         <option value="1">Perusk&#228;ytt&#228;j&#228;</option>
         <option value="2">Kohdevastaava</option>
         <option value="3">Admin</option>
       </select>
-      </th>
-      <th><input type="text" id="username" required [formControl]="myForm.controls['username']"></th>
+      </td>
+      <td><input type="text" id="username" required [formControl]="myForm.controls['username']"></td>
     </tr>
 
     <tr>
@@ -19,8 +19,8 @@
       <th><label for="lastName">Sukunimi:</label></th>
     </tr>
     <tr>
-      <th><input type="text" id="firstName" required [formControl]="myForm.controls['firstName']"></th>
-      <th><input type="text" id="lastName" required [formControl]="myForm.controls['lastName']"></th>
+      <td><input type="text" id="firstName" required [formControl]="myForm.controls['firstName']"></td>
+      <td><input type="text" id="lastName" required [formControl]="myForm.controls['lastName']"></td>
     </tr>
 
     <tr>
@@ -28,8 +28,8 @@
       <th><label for="email">S&#228;hk&#246;posti:</label></th>
     </tr>
     <tr>
-      <th><input type="text" id="phone" required [formControl]="myForm.controls['phone']"></th>
-      <th><input type="text" id="email" required [formControl]="myForm.controls['email']"></th>
+      <td><input type="text" id="phone" required [formControl]="myForm.controls['phone']"></td>
+      <td><input type="text" id="email" required [formControl]="myForm.controls['email']"></td>
     </tr>
 
     <tr>
@@ -37,22 +37,22 @@
       <th><label for="memberNumber">Jäsennumero:</label></th>
     </tr>
     <tr>
-      <th><input type="date" data-date-inline-picker="true" id="qualificationDate" [formControl]="myForm.controls['qualificationDate']"></th>
-      <th><input type="text" id="memberNumber" required [formControl]="myForm.controls['memberNumber']"></th>
+      <td><input type="date" data-date-inline-picker="true" id="qualificationDate" [formControl]="myForm.controls['qualificationDate']"></td>
+      <td><input type="text" id="memberNumber" required [formControl]="myForm.controls['memberNumber']"></td>
     </tr>
 
     <tr>
       <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
     </tr>
     <tr>
-      <th colspan="2"><textarea id="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></th>
+      <td colspan="2"><textarea id="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></td>
     </tr>
     <tr>
-      <th colspan="2"><button type="submit">Lis&#228;&#228;</button></th>
+      <th colspan="2" style="border: none"><button type="submit">Lis&#228;&#228;</button></th>
     </tr>
     <tr>
       <th colspan="2">
-        <button type="button" (click)="addDogToUser()">Lisää koira käyttäjälle</button>
+        <button type="button" style="border: none" (click)="addDogToUser()">Lisää koira käyttäjälle</button>
       </th>
     </tr>
   </table>
