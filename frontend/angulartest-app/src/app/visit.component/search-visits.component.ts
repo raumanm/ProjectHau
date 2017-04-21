@@ -1,5 +1,5 @@
 /**
- * Created by M1k1tus on 02-Apr-17.
+ * Created by M1k1tus on 08-Apr-17.
  */
 
 import { Component } from '@angular/core';
@@ -21,21 +21,17 @@ export class SearchVisitsComponent  {
 
   constructor(appComponent: AppComponent, private visitService: VisitService, private router: Router) {
 
-    appComponent.titleText = "Näytä kännit";
+    appComponent.titleText = "Näytä käynnit";
     this.visitService.getVisits().then(values=>this.addValues(values));
 
   }
 
   onSelect(visit: Visit): void {
     this.selectedVisit = visit;
-    this.router.navigate(['/showVisit', (this.selectedVisit.visitTime + this.selectedVisit.placeId)]);
+    this.router.navigate(['/showPlace', this.selectedVisit._id]);
   }
 
   private addValues(values: Visit[]) {
     this.visits = values;
-
-    for (let i=0; i<values.length; i++) {
-      console.log("search-visits.component.ts: " + (this.visits[i].visitTime + this.selectedVisit.placeId));
-    }
   }
 }
