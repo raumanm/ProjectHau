@@ -27,6 +27,9 @@ import { ShowVisitComponent } from "./visit.component/show-visit.component";
 
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from './dog.component/modify-dog.component';
+import { ModifyPlaceComponent } from './place.component/modify-place.component';
+
+import { AddDogToUserComponent } from './user.component/add-dog-to-user.component';
 
 
 export const routes: Routes = [
@@ -54,8 +57,11 @@ export const routes: Routes = [
     { path: 'showPlace/:id', component: ShowPlaceComponent},
     { path: 'showVisit/:id', component: ShowVisitComponent},
 
-    { path : 'modifyUser/:id', component: ModifyUserComponent},
-    { path : 'modifyDog/:id', component: ModifyDogComponent}
+    { path : 'modifyUser/:id', component: ModifyUserComponent },
+    { path : 'modifyDog/:id', component: ModifyDogComponent },
+    { path: 'modifyPlace/:id', component: ModifyPlaceComponent },
+
+    { path: 'addDogToUser/:id', component: AddDogToUserComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

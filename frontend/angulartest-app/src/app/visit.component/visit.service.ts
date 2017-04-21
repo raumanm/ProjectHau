@@ -8,12 +8,14 @@ import { Headers, Http } from '@angular/http';
 import { Visit } from '../classes/visit';
 
 import 'rxjs/add/operator/toPromise';
+import {Pair} from "../classes/pair";
 
 @Injectable()
 export class VisitService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private getUrl = 'http://konelandia.bounceme.net/visits/';
+  private getPairsUrl = 'http://konelandia.bounceme.net/pairs/';
 
   create(data: string): Promise<Visit> {
     return this.http
@@ -34,6 +36,13 @@ export class VisitService {
     return this.http
       .get(this.getUrl+id).toPromise()
       .then(response => response.json() as Visit)
+      .catch(this.handleError);
+  }
+  
+  getPairs(): Promise<Pair[]> {
+    return this.http
+      .get(this.getPairsUrl).toPromise()
+      .then(response => response.json() as Pair[])
       .catch(this.handleError);
   }
 

@@ -26,13 +26,20 @@ export class PlaceService {
       .catch(this.handleError);
   }
 
-  //TODO fetch one place from DB
   getPlace(id: string): Promise<Place> {
-    return this.getPlaces()
-      .then(places => places.find(place => place._id === id));
+    return this.http
+      .get(this.getUrl+id).toPromise()
+      .then(response => response.json() as Place)
+      .catch(this.handleError);
   }
 
-  //TODO put method
+  modify(data: string): Promise<Place> {
+    return this.http
+      .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
 
     constructor(private http: Http) { }
 

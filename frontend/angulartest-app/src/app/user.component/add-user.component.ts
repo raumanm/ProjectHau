@@ -87,7 +87,6 @@ export class AddUserComponent  {
         }
 
         if(everythingOk) {
-          console.log(value);
           this.userService.create(value);
           alert("Käyttäjä lisätty onnistuneesti");
         }

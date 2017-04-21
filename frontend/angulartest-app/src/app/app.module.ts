@@ -36,6 +36,9 @@ import { ShowVisitComponent } from './visit.component/show-visit.component';
 
 import { ModifyUserComponent } from './user.component/modify-user.component';
 import { ModifyDogComponent } from "./dog.component/modify-dog.component";
+import { ModifyPlaceComponent } from './place.component/modify-place.component';
+
+import { AddDogToUserComponent } from './user.component/add-dog-to-user.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,10 @@ import { ModifyDogComponent } from "./dog.component/modify-dog.component";
     ShowVisitComponent,
 
     ModifyUserComponent,
-    ModifyDogComponent
+    ModifyDogComponent,
+    ModifyPlaceComponent,
+
+    AddDogToUserComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from './user.service';
 import { User } from '../classes/user';
 import { AppComponent } from '../app.component';
+import {UtilsClass} from "../util/utilsclass";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ export class ModifyUserComponent implements OnInit {
   user: User;
   myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     appComponent.titleText = "Muokkaa käyttäjää";
   }
 
@@ -28,9 +29,8 @@ export class ModifyUserComponent implements OnInit {
     //Fetch user
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
-      .subscribe(user => this.user = user);
+      .subscribe(user => this.updateFormValues(user));
 
-    //TODO add dogs to form
     //Create form
     this.myForm = this.fb.group({
       'accessLevel': [''],
@@ -43,6 +43,11 @@ export class ModifyUserComponent implements OnInit {
       'qualificationDate': [''],
       'details': ['']
     });
+  }
+
+  updateFormValues(user: User) : void {
+    //Save user
+    this.user = user;
 
     //Update form values
     this.route.params
@@ -56,19 +61,24 @@ export class ModifyUserComponent implements OnInit {
           phone: user.phone,
           email: user.email,
           memberNumber: user.memberNumber,
-          qualificationDate: user.qualificationDate,
           details: user.details
         })
       );
+
+    if(this.user.qualificationDate != null && this.user.qualificationDate.toString() != "") {
+      this.myForm.patchValue({
+        qualificationDate: UtilsClass.createDateToBrowser(this.user.qualificationDate.toString())
+      });
+    }
+  }
+
+  addDogToUser() : void {
+    this.router.navigate(['/addDogToUser', this.user._id]);
   }
 
   onSubmit(value: string): void {
-    value["_id"] = this.user._id;
-    console.log(value);
-  }
-
-  /*onSubmit(value: string): void {
     let everythingOk = true;
+    value["_id"] = this.user._id;
 
     if(UtilsClass.validateDate(value["qualificationDate"])) {
       let temp = UtilsClass.createDate(value["qualificationDate"]);
@@ -121,12 +131,11 @@ export class ModifyUserComponent implements OnInit {
     }
 
     if(everythingOk) {
-      console.log(value);
-      //this.userService.create(value);
+      this.userService.create(value);
       alert("Käyttäjä lisätty onnistuneesti");
     }
 
-  }*/
+  }
 
 
 }
