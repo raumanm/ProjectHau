@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
+import { AppComponent } from '../app.component';
 
 import { PlaceService } from './place.service';
 import { Place } from '../classes/place';
+
+import { User } from '../classes/user';
+import { UserService } from '../user.component/user.service';
 import { UtilsClass } from '../util/utilsclass';
 
-import { AppComponent } from '../app.component';
+
 
 @Component({
     moduleId: module.id,
@@ -13,10 +18,11 @@ import { AppComponent } from '../app.component';
     templateUrl: 'add-place.component.html',
     styleUrls: ['../stylesheets/formstyle.css']
 })
-export class AddPlaceComponent {
+export class AddPlaceComponent implements OnInit {
   myForm: FormGroup;
+  users: User[];
 
-  constructor(appComponent: AppComponent, fb: FormBuilder, private placeService: PlaceService) {
+  constructor(appComponent: AppComponent, fb: FormBuilder, private placeService: PlaceService, private userService: UserService) {
 
     appComponent.titleText = "Lisää kohde";
 
@@ -30,6 +36,10 @@ export class AddPlaceComponent {
       'overseerId': [''],
       'details': ['Ihan ihme paikka']
     });
+  }
+
+  ngOnInit(): void {
+  this.userService.getUsers().then(users => this.users = users);
   }
 
   onSubmit(value: string): void {
