@@ -4,6 +4,8 @@
 
 export class Visit {
   constructor(
+    public _id: string,
+    public placeName: string,
     public visitTime: Date,
     public placeId: string,
     public assignedPairId: string,
