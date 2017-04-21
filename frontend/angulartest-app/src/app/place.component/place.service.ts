@@ -28,8 +28,10 @@ export class PlaceService {
 
   //TODO fetch one place from DB
   getPlace(id: string): Promise<Place> {
-    return this.getPlaces()
-      .then(places => places.find(place => place._id === id));
+    return this.http
+      .get(this.getUrl+id).toPromise()
+      .then(response => response.json() as Place)
+      .catch(this.handleError);
   }
 
   //TODO put method
