@@ -26,7 +26,6 @@ export class PlaceService {
       .catch(this.handleError);
   }
 
-  //TODO fetch one place from DB
   getPlace(id: string): Promise<Place> {
     return this.http
       .get(this.getUrl+id).toPromise()
