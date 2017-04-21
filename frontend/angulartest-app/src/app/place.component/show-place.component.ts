@@ -19,18 +19,14 @@ import { User } from "../classes/user";
 })
 export class ShowPlaceComponent implements OnInit {
   place: Place;
-  overseer: User;
 
   constructor(appComponent: AppComponent, private placeService: PlaceService, private route: ActivatedRoute, private userService: UserService) {
     appComponent.titleText = "Näytä kohde";
-    console.log(this.place);
   }
 
   ngOnInit(): void {
     this.route.params
       .switchMap((params: Params) => this.placeService.getPlace(params['id']))
       .subscribe(place => this.place = place);
-    console.log(this.place);
-    //TODO fetch user after place is succesfully fecthed
   }
 }

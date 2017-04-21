@@ -29,7 +29,7 @@ export class ModifyUserComponent implements OnInit {
     //Fetch user
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
-      .subscribe(user => this.user = user);
+      .subscribe(user => this.updateFormValues(user));
 
     //Create form
     this.myForm = this.fb.group({
@@ -43,6 +43,11 @@ export class ModifyUserComponent implements OnInit {
       'qualificationDate': [''],
       'details': ['']
     });
+  }
+
+  updateFormValues(user: User) : void {
+    //Save user
+    this.user = user;
 
     //Update form values
     this.route.params
