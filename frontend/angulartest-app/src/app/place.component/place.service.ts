@@ -34,6 +34,13 @@ export class PlaceService {
   }
 
   //TODO put method
+  modify(data: string): Promise<Place> {
+    return this.http
+      .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
 
     constructor(private http: Http) { }
 
