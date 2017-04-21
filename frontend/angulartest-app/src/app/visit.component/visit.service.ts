@@ -15,6 +15,7 @@ export class VisitService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private getUrl = 'http://konelandia.bounceme.net/visits/';
+  private getPairsUrl = 'http://konelandia.bounceme.net/pairs/';
 
   create(data: string): Promise<Visit> {
     return this.http
@@ -26,7 +27,7 @@ export class VisitService {
 
   getPairs(): Promise<Pair[]> {
     return this.http
-      .get(this.getUrl).toPromise()
+      .get(this.getPairsUrl).toPromise()
       .then(response => response.json() as Pair[])
       .catch(this.handleError);
   }
