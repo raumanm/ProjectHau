@@ -34,9 +34,5 @@ export class SearchDogsComponent  {
 
   private addValues(values: Dog[]) {
     this.dogs = values;
-
-    for (var i=0; i<values.length; i++) {
-      console.log("search-dogs.component.ts: " + this.dogs[i]._id);
-    }
   }
 }
