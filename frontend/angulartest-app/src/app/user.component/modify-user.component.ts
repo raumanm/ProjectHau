@@ -57,10 +57,15 @@ export class ModifyUserComponent implements OnInit {
           phone: user.phone,
           email: user.email,
           memberNumber: user.memberNumber,
-          qualificationDate: user.qualificationDate,
           details: user.details
         })
       );
+
+    if(this.user.qualificationDate != null && this.user.qualificationDate.toString() != "") {
+      this.myForm.patchValue({
+        qualificationDate: UtilsClass.createDateToBrowser(this.user.qualificationDate.toString())
+      });
+    }
   }
 
   addDogToUser() : void {
