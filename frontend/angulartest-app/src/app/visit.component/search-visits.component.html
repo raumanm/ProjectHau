@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let visit of visits" [class.selected]="visit === selectedVisit"
       (click)="onSelect(visit)">
-    <button>{{visit.placeId}}</button>
+    <button style="height: 80px">{{visit.placeName}}<br>{{visit.visitTime | date: 'dd.MM.yyyy'}}</button>
   </li>
 </ul>
