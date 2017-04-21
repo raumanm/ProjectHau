@@ -11,9 +11,10 @@ export class Place {
     public addressCity: string,
     public visitationInterval: string,
     public pairAmount?: number,
-    public overseerId?: placeOverseer,
+    public overseerId?: string,
     public details?: string,
-    public _id?: string
+    public _id?: string,
+    public overseer?: placeOverseer
   ) {}
 
 
