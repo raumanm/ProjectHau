@@ -85,7 +85,7 @@ export class AddVisitComponent implements OnInit {
     }
 
     if(everythingOk) {
-      console.log(value);
+      this.visitService.create(value);
       alert("Vierailu lisätty onnistuneesti");
     }
   }
