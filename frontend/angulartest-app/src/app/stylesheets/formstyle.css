@@ -38,6 +38,7 @@ select, input[type=text], input[type=date]{
     margin-bottom: 20px;
     margin-left: 15px;
     margin-right: 15px;
+    margin: 0;
 }
 
 p{
