@@ -32,18 +32,5 @@ export class ShowPlaceComponent implements OnInit {
       .subscribe(place => this.place = place);
     console.log(this.place);
     //TODO fetch user after place is succesfully fecthed
-    /*if(this.place != null) {
-      this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
-      console.log("käyttäjä haettu");
-    }*/
-    //this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
   }
-  /*onSelect(): void {
-    console.log(this.place);
-    console.log(this.overseer);
-    this.userService.getUser(this.place.overseerId).then(user => this.overseer = user);
-    //parseTemplate.name.small().replace("NotWorking",this.overseer.firstName);
-  }*/
-
-
 }
