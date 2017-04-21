@@ -33,7 +33,6 @@ export class PlaceService {
       .catch(this.handleError);
   }
 
-  //TODO put method
   modify(data: string): Promise<Place> {
     return this.http
       .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
