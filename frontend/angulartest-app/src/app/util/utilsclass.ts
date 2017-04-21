@@ -4,6 +4,22 @@
 
 export class UtilsClass {
 
+  static createDateToBrowser(value: string): string {
+    let date = new Date(value);
+    let temp = date.getFullYear()+"-";
+    if(date.getMonth() < 9) {
+    temp += ('0' + (date.getMonth()+1).toString().slice(-2))+"-";
+    } else {
+      temp += (date.getMonth()+1).toString()+"-";
+    }
+    if(date.getDay() < 9) {
+      temp += ('0' + date.getDay().toString().slice(-2));
+    } else {
+      temp += date.getDay().toString();
+    }
+    return temp;
+  }
+
   static validatePairAmount(value: string): boolean {
     let re = new RegExp("^[1-9]{1}$");
     if (re.test(value)) {
@@ -63,7 +79,7 @@ export class UtilsClass {
   }
 
   static validateShortOpenField(value: string): boolean {
-    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€ ]{2,50}$");
+    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€' ]{2,50}$");
     if (re.test(value)) {
       return true;
     } else {
@@ -73,7 +89,7 @@ export class UtilsClass {
   }
 
   static validateLongOpenField(value: string): boolean {
-    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€\.\n\, ]{2,64000}$");
+    let re = new RegExp("^[0-9a-zA-ZåäöÅÄÖéÉ€'\.\n\, ]{2,64000}$");
     if (re.test(value)) {
       return true;
     } else {
