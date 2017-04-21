@@ -9,8 +9,8 @@
   </tr>
 
   <tr>
-    <th><p id="firstName">{{visit.visitTime}}</p></th>
-    <th><p id="lastName">{{visit.placeId}}</p></th>
+    <td><p id="firstName">{{visit.visitTime | date: 'dd.MM.yyyy'}}</p></td>
+    <td><p id="lastName">{{visit.placeName}}</p></td>
   </tr>
 
   <tr>
@@ -19,8 +19,8 @@
   </tr>
 
   <tr>
-    <th><p id="username">{{visit.assignedPairId}}</p></th>
-    <th><p id="accessLevel">{{visit.assignedPairStatus}}</p></th>
+    <td><p id="username">{{visit.assignedPairId}}</p></td>
+    <td><p id="accessLevel">{{visit.assignedPairStatus}}</p></td>
   </tr>
 
   <tr>
@@ -28,13 +28,11 @@
   </tr>
 
   <tr>
-    <th colspan="2"><p id="details">{{visit.details}}</p></th>
+    <td colspan="2"><p id="details">{{visit.details}}</p></td>
   </tr>
 
   <tr>
-    <th colspan="2">
-      <button routerLink="/modifyVisit/{{visit.visitTime}}{{visit.placeId}}">Muokkaa</button>
-    </th>
+      <button class="bottomButt" routerLink="/modifyVisit/{{visit._id}}">Muokkaa</button>
   </tr>
 
 </div>

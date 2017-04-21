@@ -2,15 +2,15 @@
 <form>
 <table>
 <!-- SUPER IMPORTANT IN ORDER TO AVOID NULLPOINTERS --->
-<div *ngIf="user">
+<div class="formDiv" *ngIf="user">
   <tr>
     <th><label for="firstName">Etunimi:</label></th>
     <th><label for="lastName">Sukunimi:</label></th>
   </tr>
 
   <tr>
-    <th><p id="firstName">{{user.firstName}}</p></th>
-    <th><p id="lastName">{{user.lastName}}</p></th>
+    <td><p id="firstName">{{user.firstName}}</p></td>
+    <td><p id="lastName">{{user.lastName}}</p></td>
   </tr>
 
   <tr>
@@ -19,8 +19,8 @@
   </tr>
 
   <tr>
-    <th><p id="username">{{user.username}}</p></th>
-    <th><p id="accessLevel">{{user.accessLevel}}</p></th>
+    <td><p id="username">{{user.username}}</p></td>
+    <td><p id="accessLevel">{{user.accessLevel}}</p></td>
   </tr>
 
   <tr>
@@ -29,8 +29,8 @@
   </tr>
 
   <tr>
-    <th><p id="phone">{{user.phone}}</p></th>
-    <th><p id="email">{{user.email}}</p></th>
+    <td><p id="phone">{{user.phone}}</p></td>
+    <td><p id="email">{{user.email}}</p></td>
   </tr>
 
   <tr>
@@ -39,8 +39,8 @@
   </tr>
 
   <tr>
-    <th><p id="memberNumber">{{user.memberNumber}}</p></th>
-    <th><p id="qualificationDate">{{user.qualificationDate}}</p></th>
+    <td><p id="memberNumber">{{user.memberNumber}}</p></td>
+    <td><p id="qualificationDate">{{user.qualificationDate | date: 'dd.MM.yyyy'}}</p></td>
   </tr>
 
   <tr>
@@ -48,11 +48,11 @@
   </tr>
 
   <tr>
-    <th colspan="2" id="pairedDogs">
+    <td colspan="2" id="pairedDogs">
     <ul>
       <li *ngFor="let userPairedDog of user.pairedDogs">{{userPairedDog.nameNickname}}</li>
     </ul>
-    </th>
+    </td>
   </tr>
 
   <tr>
@@ -60,13 +60,12 @@
   </tr>
 
   <tr>
-    <th colspan="2"><p id="details">{{user.details}}</p></th>
+    <td colspan="2"><p id="details">{{user.details}}</p></td>
   </tr>
 
   <tr>
-    <th colspan="2">
-      <button type="button" routerLink="/modifyUser/{{user._id}}">Muokkaa</button>
-    </th>
+      <button type="button" class="bottomButt" routerLink="/modifyUser/{{user._id}}">Muokkaa</button>
+
   </tr>
 
 </div>

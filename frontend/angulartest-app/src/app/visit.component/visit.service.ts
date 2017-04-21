@@ -38,11 +38,19 @@ export class VisitService {
       .then(response => response.json() as Visit)
       .catch(this.handleError);
   }
-  
+
   getPairs(): Promise<Pair[]> {
     return this.http
       .get(this.getPairsUrl).toPromise()
       .then(response => response.json() as Pair[])
+      .catch(this.handleError);
+  }
+
+  modify(data: string): Promise<Visit> {
+    return this.http
+      .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
       .catch(this.handleError);
   }
 

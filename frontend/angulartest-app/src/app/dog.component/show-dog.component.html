@@ -1,3 +1,4 @@
+<form>
 <div *ngIf="dog">
     <table>
       <tr>
@@ -5,8 +6,8 @@
         <th><label for="nameNickname">Kutsumanimi:</label></th>
       </tr>
       <tr>
-        <th><p id="nameFull">{{dog.nameFull}}</p></th>
-        <th><p id="nameNickname">{{dog.nameNickname}}</p></th>
+        <td><p id="nameFull">{{dog.nameFull}}</p></td>
+        <td><p id="nameNickname">{{dog.nameNickname}}</p></td>
       </tr>
 
       <tr>
@@ -14,8 +15,8 @@
         <th><label for="breed">Rotu:</label></th>
       </tr>
       <tr>
-        <th><p id="dateBirth">{{dog.dateBirth}}</p></th>
-        <th><p id="breed">{{dog.breed}}</p></th>
+        <td><p id="dateBirth">{{dog.dateBirth | date: 'dd.MM.yyyy'}}</p></td>
+        <td><p id="breed">{{dog.breed}}</p></td>
       </tr>
 
       <tr>
@@ -23,8 +24,8 @@
         <th><label for="status">Tila:</label></th>
       </tr>
       <tr>
-        <th><p id="registerNumber">{{dog.registerNumber}}</p></th>
-        <th><p id="status">{{dog.status}}</p></th>
+        <td><p id="registerNumber">{{dog.registerNumber}}</p></td>
+        <td><p id="status">{{dog.status}}</p></td>
       </tr>
 
       <tr>
@@ -32,8 +33,8 @@
         <th><label for="dateGraduation">Valmistumisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
       </tr>
       <tr>
-        <th><p id="dateQualification">{{dog.dateQualification}}</p></th>
-        <th><p id="dateGraduation">{{dog.dateGraduation}}</p></th>
+        <td><p id="dateQualification">{{dog.dateQualification | date: 'dd.MM.yyyy'}}</p></td>
+        <td><p id="dateGraduation">{{dog.dateGraduation | date: 'dd.MM.yyyy'}}</p></td>
       </tr>
 
       <tr>
@@ -41,21 +42,20 @@
         <th><label for="dateRetired">Lopettamisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
       </tr>
       <tr>
-        <th><p id="dateMedal">{{dog.dateMedal}}</p></th>
-        <th><p id="dateRetired">{{dog.dateRetired}}</p></th>
+        <td><p id="dateMedal">{{dog.dateMedal | date: 'dd.MM.yyyy'}}</p></td>
+        <td><p id="dateRetired">{{dog.dateRetired | date: 'dd.MM.yyyy'}}</p></td>
       </tr>
 
       <tr>
         <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
       </tr>
       <tr>
-        <th><p id="details">{{dog.details}}</p></th>
+        <td><p id="details">{{dog.details}}</p></td>
       </tr>
 
       <tr>
-        <th colspan="2">
-          <button routerLink="/modifyDog/{{dog._id}}">Muokkaa</button>
-        </th>
+          <button class="bottomButt" routerLink="/modifyDog/{{dog._id}}">Muokkaa</button>
       </tr>
     </table>
 </div>
+</form>

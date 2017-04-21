@@ -32,7 +32,7 @@ export class AddVisitComponent implements OnInit {
 
     this.myForm = fb.group({
       'visitTime': [''],
-      'placeId': [''],
+      'placeName': [''],
       'assignedPairId': [''],
       'assignedPairStatus': [''],
       'details': ['']
@@ -64,8 +64,8 @@ export class AddVisitComponent implements OnInit {
       everythingOk = false;
     }
 
-    if(!UtilsClass.validateShortOpenField(value["placeId"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta kohde");
+    if(!UtilsClass.validateShortOpenField(value["placeName"])) {
+      alert("Virhe! Tarkista syötteesi kohdasta kohteen nimi");
       everythingOk = false;
     }
 
