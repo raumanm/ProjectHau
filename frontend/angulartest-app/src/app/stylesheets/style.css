@@ -166,6 +166,10 @@ input[type=radio]{
   width: 20px;
 }
 
+ul{
+  list-style-type: none;
+}
+
 button:hover, input[type=submit]:hover{
   border: groove 5px lightgray;
   cursor: pointer;
@@ -196,45 +200,8 @@ input[type=text], input[type=password]{
   }
 }
 
-@media only screen and (max-width: 800px) {
-
-  #title{
-    width: 100%;
-  }
-
-  .hamburger {
-    cursor: pointer;
-    padding: 15px;
-    display: block;
-  }
-
-  .line {
-    border-bottom: 4px solid #bbb;
-    width: 35px;
-    margin-bottom: 6px;
-  }
-
-  .line:last-child {
-    margin-bottom: 0;
-  }
-
-  nav li{
-    width: 100%;
-  }
-
-  .menu{
-    height: 0;
-    overflow: hidden;
-    transition: height 0.3s;
-  }
-
-  .open {
-    height: 346px;
-  }
-
   @media only screen and (max-width: 520px) {
     #logo{
       visibility: hidden;
     }
-  }
 }
