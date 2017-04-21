@@ -20,7 +20,7 @@
     <tr>
       <th>
         <select id ="assignedPairId" name="assignedPairId" required [formControl]="myForm.controls['assignedPairId']">
-          <option *ngFor="let pair of pairs" [value]="pair._id">{{pair.user.lastName}}{{pair.user.nameNickname}}</option>
+          <option *ngFor="let pair of pairs" [value]="pair._id"> {{pair.user.firstName}} {{pair.user.lastName}} ja {{pair.dog.nameNickname}}</option>
         </select>
       </th>
       <th>
