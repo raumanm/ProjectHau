@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AppComponent } from '../app.component';
+import { LoginService } from './login.service';
 
 @Component({
 moduleId: module.id,
@@ -20,7 +21,7 @@ moduleId: module.id,
 })
 export class LoginPageComponent  {
 
-    constructor(appComponent: AppComponent) {
+    constructor(appComponent: AppComponent, private loginService: LoginService) {
         appComponent.titleText = "Sisäänkirjautuminen";
     }
 }
