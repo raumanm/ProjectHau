@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { AppComponent } from '../app.component';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
 moduleId: module.id,
@@ -22,13 +23,20 @@ moduleId: module.id,
 })
 export class LoginPageComponent  {
 
-    constructor(appComponent: AppComponent, private loginService: LoginService) {
+    constructor(appComponent: AppComponent, private loginService: LoginService, private router: Router) {
         appComponent.titleText = "Sisäänkirjautuminen";
     }
 
     login(form: NgForm) {
         this.loginService.login(form.value).subscribe(
-            (res) => console.log(res)
+            (res) => {
+                var resJson = res.json();
+                if(resJson.status == 401) {
+                    alert("Virheellinen salasana tai käyttäjätunnus!");
+                } else if(resJson.status == 200) {
+                    this.router.navigate(['/mainPage']);
+                }
+            }
         );
     }
 }
