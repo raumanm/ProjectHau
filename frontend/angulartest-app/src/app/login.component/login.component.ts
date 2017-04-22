@@ -27,7 +27,8 @@ export class LoginPageComponent  {
     }
 
     login(form: NgForm) {
-        var v = this.loginService.login(form.value);
-        console.log(v);
+        this.loginService.login(form.value).subscribe(
+            (res) => console.log(res)
+        );
     }
 }

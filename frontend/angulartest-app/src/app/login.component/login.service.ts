@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 @Injectable()
 export class LoginService {
 
-    constructor(private http: Http) {}
+    private headers: Headers = new Headers();
+
+    constructor(private http: Http) {
+        this.headers.append('Content-Type', 'application/json');
+    }
 
     login(user: Object) {
-        //return this.http.post('http://localhost:8080/authentication', user);
-        return user;
+        return this.http.post('http://localhost:8080/authentication', user, this.headers);
     }
 }
