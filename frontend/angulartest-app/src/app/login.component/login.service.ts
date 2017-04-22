@@ -4,11 +4,10 @@ import { Http } from '@angular/http';
 @Injectable()
 export class LoginService {
 
-    constructor(private http: Http) {
+    constructor(private http: Http) {}
 
-    }
-
-    loging() {
-        //this.http.post('sdasa', );
+    login(user: Object) {
+        //return this.http.post('http://localhost:8080/authentication', user);
+        return user;
     }
 }
