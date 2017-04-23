@@ -32,15 +32,17 @@ import { ModifyVisitComponent } from './visit.component/modify-visit.component';
 
 import { AddDogToUserComponent } from './user.component/add-dog-to-user.component';
 import { AuthGuard } from './login.component/auth-quard.service';
+import { SessionEndedComponent } from './session-ended.component/session-ended.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
     { path: 'mainPage',  component: MainPageComponent, canActivate: [AuthGuard] },
     { path: 'loginPage', component: LoginPageComponent },
+    { path: 'sessionEnded', component: SessionEndedComponent },
     { path: 'personalInformation', component: PersonalInformationComponent, canActivate: [AuthGuard] },
     { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
     { path: 'report/:title', component: ReportComponent, canActivate: [AuthGuard] },
-    { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]},
+    { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
     { path: 'message', component: MessageComponent, canActivate: [AuthGuard] },
 
     { path: 'addDog', component: AddDogComponent, canActivate: [AuthGuard] },

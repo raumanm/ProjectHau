@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
                 if(res.json().status == 200) {
                     return true;
                 } else {
-                    this.router.navigate(["/loginPage"]);
+                    this.router.navigate(["/sessionEnded"]);
                     return false;
                 }
             });
