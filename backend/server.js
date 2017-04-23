@@ -23,7 +23,7 @@
 	hauUsers =  require('./hauapi/users/hau-users');
 	hauPairs =  require('./hauapi/pairs/hau-pairs');
 	hauPlaces = require('./hauapi/places/hau-places');
-	hauVisits = require('./hauapi/hau-visits');
+	hauVisits = require('./hauapi/visits/hau-visits');
 
     //Set up application
     app = express();
