@@ -19,7 +19,7 @@ export class LoginService {
 
     login(user: Object) {
         //return this.http.post('http://localhost:8080/authentication', user, this.headers);
-        return this.http.post('http://localhost:8080/authentication', user, this.headers)
+        return this.http.post('http://localhost:8080/authenticate', user, this.headers)
             .map((res: Response) => {
                 
                 let token = res.json().data.token;
@@ -30,7 +30,7 @@ export class LoginService {
                         accessLevel: res.json().data.accessLevel
                     };
                     this.token = JSON.stringify(currentUser);
-                    localStorage.setItem('currentUser', token);
+                    localStorage.setItem('currentUser', this.token);
                     return true;
                 } else {
                     return false;

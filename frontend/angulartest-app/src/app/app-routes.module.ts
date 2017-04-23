@@ -36,7 +36,7 @@ import { AuthGuard } from './login.component/auth-quard.service';
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
     { path: 'mainPage',  component: MainPageComponent, canActivate: [AuthGuard] },
-    { path: 'loginPage', component: LoginPageComponent, canActivate: [AuthGuard] },
+    { path: 'loginPage', component: LoginPageComponent },
     { path: 'personalInformation', component: PersonalInformationComponent, canActivate: [AuthGuard] },
     { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
     { path: 'report/:title', component: ReportComponent, canActivate: [AuthGuard] },

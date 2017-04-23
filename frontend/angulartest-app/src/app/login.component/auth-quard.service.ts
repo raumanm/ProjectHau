@@ -13,22 +13,14 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return false;
-    }
-
-    authenticateToken(token) {
-        this.http.post('http://localhost:8080/checktoken', token, this.headers)
+        var token = {
+            token: JSON.parse(localStorage.getItem('currentUser')).token
+        };
+        console.log(token);
+        return this.http.post('http://localhost:8080/checktoken', token, this.headers)
             .map((res: Response) => {
                 
-                let token = res.json().data.token;
-                if (token) {
-                    let currentUser = {
-                        _id: res.json().data.userId,
-                        token : token,
-                        accessLevel: res.json().data.accessLevel
-                    };
-                    this.token = JSON.stringify(currentUser);
-                    localStorage.setItem('currentUser', token);
+                if(res.json().status == 200) {
                     return true;
                 } else {
                     return false;

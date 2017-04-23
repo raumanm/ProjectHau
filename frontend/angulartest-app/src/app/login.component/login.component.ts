@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AppComponent } from '../app.component';
@@ -21,7 +21,7 @@ moduleId: module.id,
         </form>
     `
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
 
     constructor(appComponent: AppComponent, private loginService: LoginService, private router: Router) {
         appComponent.titleText = "Sisäänkirjautuminen";
@@ -37,9 +37,5 @@ export class LoginPageComponent implements OnInit {
                 }
             }
         );
-    }
-
-    ngOnInit() {
-        
     }
 }
