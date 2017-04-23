@@ -1,3 +1,5 @@
+import { isDevMode } from '@angular/core';
+
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
@@ -7,9 +9,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DogService {
-   dogs: Dog[] = [];
+    dogs: Dog[] = [];
+
+    private hostname = (isDevMode()) ? 'http://localhost:8080' : window.location.origin;
     private headers = new Headers({'Content-Type': 'application/json'});
-    private getUrl = 'http://konelandia.bounceme.net/dogs/';
 
   create(data: string): Promise<Dog> {
     return this.http
@@ -20,6 +23,7 @@ export class DogService {
   }
 
   modify(data: string): Promise<Dog> {
+    console.log(data);
     return this.http
       .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
       .toPromise()
