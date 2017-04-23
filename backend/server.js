@@ -32,7 +32,7 @@
     app.set('json spaces', 2);
     app.enable('trust proxy');
     app.use(logger);
-    app.use(authentication); //Set authentication route to app
+    app.use("/backend", authentication); //Set authentication route to app
 
     //JsonWebToken used for user authentication
     var jsonWebToken = require('jsonwebtoken');
@@ -75,7 +75,7 @@
     apiRoute.use(hauPairs);
     apiRoute.use(hauPlaces);
     apiRoute.use(hauVisits);
-    app.use(apiRoute);
+    app.use("/backend", apiRoute);
 
 	hauMongo.init(function (err) {
 		if (err) throw err;
