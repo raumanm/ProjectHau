@@ -88,9 +88,9 @@
                 let pair = docs.pop();
 
                 if (pair === undefined) {
-                    return hauResponse.createNotFoundResponse(visitId);
+                    callback(hauResponse.createNotFoundResponse(visitId));
                 } else {
-                    return hauResponse.createFoundResponse(pair);
+                    callback(hauResponse.createOkResponse(pair));
                 }
             } else {
                 callback(hauResponse.createErrorResponse(err))
