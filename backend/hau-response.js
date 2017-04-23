@@ -86,14 +86,17 @@
         return response;
     }
 
-    function createAuthenticationSucceededResponse(token) {
+    function createAuthenticationSucceededResponse(token, userId, accessLevel) {
         let response = {};
 
         response.status = 200;
         response.content = 'application/json';
-        response.data = {token: token};
-        response.data.message = "Authentication succeeded";
-
+        response.data = {
+            token: token,
+            userId: userId,
+            accessLevel: accessLevel};
+        response.message = "Authentication succeeded";
+        
         return response;
     }
 

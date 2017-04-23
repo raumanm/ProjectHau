@@ -50,7 +50,7 @@
                     res.json(hauResponse.createUnauthorizedResponse());
                 } else {
                     /*
-                    Add user id and access level to reuest so
+                    Add user id and access level to request and response so
                     users gredentials can be defined and right
                     data can be fetched.
                     */
@@ -59,6 +59,8 @@
                         accessLevel: user.accessLevel
                     };
                     res.token = token;
+                    res._id = user._id;
+                    res.accessLevel = user.accessLevel;
                     next();
                 }
             });

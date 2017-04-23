@@ -2,7 +2,7 @@
 (function (){
     "use strict";
     let hauDB, safeObjectId, express, validator, app, hauResponse, jsonWebToken;
-
+    
     express = require('express');
     app = module.exports = express();
     jsonWebToken = require('jsonwebtoken');
@@ -13,7 +13,7 @@
 
     safeObjectId = hauDB.safeObjectId;
 
-    app.route("\/authentication")
+    app.route("\/authenticate")
     .all((req, res, next) => {
         next();
     })
@@ -29,7 +29,7 @@
                         var token = jsonWebToken.sign(user, app.get('authenticationSecret'), {
                             expiresIn : 60*60*24
                         });
-                        res.json(hauResponse.createAuthenticationSucceededResponse(token));
+                        res.json(hauResponse.createAuthenticationSucceededResponse(token, user._id, user.accessLevel));
                     } else {
                         //If password is wrong
                         res.send(hauResponse.createAuthenticationErrorResponse());
@@ -40,6 +40,26 @@
                 }
             }
         });
+    });
+    
+    app.route("\/checktoken")
+    .all((req, res, next) => {
+        next();
+    })
+    .post((req, res, next) => {
+        //Require authentication token from requests body or query
+        var token = req.body.token;
+        if(token) {
+            jsonWebToken.verify(token, app.get('authenticationSecret'), (err, user)=> {
+                if(err) {
+                    res.json(hauResponse.createUnauthorizedResponse());
+                } else {
+                    res.json(hauResponse.createAuthenticationSucceededResponse(token, user._id, user.accessLevel));
+                }
+            });
+        } else {
+            res.json(hauResponse.createUnauthorizedResponse());
+        }
     });
 
     //Returns user by given name
