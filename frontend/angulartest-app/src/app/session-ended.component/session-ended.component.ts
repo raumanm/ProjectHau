@@ -12,4 +12,11 @@ import { AppComponent } from '../app.component';
     `,
     styleUrls: ['../stylesheets/style.css']
 })
-export class SessionEndedComponent {}
+export class SessionEndedComponent {
+
+    constructor(){
+        if(localStorage.getItem("currentUser") != null) {
+            localStorage.setItem("currentUser", "");
+        }
+    }
+}

@@ -14,19 +14,29 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        var token = {
-            token: JSON.parse(localStorage.getItem('currentUser')).token
-        };
-        console.log(token);
+        var item = localStorage.getItem('currentUser');
+        var token = {token: ""};
+        var currentUserString = localStorage.getItem('currentUser');
+        var currentUser;
+
+        if(currentUserString != null && currentUserString != "") {
+            try {
+                currentUser = JSON.parse(currentUserString);
+                if(currentUser.token != null && currentUser.token != "") {
+                    token.token = currentUser.token; 
+                }
+            } catch(e) {}
+        }
+
         return this.http.post('http://localhost:8080/checktoken', token, this.headers)
             .map((res: Response) => {
-                
-                if(res.json().status == 200) {
-                    return true;
-                } else {
-                    this.router.navigate(["/sessionEnded"]);
-                    return false;
-                }
-            });
+
+            if(res.json().status == 200) {
+                return true;
+            } else {
+                this.router.navigate(["/sessionEnded"]);
+                return false;
+            }
+        });
     }
 }
