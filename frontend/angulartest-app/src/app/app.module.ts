@@ -25,6 +25,7 @@ import { SearchPlacesComponent } from './place.component/search-places.component
 import { SearchVisitsComponent } from './visit.component/search-visits.component';
 
 import { LoginService } from './login.component/login.service';
+import { AuthGuard } from './login.component/auth-quard.service';
 import { DogService } from './dog.component/dog.service';
 import { UserService } from './user.component/user.service';
 import { PlaceService } from './place.component/place.service';
@@ -88,7 +89,8 @@ import { AddDogToUserComponent } from './user.component/add-dog-to-user.componen
     UserService,
     PlaceService,
     VisitService,
-    LoginService
+    LoginService,
+    AuthGuard
   ],
   bootstrap: [ AppComponent ]
 })

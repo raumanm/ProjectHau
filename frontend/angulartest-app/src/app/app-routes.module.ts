@@ -31,39 +31,39 @@ import { ModifyPlaceComponent } from './place.component/modify-place.component';
 import { ModifyVisitComponent } from './visit.component/modify-visit.component';
 
 import { AddDogToUserComponent } from './user.component/add-dog-to-user.component';
-
+import { AuthGuard } from './login.component/auth-quard.service';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/loginPage', pathMatch: 'full', },
-    { path: 'mainPage',  component: MainPageComponent },
-    { path: 'loginPage', component: LoginPageComponent },
-    { path: 'personalInformation', component: PersonalInformationComponent },
-    { path: 'search', component: SearchComponent },
-    { path: 'report/:title', component: ReportComponent },
-    { path: 'reports', component: ReportsComponent},
-    { path: 'message', component: MessageComponent },
+    { path: 'mainPage',  component: MainPageComponent, canActivate: [AuthGuard] },
+    { path: 'loginPage', component: LoginPageComponent, canActivate: [AuthGuard] },
+    { path: 'personalInformation', component: PersonalInformationComponent, canActivate: [AuthGuard] },
+    { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
+    { path: 'report/:title', component: ReportComponent, canActivate: [AuthGuard] },
+    { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]},
+    { path: 'message', component: MessageComponent, canActivate: [AuthGuard] },
 
-    { path: 'addDog', component: AddDogComponent },
-    { path: 'addPlace', component: AddPlaceComponent },
-    { path: 'addUser', component: AddUserComponent },
-    { path: 'addVisit', component: AddVisitComponent },
+    { path: 'addDog', component: AddDogComponent, canActivate: [AuthGuard] },
+    { path: 'addPlace', component: AddPlaceComponent, canActivate: [AuthGuard] },
+    { path: 'addUser', component: AddUserComponent, canActivate: [AuthGuard] },
+    { path: 'addVisit', component: AddVisitComponent, canActivate: [AuthGuard] },
 
-    { path: 'searchDogs', component: SearchDogsComponent },
-    { path: 'searchUsers', component: SearchUsersComponent },
-    { path: 'searchPlaces', component: SearchPlacesComponent},
-    { path: 'searchVisits', component: SearchVisitsComponent},
+    { path: 'searchDogs', component: SearchDogsComponent, canActivate: [AuthGuard] },
+    { path: 'searchUsers', component: SearchUsersComponent, canActivate: [AuthGuard] },
+    { path: 'searchPlaces', component: SearchPlacesComponent, canActivate: [AuthGuard]},
+    { path: 'searchVisits', component: SearchVisitsComponent, canActivate: [AuthGuard]},
 
-    { path: 'showDog/:id', component: ShowDogComponent },
-    { path: 'showUser/:id', component: ShowUserComponent },
-    { path: 'showPlace/:id', component: ShowPlaceComponent},
-    { path: 'showVisit/:id', component: ShowVisitComponent},
+    { path: 'showDog/:id', component: ShowDogComponent, canActivate: [AuthGuard] },
+    { path: 'showUser/:id', component: ShowUserComponent, canActivate: [AuthGuard] },
+    { path: 'showPlace/:id', component: ShowPlaceComponent, canActivate: [AuthGuard]},
+    { path: 'showVisit/:id', component: ShowVisitComponent, canActivate: [AuthGuard]},
 
-    { path : 'modifyUser/:id', component: ModifyUserComponent },
-    { path : 'modifyDog/:id', component: ModifyDogComponent },
-    { path : 'modifyPlace/:id', component: ModifyPlaceComponent },
-    { path : 'modifyVisit/:id', component: ModifyVisitComponent },
+    { path : 'modifyUser/:id', component: ModifyUserComponent, canActivate: [AuthGuard] },
+    { path : 'modifyDog/:id', component: ModifyDogComponent, canActivate: [AuthGuard] },
+    { path : 'modifyPlace/:id', component: ModifyPlaceComponent, canActivate: [AuthGuard] },
+    { path : 'modifyVisit/:id', component: ModifyVisitComponent, canActivate: [AuthGuard] },
 
-    { path: 'addDogToUser/:id', component: AddDogToUserComponent }
+    { path: 'addDogToUser/:id', component: AddDogToUserComponent, canActivate: [AuthGuard] }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

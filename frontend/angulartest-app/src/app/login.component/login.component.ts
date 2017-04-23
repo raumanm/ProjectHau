@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AppComponent } from '../app.component';
@@ -21,7 +21,7 @@ moduleId: module.id,
         </form>
     `
 })
-export class LoginPageComponent  {
+export class LoginPageComponent implements OnInit {
 
     constructor(appComponent: AppComponent, private loginService: LoginService, private router: Router) {
         appComponent.titleText = "Sisäänkirjautuminen";
@@ -30,13 +30,16 @@ export class LoginPageComponent  {
     login(form: NgForm) {
         this.loginService.login(form.value).subscribe(
             (res) => {
-                var resJson = res.json();
-                if(resJson.status == 401) {
-                    alert("Virheellinen salasana tai käyttäjätunnus!");
-                } else if(resJson.status == 200) {
-                    this.router.navigate(['/mainPage']);
+                if(res) {
+                    console.log("Succeeded", localStorage);
+                } else {
+                    console.log("Failed");
                 }
             }
         );
+    }
+
+    ngOnInit() {
+        
     }
 }
