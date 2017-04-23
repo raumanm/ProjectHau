@@ -1,6 +1,7 @@
 /**
  * Created by M1k1tus on 27-Mar-17.
  */
+import { isDevMode } from '@angular/core';
 
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
@@ -13,9 +14,10 @@ import {Pair} from "../classes/pair";
 @Injectable()
 export class VisitService {
 
+  private hostname = (isDevMode()) ? 'http://localhost:8080' : window.location.origin;
   private headers = new Headers({'Content-Type': 'application/json'});
-  private getUrl = 'http://konelandia.bounceme.net/visits/';
-  private getPairsUrl = 'http://konelandia.bounceme.net/pairs/';
+  private getUrl = this.hostname + '/hauapi/visits/';
+  private getPairsUrl = this.hostname + '/hauapi/pairs/';
 
   create(data: string): Promise<Visit> {
     return this.http

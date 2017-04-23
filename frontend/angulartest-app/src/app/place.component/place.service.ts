@@ -1,3 +1,5 @@
+import { isDevMode } from '@angular/core';
+
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
@@ -8,8 +10,10 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class PlaceService {
 
+    private hostname = (isDevMode()) ? 'http://localhost:8080' : window.location.origin;
+
     private headers = new Headers({'Content-Type': 'application/json'});
-    private getUrl = 'http://konelandia.bounceme.net/places/';
+    private getUrl = this.hostname + '/hauapi/places/';
 
   create(data: string): Promise<Place> {
     return this.http
