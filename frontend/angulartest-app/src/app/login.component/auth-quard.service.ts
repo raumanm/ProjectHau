@@ -2,13 +2,14 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Injectable } from '@angular/core';
 import { LoginService } from './login.service';
 import { Http, Headers, Response } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
     private headers: Headers = new Headers();
 
-    constructor(private loginService: LoginService, private http: Http) {
+    constructor(private loginService: LoginService, private http: Http, private router: Router) {
         this.headers.append('Content-Type', 'application/json');
     }
 
@@ -23,6 +24,7 @@ export class AuthGuard implements CanActivate {
                 if(res.json().status == 200) {
                     return true;
                 } else {
+                    this.router.navigate(["/loginPage"]);
                     return false;
                 }
             });

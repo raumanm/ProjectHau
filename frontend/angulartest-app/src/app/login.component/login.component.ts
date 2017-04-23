@@ -32,8 +32,9 @@ export class LoginPageComponent {
             (res) => {
                 if(res) {
                     console.log("Succeeded", localStorage);
+                    this.router.navigate(["/mainPage"]);
                 } else {
-                    console.log("Failed");
+                    alert("Väärä salasana tai käyttäjätunnus!");
                 }
             }
         );
