@@ -31,7 +31,6 @@ export class LoginPageComponent {
         this.loginService.login(form.value).subscribe(
             (res) => {
                 if(res) {
-                    console.log("Succeeded", localStorage);
                     this.router.navigate(["/mainPage"]);
                 } else {
                     alert("Väärä salasana tai käyttäjätunnus!");

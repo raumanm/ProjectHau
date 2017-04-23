@@ -13,6 +13,7 @@ export class DogService {
 
     private hostname = (isDevMode()) ? 'http://localhost:8080' : window.location.origin;
     private headers = new Headers({'Content-Type': 'application/json'});
+    private getUrl = this.hostname + '/hauapi/dogs/';
 
   create(data: string): Promise<Dog> {
     return this.http
