@@ -43,6 +43,13 @@
     });
 
     function postNew(place, callback) {
+        
+        try {
+            place.pairAmount = parseInt(place.pairAmount);
+        } catch (e) {
+            console.log("error");
+        }
+        
         place = validator.pruneExcessive(place);
         if (validator.validateRequired(place) && validator.validateOptionals(place)) {
             hauDB.db.collection('places').insertOne(place, (err, result) => {
