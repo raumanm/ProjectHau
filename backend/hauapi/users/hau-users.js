@@ -42,8 +42,13 @@
     });
 
     function postNew(user, callback) {
+        
+        console.log(user);
+        
         user = validator.pruneExcessive(user);
-
+        
+        
+        
         if (validator.validateRequired(user) && validator.validateOptionals(user)) {
             hauDB.db.collection('users').find({ 'username': user.username}).count(function(err, counter) {
                 if (err) {
