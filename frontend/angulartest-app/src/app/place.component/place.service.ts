@@ -1,5 +1,5 @@
 import { isDevMode } from '@angular/core';
-
+import { LoginService } from '../login.component/login.service';
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
@@ -17,7 +17,7 @@ export class PlaceService {
 
   create(data: string): Promise<Place> {
     return this.http
-      .post(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .post(this.getUrl, this.ls.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
@@ -25,27 +25,27 @@ export class PlaceService {
 
   getPlaces(): Promise<Place[]> {
     return this.http
-      .get(this.getUrl).toPromise()
+      .get(this.getUrl, this.ls.getTokenAsPathParam()).toPromise()
       .then(response => response.json() as Place[])
       .catch(this.handleError);
   }
 
   getPlace(id: string): Promise<Place> {
     return this.http
-      .get(this.getUrl+id).toPromise()
+      .get(this.getUrl+id, this.ls.getTokenAsPathParam()).toPromise()
       .then(response => response.json() as Place)
       .catch(this.handleError);
   }
 
   modify(data: string): Promise<Place> {
     return this.http
-      .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .put(this.getUrl, this.ls.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
   }
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private ls: LoginService) { }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
