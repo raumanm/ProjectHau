@@ -45,4 +45,12 @@ export class LoginService {
 
         return {search: params};
     }
+
+    public getRequestBody(data: string): string {
+        let body = {
+            token: localStorage.getItem('token'),
+            data: data
+        };
+        return JSON.stringify(body);
+    }
 }

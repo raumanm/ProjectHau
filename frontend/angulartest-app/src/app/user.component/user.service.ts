@@ -19,40 +19,24 @@ export class UserService {
     private params: URLSearchParams = new URLSearchParams();
 
   create(data: string): Promise<User> {
-    let token = localStorage.getItem('token');
-    let body = {
-      token: token,
-      data: data
-    };
     return this.http
-      .post(this.getUrl, JSON.stringify(body), {headers: this.headers})
+      .post(this.getUrl, this.loginService.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
   }
 
   addDog(data:string): Promise<Dog> {
-    let token = localStorage.getItem('token');
-    let body = {
-      token: token,
-      data: data
-    };
     return this.http
-      .post(this.getUrl, JSON.stringify(body), {headers: this.headers})
+      .post(this.getUrl, this.loginService.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
   }
 
   modify(data: string): Promise<User> {
-    let token = localStorage.getItem('token');
-    let body = {
-      token: token,
-      data: data
-    };
-
     return this.http
-      .put(this.getUrl, JSON.stringify(body), {headers: this.headers})
+      .put(this.getUrl, this.loginService.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
