@@ -5,14 +5,12 @@
     function validateRequired(toCheck) {
         return toCheck.hasOwnProperty("accessLevel")
             && toCheck.hasOwnProperty("username")
-            && toCheck.hasOwnProperty("password")
             && toCheck.hasOwnProperty("firstName")
             && toCheck.hasOwnProperty("lastName")
             && toCheck.hasOwnProperty("phone")
             && toCheck.hasOwnProperty("email")
             && typeof toCheck["accessLevel"] === "string"
             && typeof toCheck["username"] === "string"
-            && typeof toCheck["password"] === "string"
             && typeof toCheck["firstName"] === "string"
             && typeof toCheck["lastName"] === "string"
             && typeof toCheck["phone"] === "string"
@@ -21,15 +19,15 @@
 
     function validateOptionals(toCheck) {
 
-        if (toCheck.hasOwnProperty(memberNumber) && typeof toCheck.memberNumber !== "string") {
+        if (toCheck.hasOwnProperty("memberNumber") && typeof toCheck.memberNumber !== "string") {
             return false;
         }
 
-        if (toCheck.hasOwnProperty(qualificationDate) && Object.prototype.toString.call(toCheck["qualificationDate"]) !== '[object Date]') {
+        if (toCheck.hasOwnProperty("qualificationDate") && Object.prototype.toString.call(toCheck["qualificationDate"]) !== '[object Date]') {
             return false;
         }
 
-        if (toCheck.hasOwnProperty(details) && typeof toCheck.details !== "string") {
+        if (toCheck.hasOwnProperty("details") && typeof toCheck.details !== "string") {
             return false;
         }
 

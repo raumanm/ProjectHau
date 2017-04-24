@@ -18,7 +18,7 @@
     })
     .post((req, res, next) => {
         if (req.get('Content-Type') === 'application/json') {
-            postNew(req.body, (result) => hauResponse.sendResponse(res, result));
+            postNew(req.body.data, (result) => hauResponse.sendResponse(res, result));
         }
 
     })
@@ -35,7 +35,7 @@
     })
     .put((req, res, next) => {
         if (req.get('Content-Type') === 'application/json') {
-            updateById(req.params.id, req.body, (result) => hauResponse.sendResponse(res, result));
+            updateById(req.params.id, req.body.data, (result) => hauResponse.sendResponse(res, result));
         }
     })
     .delete((req, res, next) => {
@@ -43,6 +43,13 @@
     });
 
     function postNew(place, callback) {
+        
+        try {
+            place.pairAmount = parseInt(place.pairAmount);
+        } catch (e) {
+            console.log("error");
+        }
+        
         place = validator.pruneExcessive(place);
         if (validator.validateRequired(place) && validator.validateOptionals(place)) {
             hauDB.db.collection('places').insertOne(place, (err, result) => {

@@ -19,32 +19,25 @@
     }
 
     function validateOptionals(toCheck) {
-
         if (toCheck.hasOwnProperty('contactName') && typeof toCheck.contactName !== "string") {
             return false;
         }
-
         if (toCheck.hasOwnProperty('contactPhone') && typeof toCheck.contactPhone !== "string") {
             return false;
         }
-
         if (toCheck.hasOwnProperty('regularPairs') &&
             (typeof toCheck.regularPairs !== "string" || !Array.isArray(toCheck['regularPairs']))) {
             return false;
         }
-
         if (toCheck.hasOwnProperty('pairAmount') && typeof toCheck.pairAmount !== "number") {
             return false;
         }
-
         if (toCheck.hasOwnProperty('details') && typeof toCheck.details !== "string") {
             return false;
         }
-
         if (toCheck.hasOwnProperty('overseerId') && typeof toCheck.overseerId !== "string") {
             return false;
         }
-
         return true;
     }
 
