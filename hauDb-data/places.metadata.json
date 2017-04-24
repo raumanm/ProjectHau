@@ -1,0 +1,1 @@
+{"options":{"validator":{"$and":[{"name":{"$type":"string"}},{"addressStreet":{"$type":"string"}},{"addressCode":{"$type":"number"}},{"addressCity":{"$type":"string"}},{"visitationInterval":{"$type":"string","$in":["Regular","One time"]}}]}},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"hauDb.places"}]}
