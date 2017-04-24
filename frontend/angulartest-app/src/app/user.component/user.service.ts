@@ -20,8 +20,12 @@ export class UserService {
 
   create(data: string): Promise<User> {
     let token = localStorage.getItem('token');
+    let body = {
+      token: token,
+      data: data
+    };
     return this.http
-      .post(this.getUrl, JSON.stringify(data), {headers: this.headers, search: "token=" + token})
+      .post(this.getUrl, JSON.stringify(body), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
@@ -29,8 +33,12 @@ export class UserService {
 
   addDog(data:string): Promise<Dog> {
     let token = localStorage.getItem('token');
+    let body = {
+      token: token,
+      data: data
+    };
     return this.http
-      .post(this.getUrl, JSON.stringify(data), {headers: this.headers, search: "token=" + token})
+      .post(this.getUrl, JSON.stringify(body), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
@@ -38,8 +46,13 @@ export class UserService {
 
   modify(data: string): Promise<User> {
     let token = localStorage.getItem('token');
+    let body = {
+      token: token,
+      data: data
+    };
+
     return this.http
-      .put(this.getUrl, JSON.stringify(data), {headers: this.headers, search: "token=" + token})
+      .put(this.getUrl, JSON.stringify(body), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
