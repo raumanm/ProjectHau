@@ -1,33 +1,10 @@
 <br>
 <br>
-<p style="font-style: italic">{{reportContent}}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<ul>
+  <li *ngFor="let obj of reportContent">
+    <p>{{obj}}</p>
+  </li>
+</ul>
 <p (click)="exportToExcel()" style="color:blue; cursor: pointer; "><u>Tulosta Exceliin</u></p>
 
 

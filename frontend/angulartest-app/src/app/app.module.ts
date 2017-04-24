@@ -28,6 +28,7 @@ import { LoginService } from './login.component/login.service';
 import { AuthGuard } from './login.component/auth-quard.service';
 import { SessionEndedComponent } from './session-ended.component/session-ended.component';
 
+import { ReportService } from './report.component/report.service';
 import { DogService } from './dog.component/dog.service';
 import { UserService } from './user.component/user.service';
 import { PlaceService } from './place.component/place.service';
@@ -93,7 +94,8 @@ import { AddDogToUserComponent } from './user.component/add-dog-to-user.componen
     PlaceService,
     VisitService,
     LoginService,
-    AuthGuard
+    AuthGuard,
+    ReportService
   ],
   bootstrap: [ AppComponent ]
 })
