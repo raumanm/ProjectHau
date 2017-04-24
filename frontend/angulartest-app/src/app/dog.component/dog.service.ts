@@ -1,5 +1,5 @@
 import { isDevMode } from '@angular/core';
-
+import { LoginService } from '../login.component/login.service';
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
@@ -17,16 +17,15 @@ export class DogService {
 
   create(data: string): Promise<Dog> {
     return this.http
-      .post(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .post(this.getUrl, this.ls.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
   }
 
   modify(data: string): Promise<Dog> {
-    console.log(data);
     return this.http
-      .put(this.getUrl, JSON.stringify(data), {headers: this.headers})
+      .put(this.getUrl, this.ls.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
@@ -34,19 +33,19 @@ export class DogService {
 
   getDogs(): Promise<Dog[]> {
     return this.http
-      .get(this.getUrl).toPromise()
+      .get(this.getUrl, this.ls.getTokenAsPathParam()).toPromise()
       .then(response => response.json() as Dog[])
       .catch(this.handleError);
   }
 
   getDog(id: string): Promise<Dog> {
     return this.http
-      .get(this.getUrl+id).toPromise()
+      .get(this.getUrl+id, this.ls.getTokenAsPathParam()).toPromise()
       .then(response => response.json() as Dog)
       .catch(this.handleError);
   }
 
-    constructor(private http: Http) {}
+    constructor(private http: Http, private ls: LoginService) {}
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
