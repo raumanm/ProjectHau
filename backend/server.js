@@ -3,7 +3,7 @@
     "use strict";
     let express, app, hauMongo, bodyParser, authentication,
         hauDogs, hauUsers, hauPairs, hauPlaces, hauVisits,
-        hauResponse;
+        hauResponse, cors;
 
     function logger(req, res, next) {
         console.log(new Date(), req.ip, req.method, req.url);
@@ -11,6 +11,7 @@
     }
 
     express = require('express');
+    cors = require('cors');
     bodyParser = require('body-parser');
 	hauMongo = require('./hauapi/hau-db');
     hauResponse = require('./hauapi/hau-response');
@@ -32,6 +33,7 @@
     app.set('json spaces', 2);
     app.enable('trust proxy');
     app.use(logger);
+    app.use(cors());
     app.use("/hauapi", authentication); //Set authentication route to app
 
     //JsonWebToken used for user authentication
