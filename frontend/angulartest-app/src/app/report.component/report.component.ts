@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-
+import { ReportService } from './report.service';
 import { AppComponent } from '../app.component';
 
 
@@ -12,17 +12,37 @@ moduleId: module.id,
 })
 export class ReportComponent {
   private reportTitle: String;
-  private reportContent: String;
+  private reportContent: any[];
 
-  constructor(appComponent: AppComponent, private route: ActivatedRoute) {
+  constructor(appComponent: AppComponent, private route: ActivatedRoute, private reportS: ReportService) {
 
     this.route.params.subscribe((params: Params) => {
-      let title = params['title'];
+        let title = params['title'];
 
-      this.reportTitle = title;
-      this.reportContent = "- NO CONTENT -";
-      appComponent.titleText = title;
+        this.reportTitle = title;
+        this.getReportContent(title).then(values => this.reportContent = values);
+        appComponent.titleText = title;
     });
+  }
+
+  private getReportContent(title: String): Promise<any[]> {
+
+      let word = "";
+
+      if(title === 'Kohdekohtainen käyntitilasto') {
+          word = "places";
+      } else if(title === 'Kaikkien kohteiden käyntitilasto') {
+          word = "places";
+      } else if(title === 'Koirakohtainen käyntitilasto') {
+          word = "visits";
+      } else if(title === 'Koiramäärä suhteessa optimiin') {
+          word = "dogs";
+      } else if(title === 'Kohteen vakikoirakot') {
+          word = "dogs";
+      } else if(title === 'Muokattu haku') {
+          word = "users";
+      }
+      return this.reportS.getReports(word);
   }
 
   exportToExcel(){

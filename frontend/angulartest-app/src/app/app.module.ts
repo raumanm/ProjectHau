@@ -24,6 +24,11 @@ import { SearchUsersComponent } from './user.component/search-users.component';
 import { SearchPlacesComponent } from './place.component/search-places.component';
 import { SearchVisitsComponent } from './visit.component/search-visits.component';
 
+import { LoginService } from './login.component/login.service';
+import { AuthGuard } from './login.component/auth-quard.service';
+import { SessionEndedComponent } from './session-ended.component/session-ended.component';
+
+import { ReportService } from './report.component/report.service';
 import { DogService } from './dog.component/dog.service';
 import { UserService } from './user.component/user.service';
 import { PlaceService } from './place.component/place.service';
@@ -46,6 +51,7 @@ import { AddDogToUserComponent } from './user.component/add-dog-to-user.componen
     AppComponent,
     MainPageComponent,
     LoginPageComponent,
+    SessionEndedComponent,
     PersonalInformationComponent,
     SearchComponent,
     ReportsComponent,
@@ -86,7 +92,10 @@ import { AddDogToUserComponent } from './user.component/add-dog-to-user.componen
     DogService,
     UserService,
     PlaceService,
-    VisitService
+    VisitService,
+    LoginService,
+    AuthGuard,
+    ReportService
   ],
   bootstrap: [ AppComponent ]
 })

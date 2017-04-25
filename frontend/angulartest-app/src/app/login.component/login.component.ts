@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { AppComponent } from '../app.component';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
 moduleId: module.id,
@@ -9,18 +12,30 @@ moduleId: module.id,
     template: `
         <h1>Tervetuloa!</h1>
         <h2>Täytä käyttäjätiedot ja paina lähetä kirjautuaksesi sisään</h2>
-        <form>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
             Käyttäjätunnus: <br>
-            <input type="text" name="userName" style="margin-top: 5px; margin-bottom: 25px"><br>
+            <input type="text" name="username" style="margin-top: 5px; margin-bottom: 25px" ngModel><br>
             Salasana: <br>
-            <input type="password" name="password"><br><br>
+            <input type="password" name="password" ngModel><br><br>
+            <input type="submit" value="Lähetä">
         </form>
-        <button [routerLink]="['/mainPage']"> Lähetä </button>
     `
 })
-export class LoginPageComponent  {
+export class LoginPageComponent {
 
-    constructor(appComponent: AppComponent) {
+    constructor(appComponent: AppComponent, private loginService: LoginService, private router: Router) {
         appComponent.titleText = "Sisäänkirjautuminen";
+    }
+
+    login(form: NgForm) {
+        this.loginService.login(form.value).subscribe(
+            (res) => {
+                if(res) {
+                    this.router.navigate(["/mainPage"]);
+                } else {
+                    alert("Väärä salasana tai käyttäjätunnus!");
+                }
+            }
+        );
     }
 }
