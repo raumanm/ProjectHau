@@ -42,13 +42,22 @@
     </tr>
 
     <tr>
+      <th><label for="password1">Uusi salasana:</label></th>
+      <th><label for="password2">Salasana uudelleen:</label></th>
+    </tr>
+    <tr>
+      <td><input type="password" id="password1" value={{password1}}></td>
+      <td><input type="password" id="password2" value={{password2}}></td>
+    </tr>
+
+    <tr>
       <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
     </tr>
     <tr>
       <td colspan="2"><textarea id="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></td>
     </tr>
     <tr>
-      <th colspan="2" style="border: none"><button type="submit">Lis&#228;&#228;</button></th>
+      <th colspan="2" style="border: none"><button type="submit">Vahvista muutokset</button></th>
     </tr>
     <tr>
       <th colspan="2">

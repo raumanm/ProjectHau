@@ -9,8 +9,6 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class LoginService {
 
-    public token: string;
-
     private hostname = (isDevMode()) ? 'http://localhost:8080' : window.location.origin;
     private headers = new Headers({'Content-Type': 'application/json'});
     private getUrl = this.hostname + '/hauapi/authenticate';
@@ -24,12 +22,11 @@ export class LoginService {
                 let token = res.json().data.token;
                 if (token) {
                     let currentUser = {
-                        _id: res.json().data.userId,
+                        _id: res.json().data._id,
                         token : token,
                         accessLevel: res.json().data.accessLevel
                     };
-                    this.token = JSON.stringify(currentUser);
-                    localStorage.setItem('currentUser', this.token);
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
                     localStorage.setItem('token', currentUser.token);
                     return true;
                 } else {

@@ -34,6 +34,19 @@ export class VisitService {
       .catch(this.handleError);
   }
 
+  getVisitsByUserId(userId: String): Promise<Visit[]> {
+    return this.http
+      .get(this.getUrl, this.ls.getTokenAsPathParam()).toPromise()
+      .then((res) => {
+          
+          let filteredVisits: Visit[];
+          let responseVisits: Visit[] = res.json() as Visit[];
+
+          return null;
+      })
+      .catch(this.handleError);
+  }
+
   getVisit(id: string): Promise<Visit> {
     return this.http
       .get(this.getUrl+id, this.ls.getTokenAsPathParam()).toPromise()

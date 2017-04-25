@@ -33,6 +33,7 @@ export class AuthGuard implements CanActivate {
             .map((res: Response) => {
 
             if(res.json().status == 200) {
+                localStorage.setItem('currentUser', JSON.stringify(res.json().data));
                 return true;
             } else {
                 this.router.navigate(["/sessionEnded"]);

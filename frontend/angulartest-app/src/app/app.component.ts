@@ -10,4 +10,13 @@ import { Component, Input } from '@angular/core';
 
 export class AppComponent {
     @Input()titleText;
+    @Input()logout;
+
+    constructor() {
+        this.showLogout(localStorage.getItem('currentUser') != null);
+    }
+
+    public showLogout(isVisible: boolean): void {
+        isVisible == true ? this.logout = "Kirjaudu ulos" : this.logout = null;
+    }
 }
