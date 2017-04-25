@@ -42,19 +42,16 @@
     });
 
     function postNew(user, callback) {
-        
-        console.log(user);
-        
+
         user = validator.pruneExcessive(user);
-        
-        
-        
+
         if (validator.validateRequired(user) && validator.validateOptionals(user)) {
             hauDB.db.collection('users').find({ 'username': user.username}).count(function(err, counter) {
                 if (err) {
                     callback(hauResponse.createErrorResponse(err));
                 } else {
                     if (counter === 0) {
+                        user.password = '1234';
                         hauDB.db.collection('users').insertOne(user, (err, result) => {
                             if (err) {
                                 callback(hauResponse.createErrorResponse(err));
@@ -124,14 +121,31 @@
     function updateById(userId, replacement, callback) {
         let user = validator.pruneExcessive(replacement);
         if (validator.validateRequired(user) && validator.validateOptionals(user)) {
-            hauDB.db.collection('users').updateOne({ _id: safeObjectId(userId) }, user, function (err, result) {
-                console.log(result);
-                if (!err) {
-                    callback(hauResponse.createOkResponse(result));
-                } else {
-                    callback(hauResponse.createErrorResponse(err));
-                }
-            });
+            let pass;
+            if(!user.hasOwnProperty('password')) {
+                hauDB.db.collection('users').findOne( {_id: safeObjectId(userId)}, (err, tmpUser) => {
+                    pass = tmpUser.password;
+                    user.password = pass;
+                    console.log(user);
+                    hauDB.db.collection('users').updateOne({ _id: safeObjectId(userId) }, user, function (err, result) {
+                        //console.log(result);
+                        if (!err) {
+                            callback(hauResponse.createOkResponse(result));
+                        } else {
+                            callback(hauResponse.createErrorResponse(err));
+                        }
+                    });
+                });
+            } else {
+                hauDB.db.collection('users').updateOne({ _id: safeObjectId(userId) }, user, function (err, result) {
+                    //console.log(result);
+                    if (!err) {
+                        callback(hauResponse.createOkResponse(result));
+                    } else {
+                        callback(hauResponse.createErrorResponse(err));
+                    }
+                });
+            }
         } else {
             callback(hauResponse.createBadRequestResponse());
         }

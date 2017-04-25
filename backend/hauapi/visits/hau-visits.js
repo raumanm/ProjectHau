@@ -43,6 +43,9 @@
         });
 
     function postNew(visit, callback) {
+
+        console.log(visit);
+
         var pruned = validator.pruneExcessive(visit),
             place;
 

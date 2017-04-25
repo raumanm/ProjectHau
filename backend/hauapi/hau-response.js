@@ -93,7 +93,7 @@
         response.content = 'application/json';
         response.data = {
             token: token,
-            userId: userId,
+            _id: userId,
             accessLevel: accessLevel};
         response.message = "Authentication succeeded";
         

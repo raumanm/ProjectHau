@@ -13,14 +13,20 @@
 
     function validateOptionals(toCheck) {
 
+        console.log("saakeli 1");
         if (toCheck.hasOwnProperty('assignedPairs') && typeof toCheck.assignedPairs !== "object") {
+            console.log("saakeli 2");
             return false;
         } else if (toCheck.hasOwnProperty('assignedPairs')) {
+            console.log("saakeli 3");
             if (!Array.isArray(toCheck.assignedPairs)) {
+                console.log("saakeli 4");
                 return false;
             }
+            console.log("saakeli 5");
             for (let obj of toCheck.assignedPairs) {
                 if (Object.keys(obj).length !== 2 || !obj.hasOwnProperty('pairId') || !obj.hasOwnProperty('status')) {
+                    console.log("saakeli 6");
                     return false;
                 } else if ( !objectIdRe.test(obj['pairId']) || typeof obj['status'] !== 'string') {
                     return false;
@@ -31,7 +37,7 @@
         if (toCheck.hasOwnProperty('details') && typeof toCheck.details !== "string") {
             return false;
         }
-        
+
         return true;
     }
 
