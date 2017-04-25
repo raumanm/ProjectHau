@@ -12,7 +12,7 @@ moduleId: module.id,
 })
 export class ReportComponent {
   private reportTitle: String;
-  private reportContent: any[];
+  private reportContent: String[];
 
   constructor(appComponent: AppComponent, private route: ActivatedRoute, private reportS: ReportService) {
 
