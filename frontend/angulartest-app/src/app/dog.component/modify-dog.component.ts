@@ -89,15 +89,18 @@ export class ModifyDogComponent implements OnInit {
 
   onSubmit(value: string): void {
     let everythingOk = true;
+    value['_id'] = this.dog._id;
 
     if(!UtilsClass.validateShortOpenField(value["nameFull"])) {
       everythingOk = false;
       alert("Virhe! Tarkista syötteesi kohdasta koko nimi");
     }
 
-    if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
-      everythingOk = false;
-      alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+    if(value['nameNickname'] !== "") {
+      if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+      }
     }
 
     if(!UtilsClass.validateShortOpenField(value["breed"])) {
@@ -105,9 +108,11 @@ export class ModifyDogComponent implements OnInit {
       alert("Virhe! Tarkista syötteesi kohdasta rotu");
     }
 
-    if(!UtilsClass.validateShortOpenField(value["registerNumber"])) {
-      everythingOk = false;
-      alert("Virhe! Tarkista syötteesi kohdasta rekisterinumero");
+    if(value['registerNumber'] !== "") {
+      if(!UtilsClass.validateShortOpenField(value["registerNumber"])) {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta rekisterinumero");
+      }
     }
 
     if(!UtilsClass.validateShortOpenField(value["status"])) {
@@ -173,7 +178,7 @@ export class ModifyDogComponent implements OnInit {
 
     if(everythingOk) {
       console.log(value);
-      this.dogService.modify(value);
+      this.dogService.modify(this.dog._id, value);
       this.router.navigate(['/showDog', this.dog._id]);
     }
 

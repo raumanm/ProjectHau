@@ -20,31 +20,35 @@ export class AddDogComponent  {
         appComponent.titleText = "Lisää koira";
 
         this.myForm = fb.group({
-        'nameFull': ['Jepen musta salama'],
-        'nameNickname': ['Jaska'],
+        'nameFull': [''],
+        'nameNickname': [''],
         'dateBirth': [''],
-        'breed': ['Sekarotuinen'],
-        'registerNumber': ['6533TY'],
+        'breed': [''],
+        'registerNumber': [''],
         'status': [''],
         'dateQualification': [''],
         'dateGraduation': [''],
         'dateMedal': [''],
         'dateRetired': [''],
-        'details': ['Sellanen']
+        'details': ['']
         });
     }
 
     onSubmit(value: string): void {
       let everythingOk = true;
 
+      console.log(value);
+
       if(!UtilsClass.validateShortOpenField(value["nameFull"])) {
         everythingOk = false;
         alert("Virhe! Tarkista syötteesi kohdasta koko nimi");
       }
 
-      if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
-        everythingOk = false;
-        alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+      if(value['nameNickname'] !== "") {
+        if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
+          everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+        }
       }
 
       if(!UtilsClass.validateShortOpenField(value["breed"])) {
@@ -52,9 +56,11 @@ export class AddDogComponent  {
         alert("Virhe! Tarkista syötteesi kohdasta rotu");
       }
 
-      if(!UtilsClass.validateShortOpenField(value["registerNumber"])) {
-        everythingOk = false;
-        alert("Virhe! Tarkista syötteesi kohdasta rekisterinumero");
+      if(value['registerNumber'] !== "") {
+        if(!UtilsClass.validateShortOpenField(value["registerNumber"])) {
+          everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta rekisterinumero");
+        }
       }
 
       if(!UtilsClass.validateShortOpenField(value["status"])) {

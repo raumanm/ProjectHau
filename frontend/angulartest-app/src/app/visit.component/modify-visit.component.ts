@@ -50,8 +50,6 @@ export class ModifyVisitComponent implements OnInit {
 
     this.myForm.patchValue({
       placeName: visit.placeName,
-      assignedPairId: visit.assignedPairId,
-      assignedPairStatus: visit.assignedPairStatus,
       details: visit.details
     });
 
@@ -64,6 +62,21 @@ export class ModifyVisitComponent implements OnInit {
 
   onSubmit(value: string): void {
     let everythingOk = true;
+    let data = <any>{};
+    let pair = <any>{};
+
+
+    data = value;
+    data['placeId'] = this.visit['placeId'];
+
+    data.assignedPairs = [];
+
+    pair.pairId = value['assignedPairId'];
+    pair.status = value['assignedPairStatus'];
+
+    data.assignedPairs.push(pair);
+
+    console.log(data);
 
     if(value["visitTime"] != "") {
       if(UtilsClass.validateDate(value["visitTime"])) {
@@ -99,8 +112,7 @@ export class ModifyVisitComponent implements OnInit {
     }
 
     if(everythingOk) {
-      console.log(value);
-      this.visitService.modify(value);
+      this.visitService.modify(this.visit['_id'], data);
       this.router.navigate(['/showVisit', this.visit._id]);
     }
   }

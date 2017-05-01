@@ -32,7 +32,7 @@ export class AddVisitComponent implements OnInit {
 
     this.myForm = fb.group({
       'visitTime': [''],
-      'placeName': [''],
+      'placeId': [''],
       'assignedPairId': [''],
       'assignedPairStatus': [''],
       'details': ['']
@@ -50,6 +50,18 @@ export class AddVisitComponent implements OnInit {
 
   onSubmit(value: string): void {
     let everythingOk = true;
+    let data = <any>{};
+    data = value;
+    let pair = <any>{};
+
+    console.log(value);
+
+    data.assignedPairs = [];
+
+    pair.pairId = value['assignedPairId'];
+    pair.status = value['assignedPairStatus'];
+
+    data.assignedPairs.push(pair);
 
     if(value["visitTime"] != "") {
       if(UtilsClass.validateDate(value["visitTime"])) {
@@ -64,28 +76,16 @@ export class AddVisitComponent implements OnInit {
       everythingOk = false;
     }
 
-    if(!UtilsClass.validateShortOpenField(value["placeName"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta kohteen nimi");
-      everythingOk = false;
-    }
-
-    if(!UtilsClass.validateShortOpenField(value["assignedPairId"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta koirakko");
-      everythingOk = false;
-    }
-
-    if(!UtilsClass.validateShortOpenField(value["assignedPairStatus"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta koirakon tila");
-      everythingOk = false;
-    }
-
-    if(!UtilsClass.validateLongOpenField(value["details"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
-      everythingOk = false;
+    if(value["details"] != "") {
+      if(UtilsClass.validateLongOpenField(value["details"])) {
+      } else {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
+      }
     }
 
     if(everythingOk) {
-      this.visitService.create(value);
+      this.visitService.create(data);
       alert("Vierailu lisätty onnistuneesti");
     }
   }
