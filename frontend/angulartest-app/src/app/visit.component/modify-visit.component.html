@@ -1,41 +1,51 @@
-<form [formGroup]="myForm" (ngSubmit)=onSubmit(myForm.value)>
   <table>
+    <form [formGroup]="myForm">
     <tr>
       <th><label for="visitTime">Vierailupäivä:</label></th>
       <th><label for="placeName">Kohde:</label></th>
     </tr>
     <tr>
       <td><input type="date" data-date-inline-picker="true" required id="visitTime" placeholder="Vierailupäivä" [formControl]="myForm.controls['visitTime']"></td>
-      <td><input type="text" id="placeName" required placeholder="Kohteen nimi" [formControl]="myForm.controls['placeName']"></td>
-    </tr>
-
-    <tr>
-      <th><label for="assignedPairId">Koirakko:</label></th>
-      <th><label for="assignedPairStatus">Koirakon tila:</label></th>
-    </tr>
-    <tr>
       <td>
-        <select id ="assignedPairId" name="assignedPairId" required [formControl]="myForm.controls['assignedPairId']">
-          <option *ngFor="let pair of pairs" [value]="pair._id"> {{pair.user.firstName}} {{pair.user.lastName}} ja {{pair.dog.nameNickname}}</option>
-        </select>
-      </td>
-      <td>
-        <select id ="assignedPairStatus" name="assignedPairStatus" required [formControl]="myForm.controls['assignedPairStatus']">
-          <option value="Reserved">Varattu</option>
-          <option value="Confirmed">Vahvistettu</option>
-          <option value="Cancelled">Peruttu</option>
-        </select>
+        <p>{{placename}}</p>
       </td>
     </tr>
-
+    <tr>
+      <th><label for="pair">Lisää koirakko:</label></th>
+      <th><label for="status">&nbsp;</label></th>
+    </tr>
+    <tr *ngFor="let apair of assignedPairs">
+      <td><p (click)="removePair(apair.pair._id)">{{apair.pair.user.firstName}} {{apair.pair.user.lastName}} ja {{apair.pair.dog.nameFull}}</p></td>
+      <td>{{apair.status}}</td>
+    </tr>
     <tr>
       <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
     </tr>
     <tr>
-      <td colspan="2"><textarea id ="details" name="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></td>
+      <td colspan="2"><textarea id="details" name="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></td>
     </tr>
     <tr>
-      <th class="bottomButt" colspan="2"><button type="submit">Lis&#228;&#228;</button></th>
+      <th class="bottomButt" colspan="2"><button (click)="onSubmit($event, myForm.value)">Lis&#228;&#228;</button></th>
     </tr>
-  </table>
 </form>
+<form [formGroup]="assignPairs">
+    <tr>
+      <td>
+        <select id="pair" [formControl]="assignPairs.controls['pair']">
+    <option *ngFor="let pair of pairs" [value]="pair._id">{{pair.user.firstName}} {{pair.user.lastName}} ja {{pair.dog.nameFull}}</option>
+  </select>
+      </td>
+      <td>
+        <select id="status" name="status" [formControl]="assignPairs.controls['status']">
+    <option value="Reserved">Varattu</option>
+    <option value="Confirmed">Vahvistettu</option>
+    <option value="Cancelled">Peruttu</option>
+  </select>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="" (click)="addPair($event, assignPairs.value)">Lis&#228;&#228; koirakko</a></td>
+      <td>&nbsp;</td>
+    </tr>
+</form>
+</table>

@@ -38,7 +38,7 @@ export class VisitService {
     return this.http
       .get(this.getUrl, this.ls.getTokenAsPathParam()).toPromise()
       .then((res) => {
-          
+
           let filteredVisits: Visit[];
           let responseVisits: Visit[] = res.json() as Visit[];
 
@@ -61,9 +61,9 @@ export class VisitService {
       .catch(this.handleError);
   }
 
-  modify(data: string): Promise<Visit> {
+  modify(id: string, data: string): Promise<Visit> {
     return this.http
-      .put(this.getUrl, this.ls.getRequestBody(data), {headers: this.headers})
+      .put(this.getUrl + id, this.ls.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);

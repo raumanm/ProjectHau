@@ -18,9 +18,9 @@
     <th><label for="accessLevel">Koirakon tila:</label></th>
   </tr>
 
-  <tr>
-    <td><p id="username">{{visit.assignedPairId}}</p></td>
-    <td><p id="accessLevel">{{visit.assignedPairStatus}}</p></td>
+  <tr *ngFor="let apair of visit.assignedPairs">
+    <td>{{apair.pair.user.firstName}} {{apair.pair.user.lastName}} ja {{apair.pair.dog.nameFull}}</td>
+    <td>{{apair.status}}</td>
   </tr>
 
   <tr>

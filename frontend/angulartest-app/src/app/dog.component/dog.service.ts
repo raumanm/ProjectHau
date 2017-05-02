@@ -23,9 +23,9 @@ export class DogService {
       .catch(this.handleError);
   }
 
-  modify(data: string): Promise<Dog> {
+  modify(id:string, data: string): Promise<Dog> {
     return this.http
-      .put(this.getUrl, this.ls.getRequestBody(data), {headers: this.headers})
+      .put(this.getUrl + id, this.ls.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);

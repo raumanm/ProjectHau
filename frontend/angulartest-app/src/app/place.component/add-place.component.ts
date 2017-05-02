@@ -27,14 +27,14 @@ export class AddPlaceComponent implements OnInit {
     appComponent.titleText = "Lisää kohde";
 
     this.myForm = fb.group({
-      'name': ['Tuonelan vanhainkoti'],
-      'addressStreet': ['Helvetinjärvenkatu 66'],
-      'addressCode': ['33560'],
-      'addressCity': ['Tampere'],
+      'name': [''],
+      'addressStreet': [''],
+      'addressCode': [''],
+      'addressCity': [''],
       'visitationInterval': [''],
-      'pairAmount': ['2'],
+      'pairAmount': [''],
       'overseerId': [''],
-      'details': ['Ihan ihme paikka']
+      'details': ['']
     });
   }
 
