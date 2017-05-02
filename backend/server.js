@@ -1,7 +1,9 @@
 /*jslint node:true */
 (function () {
     "use strict";
-    var express, app, server, hauMongo, bodyParser;
+    let express, app, hauMongo, bodyParser, authentication,
+        hauDogs, hauUsers, hauPairs, hauPlaces, hauVisits,
+        hauResponse, cors;
 
     function logger(req, res, next) {
         console.log(new Date(), req.ip, req.method, req.url);
@@ -9,97 +11,78 @@
     }
 
     express = require('express');
-    hauMongo = require('./hau-mongo');
+    cors = require('cors');
     bodyParser = require('body-parser');
-    app = express();
+	hauMongo = require('./hauapi/hau-db');
+    hauResponse = require('./hauapi/hau-response');
 
+    //Authentication resource
+    authentication = require('./hauapi/authentication/authenticate-user');
+
+    //Rest resources
+    hauDogs =   require('./hauapi/dogs/hau-dogs');
+	hauUsers =  require('./hauapi/users/hau-users');
+	hauPairs =  require('./hauapi/pairs/hau-pairs');
+	hauPlaces = require('./hauapi/places/hau-places');
+	hauVisits = require('./hauapi/visits/hau-visits');
+
+    //Set up application
+    app = express();
+    app.set('authenticationSecret', require('./hauapi/authentication/authentication-config').secret);
     app.use( bodyParser.json() );
     app.set('json spaces', 2);
     app.enable('trust proxy');
     app.use(logger);
+    app.use(cors());
+    app.use("/hauapi", authentication); //Set authentication route to app
 
-    app.get("\/:collection(places|users|dogs)(\/)?$", function(req, res) {
-        hauMongo.getWholeCollection(req.params.collection, (docs) => sendResponse(res, docs));
-    });
+    //JsonWebToken used for user authentication
+    var jsonWebToken = require('jsonwebtoken');
+    var apiRoute = express.Router();
 
-    app.get("\/pairs(\/)?$", function(req, res) {
-        hauMongo.getAllPairs((pairs) => sendResponse(res, pairs));
-    });
+    //Verify that user is logged in correctly
+    apiRoute.use((req, res, next)=> {
 
-    app.get("\/users\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.getUserById(req.params.id, (user) => sendResponse(res, user));
-    });
+        //Require authentication token from requests body or query
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-    app.get("\/dogs\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.getDogById(req.params.id, (dog) => sendResponse(res, dog));
-    });
-
-    app.get("\/places\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.getPlaceById(req.params.id, (place) => sendResponse(res, place));
-    });
-
-    app.post("\/pairs\/userid\/:userId([0-9a-fA-F]{24})\/dogid\/:dogId([0-9a-fA-F]{24})(\/)?$", function (req, res) {
-        hauMongo.postNewPair(req.params, result => sendResponse(res, result));
-    });
-
-    app.post("\/users(\/)?$", function(req, res) {
-        if (req.get('Content-Type') === 'application/json') {
-            hauMongo.postNewUser(req.body, (result) => sendResponse(res, result));
+        if(token) {
+            jsonWebToken.verify(token, app.get('authenticationSecret'), (err, user)=> {
+                if(err) {
+                    res.json(hauResponse.createUnauthorizedResponse());
+                } else {
+                    /*
+                    Add user id and access level to request and response so
+                    users gredentials can be defined and right
+                    data can be fetched.
+                    */
+                    req.userData = {
+                        _id: user._id,
+                        accessLevel: user.accessLevel
+                    };
+                    res.token = token;
+                    res._id = user._id;
+                    res.accessLevel = user.accessLevel;
+                    next();
+                }
+            });
+        } else {
+            res.json(hauResponse.createUnauthorizedResponse());
         }
     });
 
-    app.post("\/dogs(\/)?$", function(req, res) {
-        if (req.get('Content-Type') === 'application/json') {
-            hauMongo.postNewDog(req.body, (result) => sendResponse(res, result));
-        }
-    });
+    //Set Rest resources under apiRoute
+    apiRoute.use(hauDogs);
+    apiRoute.use(hauUsers);
+    apiRoute.use(hauPairs);
+    apiRoute.use(hauPlaces);
+    apiRoute.use(hauVisits);
 
-    app.post("\/places(\/)?$", function(req, res) {
-        if (req.get('Content-Type') === 'application/json') {
-            hauMongo.postNewPlace(req.body, (result) => sendResponse(res, result));
-        }
-    });
+    app.use("/", express.static('public_html'));
+    app.use("/hauapi", apiRoute);
 
-    app.post("\/visits(\/)?$"), function(req, res) {
-        if (req.get('Content-Type') === 'application/json') {
-            hauMongo.postNewVisit(req.body, (result) => sendResponse(res, result));
-        }
-    }
-
-    app.delete("\/users\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.deleteUserById(req.params.id, (user) => sendResponse(res, user));
-    });
-
-    app.delete("\/dogs\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.deleteDogById(req.params.id, (dog) => sendResponse(res, dog));
-    });
-
-    app.delete("\/places\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.deletePlaceById(req.params.id, (place) => sendResponse(res, place));
-    });
-
-    app.delete("\/pairs\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.deletePairById(req.params.id, (dog) => sendResponse(res, dog));
-    });
-
-    app.delete("\/visits\/:id([0-9a-fA-F]{24})\/$", function (req, res) {
-        hauMongo.deleteVisitById(req.params.id, (place) => sendResponse(res, place));
-    });
-
-    var server = app.listen(8080, function() {
-        hauMongo.init();
-        console.log('Server listening\n');
-    });
-
-    function sendResponse(res, data) {
-
-        if (data.hasOwnProperty('status')) {
-            res.status(data.status);
-        }
-        if (data.hasOwnProperty('content')) {
-            res.setHeader('Content-Type', data.content);
-        }
-
-        res.send(data.data);
-    }
+	hauMongo.init(function (err) {
+		if (err) throw err;
+		app.listen(8080);
+	});
 }());
