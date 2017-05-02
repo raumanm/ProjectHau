@@ -14,6 +14,7 @@ import { PlaceService } from '../place.component/place.service';
 
 import { AppComponent } from '../app.component';
 import {Pair} from "../classes/pair";
+import {AssignedPair} from '../classes/assignedPair'
 
 @Component({
   moduleId: module.id,
@@ -23,6 +24,8 @@ import {Pair} from "../classes/pair";
 })
 export class AddVisitComponent implements OnInit {
   myForm: FormGroup;
+  assignPairs: FormGroup;
+  assignedPairs: AssignedPair[] = [];
   places: Place[];
   pairs: Pair[];
 
@@ -32,10 +35,13 @@ export class AddVisitComponent implements OnInit {
 
     this.myForm = fb.group({
       'visitTime': [''],
-      'placeName': [''],
-      'assignedPairId': [''],
-      'assignedPairStatus': [''],
+      'placeId': [''],
       'details': ['']
+    });
+
+    this.assignPairs = fb.group({
+      'pair': [''],
+      'status': ['']
     });
   }
 
@@ -48,7 +54,25 @@ export class AddVisitComponent implements OnInit {
     this.pairs = values;
   }
 
-  onSubmit(value: string): void {
+  addPair(event, value: string) {
+    event.preventDefault();
+    for (let apair of this.assignedPairs) {
+      if (apair.pair._id == value['pair']) {
+        apair.status = value['status'];
+        return;
+      }
+    }
+
+    for (let pair of this.pairs) {
+      if (value['pair'] == pair._id) {
+          this.assignedPairs.push(new AssignedPair(value['status'], pair));
+          return;
+      }
+    }
+  }
+
+  onSubmit(event, value: string): void {
+    event.preventDefault();
     let everythingOk = true;
 
     if(value["visitTime"] != "") {
@@ -64,6 +88,7 @@ export class AddVisitComponent implements OnInit {
       everythingOk = false;
     }
 
+    /*
     if(!UtilsClass.validateShortOpenField(value["placeName"])) {
       alert("Virhe! Tarkista syötteesi kohdasta kohteen nimi");
       everythingOk = false;
@@ -78,11 +103,17 @@ export class AddVisitComponent implements OnInit {
       alert("Virhe! Tarkista syötteesi kohdasta koirakon tila");
       everythingOk = false;
     }
+    */
 
-    if(!UtilsClass.validateLongOpenField(value["details"])) {
-      alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
-      everythingOk = false;
+    if(value["details"] != "") {
+      if(UtilsClass.validateLongOpenField(value["details"])) {
+      } else {
+        everythingOk = false;
+        alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
+      }
     }
+
+    value['assignedPairs'] = this.assignedPairs;
 
     if(everythingOk) {
       this.visitService.create(value);

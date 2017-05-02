@@ -20,17 +20,17 @@ export class AddDogComponent  {
         appComponent.titleText = "Lisää koira";
 
         this.myForm = fb.group({
-        'nameFull': ['Jepen musta salama'],
-        'nameNickname': ['Jaska'],
+        'nameFull': [''],
+        'nameNickname': [''],
         'dateBirth': [''],
-        'breed': ['Sekarotuinen'],
-        'registerNumber': ['6533TY'],
+        'breed': [''],
+        'registerNumber': [''],
         'status': [''],
         'dateQualification': [''],
         'dateGraduation': [''],
         'dateMedal': [''],
         'dateRetired': [''],
-        'details': ['Sellanen']
+        'details': ['']
         });
     }
 
@@ -42,9 +42,11 @@ export class AddDogComponent  {
         alert("Virhe! Tarkista syötteesi kohdasta koko nimi");
       }
 
-      if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
-        everythingOk = false;
-        alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+      if(value['nameNickname'] !== "") {
+        if(!UtilsClass.validateShortOpenField(value["nameNickname"])) {
+          everythingOk = false;
+          alert("Virhe! Tarkista syötteesi kohdasta kutsumanimi");
+        }
       }
 
       if(!UtilsClass.validateShortOpenField(value["breed"])) {

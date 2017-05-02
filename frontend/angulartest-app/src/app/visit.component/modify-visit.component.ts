@@ -1,3 +1,4 @@
+import {AssignedPair} from '../classes/assignedPair'
 /**
  * Created by M1k1tus on 08-Apr-17.
  */
@@ -20,18 +21,13 @@ import {Pair} from "../classes/pair";
 export class ModifyVisitComponent implements OnInit {
   visit: Visit;
   myForm: FormGroup;
+  assignPairs: FormGroup;
   pairs: Pair[];
+  assignedPairs: AssignedPair[] = [];
+  placename: string = "";
 
   constructor(appComponent: AppComponent, private visitService: VisitService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     appComponent.titleText = "Muokkaa käyntiä";
-  }
-
-  ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.visitService.getVisit(params['id']))
-      .subscribe(visit => this.modifyDates(visit));
-    this.visitService.getPairs().then(pairs=> this.addValues(pairs));
-
     this.myForm = this.fb.group({
       'visitTime': [''],
       'placeName': [''],
@@ -39,19 +35,55 @@ export class ModifyVisitComponent implements OnInit {
       'assignedPairStatus': [''],
       'details': ['']
     });
+
+    this.assignPairs = this.fb.group({
+      'pair': [''],
+      'status': ['']
+    });
+  }
+
+  ngOnInit(): void {
+    this.route.params
+      .switchMap((params: Params) => this.visitService.getVisit(params['id']))
+      .subscribe(visit => this.modifyDates(visit));
+      this.visitService.getPairs().then(pairs=> this.addValues(pairs));
   }
 
   addValues(values: Pair[]): void {
     this.pairs = values;
   }
 
+  addPair(event, value: string) {
+    event.preventDefault();
+    for (let apair of this.assignedPairs) {
+      if (apair.pair._id == value['pair']) {
+        apair.status = value['status'];
+        return;
+      }
+    }
+
+    for (let pair of this.pairs) {
+      if (value['pair'] == pair._id) {
+          this.assignedPairs.push(new AssignedPair(value['status'], pair));
+          return;
+      }
+    }
+  }
+
+  removePair(id) {
+    this.assignedPairs = this.assignedPairs.filter(e => {return (e.pair._id != id)});
+  }
+
   modifyDates(visit: Visit) {
     this.visit = visit;
+    this.placename = visit.placeName;
+    console.log(visit.assignedPairs);
+
+    if(visit.assignedPairs != undefined && visit.assignedPairs !== null  ) {
+      this.assignedPairs = visit.assignedPairs;
+    }
 
     this.myForm.patchValue({
-      placeName: visit.placeName,
-      assignedPairId: visit.assignedPairId,
-      assignedPairStatus: visit.assignedPairStatus,
       details: visit.details
     });
 
@@ -62,7 +94,8 @@ export class ModifyVisitComponent implements OnInit {
     }
   }
 
-  onSubmit(value: string): void {
+  onSubmit(event, value: string): void {
+    event.preventDefault();
     let everythingOk = true;
 
     if(value["visitTime"] != "") {
@@ -77,11 +110,12 @@ export class ModifyVisitComponent implements OnInit {
       alert("Virhe! Tarkista syötteesi kohdasta vierailuaika");
       everythingOk = false;
     }
-
+    /*
     if(!UtilsClass.validateShortOpenField(value["placeName"])) {
       alert("Virhe! Tarkista syötteesi kohdasta kohteen nimi");
       everythingOk = false;
     }
+
 
     if(!UtilsClass.validateShortOpenField(value["assignedPairId"])) {
       alert("Virhe! Tarkista syötteesi kohdasta koirakko");
@@ -92,16 +126,19 @@ export class ModifyVisitComponent implements OnInit {
       alert("Virhe! Tarkista syötteesi kohdasta koirakon tila");
       everythingOk = false;
     }
+    */
 
     if(!UtilsClass.validateLongOpenField(value["details"])) {
       alert("Virhe! Tarkista syötteesi kohdasta lisätietoja");
       everythingOk = false;
     }
 
+    value['assignedPairs'] = this.assignedPairs;
+
     if(everythingOk) {
-      console.log(value);
-      this.visitService.modify(value);
-      this.router.navigate(['/showVisit', this.visit._id]);
+      alert("ok!");
+      this.visitService.modify(this.visit._id, value);
+      //this.router.navigate(['/showVisit', this.visit._id]);
     }
   }
 }

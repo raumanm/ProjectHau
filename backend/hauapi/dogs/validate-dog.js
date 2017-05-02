@@ -58,10 +58,10 @@
         (toPrune.hasOwnProperty('breed')) ? pruned.breed = toPrune.breed : undefined;
         (toPrune.hasOwnProperty('status')) ? pruned.status = toPrune.status : undefined;
         (toPrune.hasOwnProperty('registerNumber')) ? pruned.registerNumber = toPrune.registerNumber : undefined;
-        (toPrune.hasOwnProperty('dateQualification')) ? pruned.dateQualification = new Date(toPrune.dateQualification) : undefined;
-        (toPrune.hasOwnProperty('dateGraduation')) ? pruned.dateGraduation = new Date(toPrune.dateGraduation) : undefined;
-        (toPrune.hasOwnProperty('dateMedal')) ? pruned.dateMedal = new Date(toPrune.dateMedal) : undefined;
-        (toPrune.hasOwnProperty('dateRetired')) ? pruned.dateRetired = new Date (toPrune.dateRetired) : undefined;
+        (toPrune.hasOwnProperty('dateQualification') && toPrune.dateQualification !== "") ? pruned.dateQualification = new Date(toPrune.dateQualification) : undefined;
+        (toPrune.hasOwnProperty('dateGraduation') && toPrune.dateGraduation !== "") ? pruned.dateGraduation = new Date(toPrune.dateGraduation) : undefined;
+        (toPrune.hasOwnProperty('dateMedal') && toPrune.dateMedal !== "") ? pruned.dateMedal = new Date(toPrune.dateMedal) : undefined;
+        (toPrune.hasOwnProperty('dateRetired') && toPrune.dateRetired !== "") ? pruned.dateRetired = new Date (toPrune.dateRetired) : undefined;
         (toPrune.hasOwnProperty('details')) ? pruned.details = toPrune.details : undefined;
 
         return pruned;

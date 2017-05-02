@@ -100,7 +100,7 @@ export class ModifyPlaceComponent implements OnInit {
     }
 
     if(everythingOk) {
-      this.placeService.modify(value);
+      this.placeService.modify(this.place._id, value);
       alert("Kohde lisätty onnistuneesti");
     }
   }

@@ -6,7 +6,7 @@
             </tr>
             <tr>
                 <th><input type="text" id="nameFull" required placeholder="Koko nimi" [formControl]="myForm.controls['nameFull']"></th>
-                <th><input type="text" id="nameNickname" required placeholder="Kutsumanimi" [formControl]="myForm.controls['nameNickname']"></th>
+                <th><input type="text" id="nameNickname" placeholder="Kutsumanimi" [formControl]="myForm.controls['nameNickname']"></th>
             </tr>
 
             <tr>
@@ -23,7 +23,7 @@
                 <th><label for="status">Tila:</label></th>
             </tr>
             <tr>
-                <th><input type="text" id="registerNumber" required placeholder="Rekisterinumbero" [formControl]="myForm.controls['registerNumber']"></th>
+                <th><input type="text" id="registerNumber" placeholder="Rekisterinumbero" [formControl]="myForm.controls['registerNumber']"></th>
                 <th><select id="status" name="status" required [formControl]="myForm.controls['status']">
                     <option value="Active">Aktiivinen</option>
                     <option value="Passive">Tauolla</option>

@@ -37,9 +37,9 @@ export class PlaceService {
       .catch(this.handleError);
   }
 
-  modify(data: string): Promise<Place> {
+  modify(id:string, data: string): Promise<Place> {
     return this.http
-      .put(this.getUrl, this.ls.getRequestBody(data), {headers: this.headers})
+      .put(this.getUrl + id, this.ls.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
