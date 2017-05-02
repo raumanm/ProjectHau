@@ -1,0 +1,73 @@
+
+<form>
+<table>
+<!-- SUPER IMPORTANT IN ORDER TO AVOID NULLPOINTERS --->
+<div class="formDiv" *ngIf="user">
+  <tr>
+    <th><label for="firstName">Etunimi:</label></th>
+    <th><label for="lastName">Sukunimi:</label></th>
+  </tr>
+
+  <tr>
+    <td><p id="firstName">{{user.firstName}}</p></td>
+    <td><p id="lastName">{{user.lastName}}</p></td>
+  </tr>
+
+  <tr>
+    <th><label for="username">Käyttäjänimi:</label></th>
+    <th><label for="accessLevel">Käyttäjätaso:</label></th>
+  </tr>
+
+  <tr>
+    <td><p id="username">{{user.username}}</p></td>
+    <td><p id="accessLevel">{{user.accessLevel}}</p></td>
+  </tr>
+
+  <tr>
+    <th><label for="phone">Puhelinnumero:</label></th>
+    <th><label for="email">Sähköposti:</label></th>
+  </tr>
+
+  <tr>
+    <td><p id="phone">{{user.phone}}</p></td>
+    <td><p id="email">{{user.email}}</p></td>
+  </tr>
+
+  <tr>
+    <th><label for="memberNumber">Jäsennumero:</label></th>
+    <th><label for="qualificationDate">Valmistumispäivämäärä:</label></th>
+  </tr>
+
+  <tr>
+    <td><p id="memberNumber">{{user.memberNumber}}</p></td>
+    <td><p id="qualificationDate">{{user.qualificationDate | date: 'dd.MM.yyyy'}}</p></td>
+  </tr>
+
+  <tr>
+    <th colspan="2"><label for="pairedDogs">Koirat:</label></th>
+  </tr>
+
+  <tr>
+    <td colspan="2" id="pairedDogs">
+    <ul>
+      <li *ngFor="let userPairedDog of user.pairedDogs">{{userPairedDog.nameNickname}}</li>
+    </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <th colspan="2"><label for="details">Lisätietoja:</label></th>
+  </tr>
+
+  <tr>
+    <td colspan="2"><p id="details">{{user.details}}</p></td>
+  </tr>
+
+  <tr>
+      <button type="button" class="bottomButt" routerLink="/modifyUser/{{user._id}}">Muokkaa</button>
+
+  </tr>
+
+</div>
+</table>
+</form>

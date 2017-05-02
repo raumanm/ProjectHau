@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let dog of dogs" [class.selected]="dog === selectedDog"
+      (click)="onSelect(dog)">
+    <button>{{dog.nameFull}}</button>
+  </li>
+</ul>

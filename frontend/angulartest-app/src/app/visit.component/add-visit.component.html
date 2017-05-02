@@ -1,0 +1,41 @@
+<form [formGroup]="myForm" (ngSubmit)=onSubmit(myForm.value)>
+  <table>
+    <tr>
+      <th><label for="visitTime">Vierailupäivä:</label></th>
+      <th><label for="placeName">Kohde:</label></th>
+    </tr>
+    <tr>
+      <th><input type="date" data-date-inline-picker="true" required id="visitTime" placeholder="Vierailupäivä" [formControl]="myForm.controls['visitTime']"></th>
+      <th><input type="text" id="placeName" required placeholder="Kohteen nimi" [formControl]="myForm.controls['placeName']"></th>
+    </tr>
+
+    <tr>
+      <th><label for="assignedPairId">Koirakko:</label></th>
+      <th><label for="assignedPairStatus">Koirakon tila:</label></th>
+    </tr>
+    <tr>
+      <th>
+        <select id ="assignedPairId" name="assignedPairId" required [formControl]="myForm.controls['assignedPairId']">
+          <option *ngFor="let pair of pairs" [value]="pair._id"> {{pair.user.firstName}} {{pair.user.lastName}} ja {{pair.dog.nameNickname}}</option>
+        </select>
+      </th>
+      <th>
+        <select id ="assignedPairStatus" name="assignedPairStatus" required [formControl]="myForm.controls['assignedPairStatus']">
+          <option value="Reserved">Varattu</option>
+          <option value="Confirmed">Vahvistettu</option>
+          <option value="Cancelled">Peruttu</option>
+        </select>
+      </th>
+    </tr>
+
+    <tr>
+      <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
+    </tr>
+    <tr>
+      <th colspan="2"><textarea id ="details" name="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></th>
+    </tr>
+    <tr>
+      <th colspan="2"><button type="submit">Lis&#228;&#228;</button></th>
+    </tr>
+  </table>
+</form>

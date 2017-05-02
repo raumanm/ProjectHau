@@ -1,0 +1,40 @@
+
+<form>
+<table>
+<!-- SUPER IMPORTANT IN ORDER TO AVOID NULLPOINTERS --->
+<div *ngIf="visit">
+  <tr>
+    <th><label for="firstName">Vierailupäivä:</label></th>
+    <th><label for="lastName">Kohde:</label></th>
+  </tr>
+
+  <tr>
+    <td><p id="firstName">{{visit.visitTime | date: 'dd.MM.yyyy'}}</p></td>
+    <td><p id="lastName">{{visit.placeName}}</p></td>
+  </tr>
+
+  <tr>
+    <th><label for="username">Koirakko:</label></th>
+    <th><label for="accessLevel">Koirakon tila:</label></th>
+  </tr>
+
+  <tr>
+    <td><p id="username">{{visit.assignedPairId}}</p></td>
+    <td><p id="accessLevel">{{visit.assignedPairStatus}}</p></td>
+  </tr>
+
+  <tr>
+    <th colspan="2"><label for="details">Lisätietoja:</label></th>
+  </tr>
+
+  <tr>
+    <td colspan="2"><p id="details">{{visit.details}}</p></td>
+  </tr>
+
+  <tr>
+      <button class="bottomButt" routerLink="/modifyVisit/{{visit._id}}">Muokkaa</button>
+  </tr>
+
+</div>
+</table>
+</form>

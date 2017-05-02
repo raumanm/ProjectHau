@@ -1,0 +1,44 @@
+<form [formGroup]="myForm" (ngSubmit)=onSubmit(myForm.value)>
+  <table>
+    <tr>
+      <th><label for="name">Nimi :</label></th>
+      <th><label for="addressStreet">Katuosoite:</label></th>
+    </tr>
+    <tr>
+      <td><input type="text" id="name" required placeholder="Nimi" [formControl]="myForm.controls['name']"></td>
+      <td><input type="text" id="addressStreet" required placeholder="Katuosoite" [formControl]="myForm.controls['addressStreet']"></td>
+    </tr>
+
+    <tr>
+      <th><label for="addressCode">Postinumero:</label></th>
+      <th><label for="addressCity">Kaupunki:</label></th>
+    </tr>
+    <tr>
+      <td><input type="number" id="addressCode" required placeholder="Postinumero" [formControl]="myForm.controls['addressCode']"></td>
+      <td><input type="text" id="addressCity" required placeholder="Kaupunki" [formControl]="myForm.controls['addressCity']"></td>
+    </tr>
+
+    <tr>
+      <th><label for="visitationInterval">Vakikohde vai kertaluontoinen:</label></th>
+      <th><label for="pairAmount">Optimikoirakkomäärä:</label></th>
+    </tr>
+    <tr>
+      <td><select id="visitationInterval" name="visitationInterval" required [formControl]="myForm.controls['visitationInterval']">
+        <option value="Regular">Vakikohde</option>
+        <option value="One time">Kertaluontoinen</option>
+      </select>
+      </td>
+      <td><input type="number" id="pairAmount" required placeholder="Optimikoirakkomäärä" maxlength="1" [formControl]="myForm.controls['pairAmount']"></td>
+    </tr>
+
+      <tr>
+        <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
+      </tr>
+      <tr>
+        <td colspan="2"><textarea id="details" name="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></td>
+      </tr>
+      <tr>
+        <th colspan="2" class="bottomButt"><button type="submit">Lis&#228;&#228;</button></th>
+      </tr>
+  </table>
+</form>

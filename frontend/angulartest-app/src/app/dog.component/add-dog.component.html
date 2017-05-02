@@ -1,0 +1,63 @@
+    <form [formGroup]="myForm" (ngSubmit)=onSubmit(myForm.value)>
+        <table>
+            <tr>
+                <th><label for="nameFull">Koko nimi:</label></th>
+                <th><label for="nameNickname">Kutsumanimi:</label></th>
+            </tr>
+            <tr>
+                <th><input type="text" id="nameFull" required placeholder="Koko nimi" [formControl]="myForm.controls['nameFull']"></th>
+                <th><input type="text" id="nameNickname" required placeholder="Kutsumanimi" [formControl]="myForm.controls['nameNickname']"></th>
+            </tr>
+
+            <tr>
+                <th><label for="dateBirth">Syntym&#228;aika:</label></th>
+                <th><label for="breed">Rotu:</label></th>
+            </tr>
+            <tr>
+                <th><input type="date" data-date-inline-picker="true" id="dateBirth" required placeholder="Syntym&#228;aika" [formControl]="myForm.controls['dateBirth']"></th>
+                <th><input type="text" id="breed" required placeholder="Rotu" [formControl]="myForm.controls['breed']"></th>
+            </tr>
+
+            <tr>
+                <th><label for="registerNumber">Rekisterinumero:</label></th>
+                <th><label for="status">Tila:</label></th>
+            </tr>
+            <tr>
+                <th><input type="text" id="registerNumber" required placeholder="Rekisterinumbero" [formControl]="myForm.controls['registerNumber']"></th>
+                <th><select id="status" name="status" required [formControl]="myForm.controls['status']">
+                    <option value="Active">Aktiivinen</option>
+                    <option value="Passive">Tauolla</option>
+                    <option value="Retired">Lopettanut</option>
+                    </select>
+                </th>
+            </tr>
+
+            <tr>
+                <th><label for="dateQualification">P&#228;tev&#246;itymisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+                <th><label for="dateGraduation">Valmistumisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+            </tr>
+            <tr>
+                <th><input type="date" data-date-inline-picker="true" id="dateQualification" placeholder="P&#228;tev&#246;itymisp&#228;iv&#228;m&#228;&#228;r&#228;" [formControl]="myForm.controls['dateQualification']"></th>
+                <th><input type="date" data-date-inline-picker="true" id="dateGraduation" placeholder="Valmistumisp&#228;iv&#228;m&#228;&#228;r&#228;" [formControl]="myForm.controls['dateGraduation']"></th>
+            </tr>
+
+             <tr>
+                <th><label for="dateMedal">Mitalin p&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+                <th><label for="dateRetired">Lopettamisp&#228;iv&#228;m&#228;&#228;r&#228;:</label></th>
+            </tr>
+            <tr>
+                <th><input type="date" data-date-inline-picker="true" id="dateMedal" placeholder="Mitalin p&#228;iv&#228;m&#228;&#228;r&#228;" [formControl]="myForm.controls['dateMedal']"></th>
+                <th><input type="date" data-date-inline-picker="true" id="dateRetired" placeholder="p&#228;iv&#228;m&#228;&#228;r&#228;" [formControl]="myForm.controls['dateRetired']"></th>
+            </tr>
+
+            <tr>
+                <th colspan="2"><label for="details">Lis&#228;tietoja:</label></th>
+            </tr>
+            <tr>
+                <th colspan="2"><textarea id="details" name="details" rows="7" cols="30" [formControl]="myForm.controls['details']"></textarea></th>
+            </tr>
+            <tr>
+                <th colspan="2"><button type="submit">Lis&#228;&#228;</button></th>
+            </tr>
+        </table>
+    </form>
