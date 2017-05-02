@@ -26,17 +26,21 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  addDog(data:string): Promise<Dog> {
+  addDog(userId: String, dogId: String): Promise<Dog> {
+    
+    let url = this.hostname + '/hauapi/pairs/user/' + userId + '/dog/' + dogId;
+    
     return this.http
-      .post(this.getUrl, this.loginService.getRequestBody(data), {headers: this.headers})
+      .post(url, this.loginService.getRequestBody(""), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
   }
 
-  modify(data: string): Promise<User> {
+  modify(_id: String, data: string): Promise<User> {
+
     return this.http
-      .put(this.getUrl, this.loginService.getRequestBody(data), {headers: this.headers})
+      .put(this.getUrl + _id, this.loginService.getRequestBody(data), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);

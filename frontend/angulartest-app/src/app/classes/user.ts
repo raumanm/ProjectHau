@@ -9,9 +9,10 @@ constructor(
     public phone: string,
     public email: string,
     public memberNumber: string,
+    public password?: string,
     public qualificationDate?: Date,
     public details?: string,
-	  public _id?: string,
+	public _id?: string,
     public pairedDogs?: UserPairedDog[]
 ) {}
 }

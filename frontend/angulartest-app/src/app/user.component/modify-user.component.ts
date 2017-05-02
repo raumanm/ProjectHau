@@ -2,7 +2,7 @@
  * Created by M1k1tus on 02-Apr-17.
  */
 
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -20,6 +20,9 @@ import {UtilsClass} from "../util/utilsclass";
 export class ModifyUserComponent implements OnInit {
   user: User;
   myForm: FormGroup;
+
+  @Input() password1: string;
+  @Input() password2: string;
 
   constructor(appComponent: AppComponent, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     appComponent.titleText = "Muokkaa käyttäjää";
@@ -76,7 +79,7 @@ export class ModifyUserComponent implements OnInit {
     this.router.navigate(['/addDogToUser', this.user._id]);
   }
 
-  onSubmit(value: string): void {
+  onSubmit(value: string, pass: String): void {
     let everythingOk = true;
     value["_id"] = this.user._id;
 
@@ -130,12 +133,12 @@ export class ModifyUserComponent implements OnInit {
       everythingOk = false;
     }
 
+    console.log(this.password1);
+
     if(everythingOk) {
-      this.userService.create(value);
-      alert("Käyttäjä lisätty onnistuneesti");
+      alert("Käyttäjä muokattu onnistuneesti");
+      this.userService.modify(this.user._id, value);
+      this.router.navigate(['/showUser/', this.user._id]);
     }
-
   }
-
-
 }

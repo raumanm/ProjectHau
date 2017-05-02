@@ -25,11 +25,17 @@ export class AddDogToUserComponent implements OnInit {
   avaibleDogs: Dog[] = [];
   myForm: FormGroup;
 
-  constructor(appComponent: AppComponent, private dogService: DogService, private userService: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
+  constructor(appComponent: AppComponent,
+     private dogService: DogService, 
+     private userService: UserService, 
+     private fb: FormBuilder, 
+     private route: ActivatedRoute, 
+     private router: Router) {
     appComponent.titleText = "Lisää koira käyttäjälle";
   }
 
   ngOnInit(): void {
+
     this.route.params
       .switchMap((params: Params) => this.userService.getUser(params['id']))
       .subscribe(user => this.fetchDogs(user));
@@ -45,13 +51,19 @@ export class AddDogToUserComponent implements OnInit {
   compareDogs(dogs: Dog[]): void {
     this.dogs = dogs;
     if(this.user.pairedDogs != null) {
-      for (let i = 0; i < dogs.length; i++) {
-        for (let j = 0; j < this.user.pairedDogs.length; j++) {
-          if (dogs[i]._id != this.user.pairedDogs[j]._id) {
-            this.avaibleDogs.push(this.dogs[i]);
-          }
+        for(let dog of this.dogs) {
+            if(!this.avaibleDogs.includes(dog)) {
+                let userHasDog: boolean = false;
+                for(let userDog of this.user.pairedDogs) {
+                    if(dog._id == userDog._id) {
+                        userHasDog = true;
+                    }
+                }
+                if(!userHasDog) {
+                    this.avaibleDogs.push(dog);
+                }
+            }
         }
-      }
     } else {
       this.avaibleDogs = dogs;
     }
@@ -62,9 +74,7 @@ export class AddDogToUserComponent implements OnInit {
   }
 
   submitSelect(): void {
-    this.userService.addDog("userId:"+this.user._id+",dogId:"+this.selectedDog._id);
+    this.userService.addDog(this.user._id, this.selectedDog._id);
     this.router.navigate(['/showUser', this.user._id]);
   }
-
-
 }

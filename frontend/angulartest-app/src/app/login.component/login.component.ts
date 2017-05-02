@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AppComponent } from '../app.component';
@@ -19,21 +19,25 @@ moduleId: module.id,
             <input type="password" name="password" ngModel><br><br>
             <input type="submit" value="Lähetä">
         </form>
+        <h3 class="error">{{error}}</h3>
     `
 })
 export class LoginPageComponent {
 
-    constructor(appComponent: AppComponent, private loginService: LoginService, private router: Router) {
-        appComponent.titleText = "Sisäänkirjautuminen";
+    @Input() error: string
+
+    constructor(private app: AppComponent, private loginService: LoginService, private router: Router) {
+        app.titleText = "Sisäänkirjautuminen";
     }
 
     login(form: NgForm) {
         this.loginService.login(form.value).subscribe(
             (res) => {
                 if(res) {
+                    this.app.showLogout(true);
                     this.router.navigate(["/mainPage"]);
                 } else {
-                    alert("Väärä salasana tai käyttäjätunnus!");
+                    this.error = "Väärä käyttäjätunnus tai salasana!"
                 }
             }
         );

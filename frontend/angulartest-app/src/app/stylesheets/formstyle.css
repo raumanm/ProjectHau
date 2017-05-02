@@ -29,7 +29,7 @@ textarea{
     margin-bottom: 15px;
 }
 
-select, input[type=text], input[type=date], input[type=number]{
+select, input[type=text], input[type=date], input[type=number], input[type=password]{
     width: 250px;
     height: 30px;
     display: inline-block;
@@ -83,3 +83,4 @@ th{
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
 }
+
