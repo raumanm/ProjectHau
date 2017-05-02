@@ -15,7 +15,7 @@
     float: top;
 }
 
-.error { 
+.error {
     color: red;
 }
 
@@ -51,7 +51,10 @@ width: 110px;
   background-size: 100% 100%;
 }
 
-
+#calendar {
+  background-image: url("../assets/calendar.png");
+  background-repeat: no-repeat;
+}
 
 h1, h2 {
   padding: 15px 0;
